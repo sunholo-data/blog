@@ -2,7 +2,7 @@
 title: "Why GenAI Needs a Subconscious: Internal Monologues for your Cognitive Designs"
 authors: me
 tags: [agents, cognitive-design]
-image: https://dev.sunholo.com/assets/images/subconscious-afec73da2d5a115ecd2c3c16776300e3.png
+image: ./img/subconscious.png
 slug: /subconscious-genai
 ---
 

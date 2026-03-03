@@ -60,17 +60,17 @@ const config = {
         },
         items: [
           {
-            href: 'https://dev.sunholo.com',
-            label: 'Dev Portal',
+            href: 'https://www.sunholo.com',
+            label: 'Home',
             position: 'left',
           },
           {
-            href: 'https://www.sunholo.com',
-            label: 'Multivac',
-            position: 'right',
+            href: 'https://ailang.sunholo.com',
+            label: 'AILANG',
+            position: 'left',
           },
           {
-            href: 'https://github.com/sunholo-data/sunholo-py',
+            href: 'https://github.com/sunholo-data',
             label: 'GitHub',
             position: 'right',
           },
@@ -83,12 +83,20 @@ const config = {
             title: 'Resources',
             items: [
               {
-                label: 'Dev Portal',
-                href: 'https://dev.sunholo.com',
+                label: 'Home',
+                href: 'https://www.sunholo.com',
+              },
+              {
+                label: 'AILANG',
+                href: 'https://ailang.sunholo.com',
               },
               {
                 label: 'Presentations',
                 href: 'https://www.sunholo.com/presentations/',
+              },
+              {
+                label: 'Dev Portal',
+                href: 'https://dev.sunholo.com',
               },
             ],
           },
@@ -106,7 +114,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/sunholo-data/sunholo-py',
+                href: 'https://github.com/sunholo-data',
               },
             ],
           },

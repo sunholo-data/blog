@@ -2,7 +2,7 @@
 title: "Using Cognitive Design to create a BigQuery Agent"
 authors: me
 tags: [agents, bigquery, cognitive-design]
-image: https://dev.sunholo.com/assets/images/cognitive-design-ec3719c6b00a22113dd45194210067fa.webp
+image: ./img/cognitive-design.webp
 slug: /cognitive-design
 ---
 
