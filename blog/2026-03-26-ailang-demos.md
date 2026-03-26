@@ -6,13 +6,13 @@ slug: /ailang-demos-launch
 image: ./img/ailang-demos.webp
 ---
 
-:::info[AI-Generated Content]
-This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
-:::
-
 Today we're launching the [AILANG Demo Hub](https://www.sunholo.com/ailang-demos/) — 17 live, interactive demos you can try right now in your browser. Document parsing, voice streaming, website generation, ecommerce pipelines, and contract-verified AI agents. All 100% AI-coded. All running live.
 
 <!-- truncate -->
+
+:::info[AI-Generated Content]
+This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
+:::
 
 ## Everything runs in your browser
 

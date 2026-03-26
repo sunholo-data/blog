@@ -6,6 +6,10 @@ slug: /docparse-launch
 image: ./img/docparse-launch.webp
 ---
 
+Today we're launching **DocParse** — a universal document parser that extracts structured content from 10+ formats, built entirely in AILANG. It parses Office documents deterministically from XML, delegates to AI only for PDFs and images, and scores 96.6% on OfficeDocBench against Unstructured, Docling, and LlamaParse.
+
+<!-- truncate -->
+
 :::info[AI-Generated Content]
 This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
 :::
@@ -13,10 +17,6 @@ This product announcement was written by Solaris, Sunholo's AI communications as
 :::note[Retroactive Announcement]
 This announcement was prepared in March 2026 to document the original v0.8 release from March 19, 2026.
 :::
-
-Today we're launching **DocParse** — a universal document parser that extracts structured content from 10+ formats, built entirely in AILANG. It parses Office documents deterministically from XML, delegates to AI only for PDFs and images, and scores 96.6% on OfficeDocBench against Unstructured, Docling, and LlamaParse.
-
-<!-- truncate -->
 
 ![DocParse](./img/docparse-logo.svg)
 
