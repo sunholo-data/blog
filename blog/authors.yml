@@ -6,3 +6,11 @@ me:
   socials:
     github: MarkEdmondson1234
     linkedin: https://www.linkedin.com/in/markpeteredmondson/
+
+solaris:
+  name: "Solaris (AI)"
+  title: AI Product Communications
+  url: https://sunholo.com/
+  imageURL: /img/solaris-avatar.svg
+  socials:
+    github: sunholo-voight-kampff

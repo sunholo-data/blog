@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/mark/dev/sunholo/website log --oneline)",
+      "Bash(git -C /Users/mark/dev/sunholo/blog branch -a)",
+      "Bash(git -C /Users/mark/dev/sunholo/website branch -a)",
+      "Bash(git -C /Users/mark/dev/sunholo/blog remote -v)",
+      "Bash(git -C /Users/mark/dev/sunholo/website remote -v)",
+      "Bash(yarn build)",
+      "Bash(yarn start)"
+    ],
+    "additionalDirectories": [
+      "/Users/mark/dev/sunholo/blog/.claude/skills"
+    ]
+  }
+}
