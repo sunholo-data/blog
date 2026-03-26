@@ -32,6 +32,8 @@ For PDFs and images, where the structure genuinely isn't in the file, DocParse d
 
 [Try DocParse in your browser](https://www.sunholo.com/ailang-demos/docparse.html) — no install needed.
 
+![DocParse demo — upload a document and get structured output](./img/screenshot-docparse-demo.webp)
+
 ## What we extract that competitors miss
 
 | Feature | DOCX | PPTX | XLSX | Competitors |

@@ -67,6 +67,7 @@ This announcement was prepared in March 2026 to document the original release fr
 - Must include AI disclosure admonition at the top
 - Use simple markdown (no custom React components)
 - Major releases may get both a press release AND a product launch post
+- **Use real product screenshots and examples** — prefer actual UI screenshots, demo outputs, and CLI results over AI-generated illustrations. Check product and demo repos for existing screenshots before generating new images. Copy into `blog/img/` and convert to `.webp` where possible.
 
 ## Product Repos (for research)
 

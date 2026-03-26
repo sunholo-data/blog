@@ -84,6 +84,8 @@ The full production stack runs for approximately **$60/month**:
 
 The dominant cost is Cloud Run compute. Dev environments cost less because coordinator and dashboard scale to zero when idle. AI provider API costs (Anthropic, Google) are separate and depend on your agent workload.
 
+![AILANG Cloud build in progress](./img/screenshot-ailang-cloud-build.webp)
+
 ## First use case: autonomous website building
 
 The first production workload running on AILANG Cloud is the [Website Builder](/blog/ailang-demos-launch) — an agent that takes a description, generates a complete website, and deploys it. Users interact through a Firebase-authenticated portal, send messages to the coordinator REST API, and the website-builder agent handles the rest.

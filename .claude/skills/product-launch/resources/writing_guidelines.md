@@ -183,6 +183,19 @@ Google always gives the reader something to do next:
 - Include product logos/icons inline where appropriate (from branding.md)
 - If no image available, omit the `image:` frontmatter field (don't leave a broken reference)
 
+### Screenshots & Product Examples
+- **Prefer real product screenshots over generated images** — actual UI screenshots and demo outputs are more credible and useful than AI-generated illustrations
+- Copy screenshots from product/demo repos into `blog/img/` (convert to `.webp` where possible)
+- Include at least one real screenshot or product output per product launch post
+- Show the product doing something real: a parsed document, a running demo, a dashboard view, a CLI output
+- Available screenshot sources:
+  - Demo thumbnails: `demos/site/thumbnails/` (docparse, extractor, ecommerce, streaming demos)
+  - Website builder: `demos/website_builder/docs/screenshots/` (dashboard, upload, builder selection, cloud build)
+  - DocParse demo: `demos/invoice_processor_wasm/assets/doc_parse_demo_screenshot.png`
+  - Ecommerce dashboard: `demos/ecommerce/img/ecommerce-dashboard-ui.png`
+  - Ambient assistant: `demos/streaming/ambient_assistant/ambient-demo.png`
+- When writing about a demo or feature, check the product repo for existing screenshots before generating new images
+
 ## Docusaurus Features
 
 ### Admonitions
@@ -224,3 +237,4 @@ Before submitting for review:
 - [ ] Slug is set and meaningful
 - [ ] Tags include the format tag + product tag
 - [ ] Product logo/icon included where appropriate
+- [ ] At least one real product screenshot or demo output included (not just AI-generated banners)

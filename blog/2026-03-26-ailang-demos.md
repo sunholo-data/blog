@@ -32,6 +32,8 @@ Four demos that parse, extract, and validate documents with formal safety guaran
 
 **[DocParse](https://www.sunholo.com/ailang-demos/docparse.html)** — Drop a DOCX, PPTX, XLSX, PDF, or image and get structured output. 10 AILANG modules parse Office XML directly in WebAssembly. No server needed — 28 contracts enforce structural invariants.
 
+![DocParse live demo](./img/screenshot-docparse-demo.webp)
+
 **[Z3 Verify](https://www.sunholo.com/ailang-demos/verify.html)** — Prove contracts correct at compile time with the Z3 theorem prover. 43 contracts verified, 9 bugs caught — including a credit-apply function that silently allows negative totals when `subtotal=0, credits=1`.
 
 **[AI + Contracts](https://www.sunholo.com/ailang-demos/contracts-ai.html)** — AI extracts structured data from documents, then AILANG contracts validate every field. Deterministic validation of stochastic AI output.
@@ -51,6 +53,8 @@ Five demos exercising AILANG's `std/stream` effect system across SSE, WebSocket,
 **[Gemini Live](https://www.sunholo.com/ailang-demos/streaming/gemini_live/)** — Type text, hear it spoken. 30 voices available with native WAV generation over bidirectional WebSocket.
 
 **[Safe Agent](https://www.sunholo.com/ailang-demos/streaming/safe_agent/)** — Contract-verified AI tool calling. The agent has a calculator, file reader, and SQL query runner — but every tool is wrapped in `requires`/`ensures` contracts. If the AI tries a path traversal or mutating SQL query, the contract blocks it before execution.
+
+![Safe Agent demo — contracts catch invalid tool arguments in real time](./img/screenshot-safe-agent.webp)
 
 ![Contract Verified](./img/demo-contract-verified.svg)
 

@@ -52,6 +52,8 @@ Why does this matter? AILANG Cloud mode means **no API key required** and higher
 Start with Gemma Builder (WASM) for quick experiments. Switch to Claudette Mouser (AILANG Cloud) when you want a polished result.
 :::
 
+![Website Builder dashboard — manage your sites](./img/screenshot-website-builder-dashboard.webp)
+
 ## Four Builder Personas
 
 Each persona brings a different AI model and build approach:
@@ -62,6 +64,8 @@ Each persona brings a different AI model and build approach:
 - **Opal Cadillac** — Brings OpenAI's GPT models to your builds with your own API key.
 
 Pick the persona that matches your needs. You can switch between builds without losing your content.
+
+![Builder persona selection](./img/screenshot-website-builder-personas.webp)
 
 ## Six Style Directions
 
