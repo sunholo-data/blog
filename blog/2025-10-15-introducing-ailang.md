@@ -37,7 +37,9 @@ The language is purely functional, built on lambda calculus with Hindley-Milner 
 
 - **Deterministic execution.** Given the same inputs and capabilities, an AILANG program produces the same output every time. Execution traces are structured and replayable.
 
-- **AI-first design.** Regular syntax, explicit semantics, and a small surface area optimized for code generation by large language models.
+- **AI-first design.** Regular syntax, explicit semantics, and a small surface area optimized for code generation by large language models. Research from the [LoCoBench benchmark](https://arxiv.org/abs/2404.07498) (Salesforce AI Research, 2025) shows that language complexity causes 30-50% performance degradation in long-context AI code synthesis — AILANG's minimal syntax is designed to avoid this.
+
+![LoCoBench: AI code generation performance across programming languages](./img/locobench-performance-heatmap.webp)
 
 - **Open source under Apache 2.0.** The full compiler, standard library, and 42 passing example programs are available on GitHub.
 

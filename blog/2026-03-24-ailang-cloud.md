@@ -58,6 +58,8 @@ terraform apply -var-file="environments/dev/terraform.tfvars"
 
 CI/CD is automatic. Push to `dev`, `test`, or `prod` and Cloud Build triggers handle the rest — building images, running Terraform, and deploying services.
 
+![Cloud Trace Explorer — end-to-end agent execution traces](./img/screenshot-cloud-trace.webp)
+
 ## Full observability with dual trace export
 
 Every agent execution is traced end-to-end. AILANG Cloud exports OpenTelemetry data to two destinations simultaneously:

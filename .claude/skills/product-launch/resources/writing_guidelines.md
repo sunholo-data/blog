@@ -194,7 +194,9 @@ Google always gives the reader something to do next:
   - DocParse demo: `demos/invoice_processor_wasm/assets/doc_parse_demo_screenshot.png`
   - Ecommerce dashboard: `demos/ecommerce/img/ecommerce-dashboard-ui.png`
   - Ambient assistant: `demos/streaming/ambient_assistant/ambient-demo.png`
-- AILANG docs site: `ailang/docs/static/img/` (logo, social card, dashboard screenshots, cloud trace)
+- AILANG docs site: `ailang/docs/static/img/` (logo, social card, dashboard screenshots, cloud trace, LoCoBench heatmap, coupling-cohesion chart)
+- AILANG docs content: `ailang/docs/docs/` — 40+ pages of guides, reference, vision, axioms, benchmarks. Check here first for feature details, research data, and code examples
+- Presentations repo: `presentations/images/` and `presentations/ai-slaves-human-masters/images/` — conference-quality visuals (LoCoBench heatmap, "Boring Task" illustration, Aitana dashboard, 4-icon design system)
 - Also check ailang.sunholo.com docs pages for any new images added over time
 - When writing about a demo or feature, check the product repo for existing screenshots before generating new images
 
