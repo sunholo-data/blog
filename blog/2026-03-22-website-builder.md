@@ -6,6 +6,8 @@ slug: /website-builder
 image: ./img/website-builder.webp
 ---
 
+![](./img/website-builder.webp)
+
 Today we're launching the **AILANG Website Builder** — describe your business, upload some photos and documents, pick a style, and get a multi-page website published to GitHub Pages. No code, no templates, no web skills required.
 
 <!-- truncate -->

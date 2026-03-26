@@ -6,6 +6,8 @@ slug: /ailang-cloud
 image: ./img/ailang-cloud.webp
 ---
 
+![](./img/ailang-cloud.webp)
+
 Today we're launching **AILANG Cloud** — a serverless execution platform that runs autonomous AILANG agent workflows on Google Cloud. Three components, five Pub/Sub topics, Terraform-managed infrastructure, and a full observability dashboard. Production cost: roughly $60/month.
 
 <!-- truncate -->

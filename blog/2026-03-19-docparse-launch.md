@@ -6,6 +6,8 @@ slug: /docparse-launch
 image: ./img/docparse-launch.webp
 ---
 
+![](./img/docparse-launch.webp)
+
 Today we're launching **DocParse** — a universal document parser that extracts structured content from 10+ formats, built entirely in AILANG. It parses Office documents deterministically from XML, delegates to AI only for PDFs and images, and scores 96.6% on OfficeDocBench against Unstructured, Docling, and LlamaParse.
 
 <!-- truncate -->

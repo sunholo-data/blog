@@ -6,6 +6,8 @@ slug: /press-introducing-ailang
 image: ./img/introducing-ailang.webp
 ---
 
+![](./img/introducing-ailang.webp)
+
 ![AILANG](./img/ailang-logo.svg)
 
 **COPENHAGEN, Denmark — October 15, 2025 —** Sunholo today released AILANG, an open-source programming language designed as a deterministic execution substrate for AI-generated code. AILANG closes a gap in the AI development landscape: AI systems can write code, but verifying that code is safe, correct, and reproducible remains an unsolved problem.

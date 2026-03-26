@@ -6,6 +6,8 @@ slug: /ailang-demos-launch
 image: ./img/ailang-demos.webp
 ---
 
+![](./img/ailang-demos.webp)
+
 Today we're launching the [AILANG Demo Hub](https://www.sunholo.com/ailang-demos/) — 17 live, interactive demos you can try right now in your browser. Document parsing, voice streaming, website generation, ecommerce pipelines, and contract-verified AI agents. All 100% AI-coded. All running live.
 
 <!-- truncate -->
