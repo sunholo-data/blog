@@ -10,7 +10,8 @@
       "Bash(yarn start)"
     ],
     "additionalDirectories": [
-      "/Users/mark/dev/sunholo/blog/.claude/skills"
+      "/Users/mark/dev/sunholo/ailang",
+      "/Users/mark/dev/sunholo/multivac"
     ]
   }
 }
