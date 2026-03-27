@@ -24,6 +24,8 @@ Our product launch style is modeled on Google's official blog ("The Keyword"). K
 - **Directly address the reader ("you")** — "You can try it now" / "Here's what this means for you"
 - **Conversational but confident** — Not stiff corporate prose, not breathless hype. The tone of an engineer explaining something they built and are proud of.
 - **Inclusive, not exclusive** — Explain jargon when first used. Write so a technical PM understands, not just a compiler engineer.
+- **Forward-thinking and ambitious** — Sunholo is building things that don't exist yet. Posts should convey the scale of ambition and help readers see the consequences of what's being built. Don't just describe features — articulate where they lead. Connect technical details to the larger vision of AI-maintained software, self-updating systems, and a new relationship between humans and code.
+- **Strategic, not just tactical** — Every feature sits within a bigger picture. A package registry isn't just dependency management — it's the foundation for AI agents that write, verify, publish, and maintain their own code. Help the reader see the trajectory.
 
 ### Opening Pattern
 Google product posts almost always open with one of these patterns:
@@ -154,6 +156,10 @@ Google always gives the reader something to do next:
 - **Today** — for announcements ("Today we're launching...")
 - **You can now** — for user-facing features
 - **Here's how** — to introduce getting started sections
+- **Self-maintaining** — for the package ecosystem vision
+- **By construction** — for security guarantees (safe by construction, not by convention)
+- **AI-maintained** — software written and updated by AI agents
+- **Unprecedented** — when describing genuinely novel capabilities (use sparingly, with evidence)
 
 ## Structure Guidelines
 

@@ -42,7 +42,7 @@ All AI-generated content uses author `solaris` and must include an AI disclosure
 ### Product Launch Posts
 - Tag: `product-launch` (plus product-specific tags)
 - Slug: `/slug-name`
-- Tone: enthusiastic, hands-on, developer-friendly
+- Tone: forward-thinking, ambitious, developer-friendly
 - Length: 800-1500 words
 - Includes code snippets, getting started steps
 
