@@ -107,6 +107,10 @@ const config = {
                 label: 'Discord',
                 href: 'https://discord.gg/RANn65Rh9a',
               },
+              {
+                label: 'Substack',
+                href: 'https://markedmondson.substack.com',
+              },
             ],
           },
           {
