@@ -4,3 +4,4 @@ build/
 .cache-loader/
 .env
 .DS_Store
+substack/
