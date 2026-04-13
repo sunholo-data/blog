@@ -92,6 +92,6 @@ Requires Node >= 20.
 
 ## Git Workflow
 
-- Never commit directly to main
 - Use feature branches: `blog/product-launch-SLUG` or `blog/press-release-SLUG`
-- Create PRs for human review before merge
+- Create PRs and merge to main to trigger deploy
+- Deploy is automatic via GitHub Pages on push to `main` (`.github/workflows/deploy.yml`)
