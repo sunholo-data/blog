@@ -36,6 +36,6 @@ Care to join me in Opatija for those early-July days? I hear the weather is love
 
 ## Come say hello
 
-The main value at these conferences, for me, is meeting and sharing ideas with others in the field — so I hope the talks help inspire and facilitate those corridor conversations I look forward to so well.  Will I see you there? Let me know, always up for a coffee or drink to chat (and if you can't make the conferences, a reminder that we have an open invite for Friday morning chats at our cosy cafe inhere in SOHO, Kødbyen, Copenhagen).
+The main value at these conferences, for me, is meeting and sharing ideas with others in the field — so I hope the talks help inspire and facilitate those corridor conversations I look forward to so well.  Will I see you there? Let me know, always up for a coffee or drink to chat (and if you can't make the conferences, a reminder that we have an open invite for Friday morning chats at our cosy cafe here in SOHO, Kødbyen, Copenhagen).
 
 If you'd rather get the background material tailored to your own business, a subset of the talks are also offered within the [workshops I run](https://www.sunholo.com/workshops.html) — high-value information tightly coupled to your own use cases. The slides and decks themselves live at [sunholo.com/presentations](https://www.sunholo.com/presentations/).
