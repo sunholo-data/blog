@@ -7,11 +7,11 @@ Canonical: https://www.sunholo.com/blog/upcoming-talks-2026-q2
 
 ---
 
-Three conferences this spring, and I hope at least one has something of interest to you, dear reader. I'd love to meet you face to face at one of them. If you do, please say hello — the talks cover AI in data, AI in programming, and AI in UI (I sense an AI theme...). If you have the time to come, I think you'll learn something about how to apply AI to your day job.
+I am happy to be appearing at three conferences this spring, and I hope at least one has something of interest to you, dear reader. I'd love to meet you face to face at one of them. If you do, please say hello — the talks cover AI in data, AI in programming, and AI in UI (I sense an AI theme...). If you have the time to come, I think you'll learn something about how to apply AI to your day job.
 
 [IMAGE: Mark Edmondson speaker card for analyticsdev.net Copenhagen, 29 April 2026 — upload blog/img/analyticsdev-mark-speaker.webp]
 
-analyticsdev.net — Copenhagen
+analyticsdev.net — Copenhagen, 29 April 2026
 [Heading 2]
 
 The first is analyticsdev.net
@@ -30,7 +30,7 @@ As a side note, it will also be my first outing of my latest PowerPoint avoidanc
 
 [IMAGE: IDA Driving AI 2026 conference banner — upload blog/img/driving-ai-banner.webp]
 
-Driving AI 2026 — IDA, Copenhagen
+Driving AI 2026 — IDA, Copenhagen, 27 May 2026
 [Heading 2]
 
 Next up will be the IDA talk for Driving AI 2026
@@ -48,14 +48,14 @@ The benchmarks already show AILANG beating Python on token usage and maintainabi
 
 [IMAGE: Diagram of AI protocols including AGUI, A2UI, MCPApps — upload blog/img/ai-protocols.png]
 
-WebSummerCamp — Croatia
+WebSummerCamp — Opatija, Croatia, 2–4 July 2026
 [Heading 2]
 
-In July I will be talking at WebSummerCamp in Croatia, where we will be exploring AI protocols — in particular those focused on the UI and UX part of the AI experience. As I've written before, protocols offer a way to standardise your AI stack, and also a glimpse into what the industry is accepting as the new abstraction layers. Whilst it can be an alphabet soup of ADK, MCP, A2A etc., I will help you cut through the protocols dedicated to making responsive and dynamic user interfaces: AGUI, A2UI and MCPApps.
+From 2–4 July I will be talking at WebSummerCamp in Opatija, Croatia, where we will be exploring AI protocols — in particular those focused on the UI and UX part of the AI experience. As I've written before, protocols offer a way to standardise your AI stack, and also a glimpse into what the industry is accepting as the new abstraction layers. Whilst it can be an alphabet soup of ADK, MCP, A2A etc., I will help you cut through the protocols dedicated to making responsive and dynamic user interfaces: AGUI, A2UI and MCPApps.
 
 If you're working with AI applications you need a combination of data, the model and UX — and it's only the data and UX which will make the difference, as we all have access to the same models (at the moment?).
 
-Care to join me in Croatia at the start of July? I hear the weather is lovely, and I'm excited to visit for the first time — early bird tickets available now:
+Care to join me in Opatija for those early-July days? I hear the weather is lovely, and I'm excited to visit for the first time — early bird tickets available now:
 
 https://websummercamp.com/2026/news/super-early-sold-out-get-your-early-bird-now
 
