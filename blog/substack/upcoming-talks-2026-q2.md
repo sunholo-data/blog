@@ -46,7 +46,7 @@ AILANG will be one of the first of many AI-specific languages.
 
 The benchmarks already show AILANG beating Python on token usage and maintainability — once that gap is visible, more languages will follow. And perhaps we'll all end up with our own created artifacts; I think it's already happening in natural language, as we gather up markdown files full of our secret sauces.
 
-[IMAGE: Diagram of AI protocols including AGUI, A2UI, MCPApps — upload blog/img/ai-protocols.png]
+[IMAGE: WebSummerCamp 2026 in Opatija, Croatia — 2–4 July, early-bird tickets available until 15 May — upload blog/img/websummercamp-croatia.webp]
 
 WebSummerCamp — Opatija, Croatia, 2–4 July 2026
 [Heading 2]

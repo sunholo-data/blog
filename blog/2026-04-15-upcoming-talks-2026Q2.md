@@ -28,7 +28,7 @@ Here's the prediction I'll be making: **AILANG will be one of the first of many 
 
 ## WebSummerCamp — Opatija, Croatia, 2–4 July 2026
 
-![Diagram of AI protocols including AGUI, A2UI, MCPApps](./img/ai-protocols.png)
+![WebSummerCamp 2026 in Opatija, Croatia — 2–4 July, early-bird tickets available until 15 May](./img/websummercamp-croatia.webp)
 
 From 2–4 July I will be talking at WebSummerCamp in Opatija, Croatia, where we will be exploring AI protocols — in particular those focused on the UI and UX part of the AI experience.  As I've written before, protocols offer a way to standardise your AI stack and also offer a glimpse into what the industry is accepting as the new abstraction layers.  Whilst it can be an alphabet soup of ADK, MCP, A2A etc., I will help you navigate the protocols dedicated to making responsive and dynamic user interfaces: AGUI, A2UI and MCPApps.  I believe if you are working with AI applications you need a combination of data, the model and UX — and it's only the data and UX which will make the difference, as we all have access to the same models (at the moment?).
 
