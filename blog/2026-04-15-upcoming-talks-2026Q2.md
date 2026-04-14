@@ -2,7 +2,7 @@
 title: "Upcoming talks — Q2 2026"
 authors: me
 tags: [talks, conferences, ailang, ai-protocols]
-image: ./img/analyticsdev-banner.webp
+image: ./img/analyticsdev-mark-speaker.webp
 slug: /upcoming-talks-2026-q2
 ---
 
@@ -12,7 +12,7 @@ I am happy to be appearing at some varied conferences this spring in 2026, and I
 
 ## analyticsdev.net — Copenhagen
 
-![analyticsdev.net conference banner](./img/analyticsdev-banner.webp)
+![Mark Edmondson speaker card for analyticsdev.net Copenhagen, 29 April 2026](./img/analyticsdev-mark-speaker.webp)
 
 The first is [analyticsdev.net](http://analyticsdev.net/), co-organised by my [8-bit-sheep](https://8-bit-sheep.com/) flock member Gunnar as well as Steen and Jomar from the Brand Community.  It looks to be a digital analytics star-studded lineup (and me). Real meat to the bone if you are looking for deep technical talks to help further your digital analytics abilities.  I'll be talking about how my background in digital marketing, analytics, data science and engineering have helped with my current AI focus, and how what skills and concepts seem to be the same and which are different.  AI is definitely transformational to the digital analytics industry — changing web traffic, how people get recommendations, and measurement — and I hope to talk about how we can all weather these changes.
 

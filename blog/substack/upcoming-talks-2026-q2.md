@@ -9,7 +9,7 @@ Canonical: https://www.sunholo.com/blog/upcoming-talks-2026-q2
 
 Three conferences this spring, and I hope at least one has something of interest to you, dear reader. I'd love to meet you face to face at one of them. If you do, please say hello — the talks cover AI in data, AI in programming, and AI in UI (I sense an AI theme...). If you have the time to come, I think you'll learn something about how to apply AI to your day job.
 
-[IMAGE: analyticsdev.net conference banner — upload blog/img/analyticsdev-banner.webp]
+[IMAGE: Mark Edmondson speaker card for analyticsdev.net Copenhagen, 29 April 2026 — upload blog/img/analyticsdev-mark-speaker.webp]
 
 analyticsdev.net — Copenhagen
 [Heading 2]
