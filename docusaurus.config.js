@@ -37,6 +37,7 @@ const config = {
           showReadingTime: true,
           blogSidebarCount: 'ALL',
           blogSidebarTitle: 'All posts',
+          exclude: ['substack/**'],
         },
         googleTagManager: {
           containerId: 'GTM-WLQZQF2P',
