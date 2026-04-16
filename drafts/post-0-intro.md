@@ -112,7 +112,7 @@ Sign off: *"Over the next five weeks I'll take each of these apart with the spec
 - The Python/AILANG toy code contrasts — rhetorically weak, hold back
 - Anthropic interpretability research detail — save for Post 3
 - EU AI Act specifics — save for Post 3 or optional Post 6
-- Entropy-budget equation, five axes — save for Post 4
+- Decision-budget equation, five axes — save for Post 4
 - Circuit breakers / WHO checklist — save for Posts 4/5
 
 ## Editorial notes

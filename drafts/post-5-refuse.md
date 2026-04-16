@@ -90,7 +90,7 @@ Short quote:
 
 ### Policy-level (refusal envelopes)
 
-- The entropy-budget scope from Post 4 — `forbidden: [facts, quantities, names, dates, monetary amounts, legal claims]` — is a refusal path expressed as a rule. Anything in `forbidden` that lacks evidence → the system returns "I don't know" rather than producing text.
+- The decision-budget scope from Post 4 — `forbidden: [facts, quantities, names, dates, monetary amounts, legal claims]` — is a refusal path expressed as a rule. Anything in `forbidden` that lacks evidence → the system returns "I don't know" rather than producing text.
 
 The general shape: **refusal is designed, not hoped for.** Every system that successfully refuses has architecture that makes refusal the cheapest path. Every system that hallucinates has architecture that makes answering the cheapest path.
 
@@ -121,7 +121,7 @@ Return to the five principles. Show that each one, ultimately, is a different fa
 | Declared authority | The AI says what it will touch | Replit deletes prod DB |
 | Reproducibility | The AI can be replayed | Air Canada can't defend chatbot output |
 | Visibility | The AI's actions are logged | o1 hides reasoning, bills you for it |
-| Entropy budgets | The AI's ambiguity is assigned | "Don't hallucinate" fails; 30-turn sessions |
+| Decision budgets | The AI's ambiguity is assigned | "Don't hallucinate" fails; 30-turn sessions |
 | Refusal | The AI can say "I don't know" | NYC MyCity tells you to commit wage theft |
 
 Every AI failure in the press over the last three years is one of these five, or a combination. None are failures of model capability. All are failures of delegation architecture.
@@ -151,7 +151,7 @@ A system that passes all three is one you can delegate to. A system that fails a
 
 Land it. Short. Personal.
 
-The whole series has been one argument: **we are giving AI systems authority at a scale and speed our institutions were not designed for.** The solution is not to slow down the AI — the economics won't allow it. The solution is to catch our *institutions* up: written capability envelopes, reproducible decisions, audit-grade action logs, explicit entropy budgets, mandatory refusal paths.
+The whole series has been one argument: **we are giving AI systems authority at a scale and speed our institutions were not designed for.** The solution is not to slow down the AI — the economics won't allow it. The solution is to catch our *institutions* up: written capability envelopes, reproducible decisions, audit-grade action logs, explicit decision budgets, mandatory refusal paths.
 
 This is not exotic. It is what we already demand of human professionals — the contractor, the lawyer, the doctor, the accountant. All of them operate within declared scope, keep records, escalate uncertainty, and have a legally-binding way to say "outside my expertise, ask someone else." AI deserves the same discipline, and the same expectations.
 

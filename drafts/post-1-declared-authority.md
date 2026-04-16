@@ -122,7 +122,7 @@ Close with the single-sentence takeaway and a light forward link:
 - Samsung → long digression on corporate AI policy. Keep to the capability-layer point.
 - Detailed AILANG effect syntax. The menu-of-ingredients line is enough.
 - Anthropic research on deception / alignment faking — save for Post 3.
-- Entropy-budget framing — save for Post 4.
+- Decision-budget framing — save for Post 4.
 - OAuth scopes as a middle-layer example — too technical, only include if the post is running short.
 
 ## Editorial notes

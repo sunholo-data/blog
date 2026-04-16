@@ -14,7 +14,7 @@
 
 Open with the surprise.
 
-- For five weeks this series has argued that trustworthy AI delegation requires: declared authority, reproducibility, action-layer visibility, explicit entropy budgets, mandatory refusal paths.
+- For five weeks this series has argued that trustworthy AI delegation requires: declared authority, reproducibility, action-layer visibility, explicit decision budgets, mandatory refusal paths.
 - None of that came from a regulator. It came from operational failure cases and a programming-language design doc.
 - And yet: **the EU AI Act, enforceable for high-risk systems from August 2026, requires substantially the same list.** Transparency, logging, human oversight, documented limitations, risk management, post-market monitoring.
 - When an independent regulator and an independent language designer converge on the same requirements, the requirements are not stylistic. They are structural.
@@ -47,8 +47,8 @@ This is the load-bearing section. Map each principle to the statutory requiremen
 - Article 86 gives affected persons the right to a "clear and meaningful explanation" of decisions made by high-risk AI.
 - Both require what Post 3 called action-layer visibility. Neither requires, or could require, weight-layer explainability — the law is pragmatic where the discourse is not.
 
-### Principle 4 — Entropy budgets → **Article 13(3)(b) "limitations of performance"**
-- The clause requiring disclosure of "limitations" — given equal weight to capabilities — is the statutory version of entropy-budget declaration.
+### Principle 4 — Decision budgets → **Article 13(3)(b) "limitations of performance"**
+- The clause requiring disclosure of "limitations" — given equal weight to capabilities — is the statutory version of decision-budget declaration.
 - A system that has not mapped the edges of its competence cannot disclose its limitations, cannot comply with Article 13, and cannot be deployed in a high-risk setting.
 - **"Don't hallucinate" is now, in effect, a compliance violation.** You are required to declare where the model will fail.
 

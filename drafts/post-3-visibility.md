@@ -187,7 +187,7 @@ Forward link:
 - Extended comparison of Langfuse/LangSmith/OpenTelemetry — one-line mention is enough
 - Deep defence of Anthropic (vs. critique) — the research stands on its own
 - Replit / Air Canada callbacks — keep them scarce, they belong to their own posts
-- Entropy-budget framing — Post 4
+- Decision-budget framing — Post 4
 
 ## Editorial notes
 
