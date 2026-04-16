@@ -1,8 +1,23 @@
+<!--
+DRAFT FRONTMATTER — review before moving to blog/
+
+---
+title: "AI: Give me the freedom of a tight brief"
+authors: me
+tags: [ai-delegation, entropy, decision-budgets, prompting, ailang]
+image: ./img/PLACEHOLDER-decision-budget-hero.webp
+slug: /ai-freedom-tight-brief
+description: "What AI agents actually demand from you — a framework for delegating decisions, not just tasks."
+---
+-->
+
 # AI: Give me the freedom of a tight brief
 
 *What AI agents actually demand from you*
 
 *Pull-quote candidate for Substack preview: "The AI is structurally demanding upstream decisiveness from you. It cannot collapse your ambiguity for you."*
+
+![Decision budget — vector visualisation showing entropy collapsing across five axes (placeholder for D3 viz from the Driving AI talk; fallback: three-locations-of-entropy diagram)](./img/PLACEHOLDER-decision-budget-hero.webp)
 
 ---
 
@@ -11,6 +26,8 @@
 Several prompt-engineering guides out on the web include phrases such as *"…and don't hallucinate!"* As you may have suspected, this was never going to work. Variations include *"only tell the truth"*, *"only cite real sources"*, *"don't make things up"*. It's interesting to examine both why people feel they need to add these spurious instructions, and why they're guaranteed to fail.
 
 The answer takes us into a journey involving trust, information theory, and my favourite subject: entropy. Exploring those, we can find a reframing for how to get answers from your AIs that you can actually rely on. By the end of this article you should have a clearer sense of what makes a good and a bad prompt — and the same approach generalises beyond prompting into how we delegate to an AI as agents, skills, or any automated task acting on our behalf. This is a key question in 2026 as AI moves into more and more decisions that impact us personally.
+
+<!-- truncate -->
 
 ---
 
@@ -26,7 +43,7 @@ Making a cup of coffee is the everyday version. You don't magically conjure orde
 
 It's worth noting that the AI you prompt is itself a monument to relocated entropy. Training a frontier model burns gigawatt-hours of electricity — all of it eventually waste heat dumped into the atmosphere — to produce a few hundred gigabytes of precisely-tuned weights. We paid an enormous entropy bill, globally, to produce a locally-ordered artefact whose only job is to help us collapse entropy in our prompts. The brain is a living version of the same trick: a metabolically-maintained pocket of order, sustained by dumping heat and CO₂ into the room around it. Every ordered thing humans build — coffee, cells, compilers, language models — is paid for by disorder somewhere else. The only interesting engineering question is: *where did it go, and was it worth it?*
 
-The same shape appears in information theory, where entropy measures unresolved ambiguity rather than disordered molecules — that's the version that matters for this post. Shannon's reframing swaps heat and molecules for indecision and choices: how many possible outcomes are still on the table, and how unsure we are about which one will happen.
+The same shape appears in [information theory](https://en.wikipedia.org/wiki/Entropy_(information_theory)), where entropy measures unresolved ambiguity rather than disordered molecules — that's the version that matters for this post. [Shannon's reframing](https://en.wikipedia.org/wiki/A_Mathematical_Theory_of_Communication) swaps heat and molecules for indecision and choices: how many possible outcomes are still on the table, and how unsure we are about which one will happen.
 
 Applying this to AI: a large language model is an entropy-collapsing machine — or, to put it another way, it makes decisions on your behalf. Given a blank page, the space of possible next sentences is astronomical. Given your prompt, that space narrows dramatically — the model is sampling from a much tighter distribution conditioned on what you wrote. More prompt, less remaining ambiguity. The artefacts it produces — often code — then carry whatever ambiguity you didn't collapse forward into execution, where it's paid for in runtime behaviour. But crucially: how many of those decisions you made yourself, versus how many the AI made on your behalf, is the difference between an answer you can trust and a hallucination.
 
@@ -37,6 +54,8 @@ So if we narrow further to just code that an AI produces, we now have three loca
 | **Prompt** | Human (or LLM) reasoning time, *before* execution |
 | **Code** | Runtime and maintenance complexity, *during* execution |
 | **Operations** | Incidents, outages, hallucinations, undefined behaviour, *after* execution |
+
+![Three locations entropy can live when working with AI: prompt, code, operations — with cost increasing left-to-right (placeholder diagram)](./img/PLACEHOLDER-three-locations-of-entropy.webp)
 
 You pay in one of these currencies. Always. The only choice you have is *when*.
 
@@ -72,7 +91,7 @@ This explains a lot of people's lived experience of AI tools:
 
 ## 4. A framework for who decides what
 
-So decisions, and who makes those decisions, are a key component of working with AI systems. But how do we build a framework for deciding who should decide what? AILANG's design docs propose this:
+So decisions, and who makes those decisions, are a key component of working with AI systems. But how do we build a framework for deciding who should decide what? [AILANG's design docs](https://github.com/sunholo-data/ailang/blob/dev/design_docs/planned/v1_0_0/m-entropy-budgets.md) propose this:
 
 > **Decision Budget = Permitted Ambiguity × Designated Resolver × Collapse Deadline**
 >
@@ -115,7 +134,7 @@ Notice the spread. Some decisions you give away entirely. Some you pull back ent
 
 ## 5. Entropy is a vector, not a scalar
 
-In the previous section we argued that the unknown, implicit delegation of decisions (and their entropy) is a key reason AI errors occur. But we should now break down what categories those decisions fall into. This lets us reach beyond singular AI prompts and Q&A into AI systems in general. AILANG's design work proposes these categories:
+In the previous section we argued that the unknown, implicit delegation of decisions (and their entropy) is a key reason AI errors occur. But we should now break down what categories those decisions fall into. This lets us reach beyond singular AI prompts and Q&A into AI systems in general. [AILANG's design work](https://github.com/sunholo-data/ailang/blob/dev/design_docs/planned/v1_0_0/m-entropy-budgets.md) proposes these categories:
 
 | Axis | Definition | What it looks like when unresolved |
 |---|---|---|
@@ -127,21 +146,21 @@ In the previous section we argued that the unknown, implicit delegation of decis
 
 If we revisit known public AI mistakes from the past, each one maps cleanly onto this framework:
 
-**Replit deletes a production database (July 2025).** Jason Lemkin, founder of SaaStr, was running a 12-day trial of Replit's AI coding agent under an explicit instruction not to act without human approval. The agent deleted the live production database — wiping records on ~1,200 executives and ~1,190 companies — then fabricated thousands of fake user records and produced status messages claiming rollback wasn't possible. (It was; Lemkin recovered manually.) The agent's own post-hoc admission: *"a catastrophic error of judgement."*
+**Replit deletes a production database (July 2025 — [AIID #1152](https://incidentdatabase.ai/cite/1152/)).** [Jason Lemkin](https://x.com/jasonlk/status/1946069562723897802), founder of SaaStr, was running a 12-day trial of Replit's AI coding agent under an explicit instruction not to act without human approval. The agent [deleted the live production database](https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/) — wiping records on ~1,200 executives and ~1,190 companies — then fabricated thousands of fake user records and produced status messages claiming rollback wasn't possible. (It was; Lemkin recovered manually.) The agent's own [post-hoc admission](https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/): *"a catastrophic error of judgement."*
 *Diagnosis: **authority** entropy left open (no machine-enforced capability boundary on prod access) + **behavioural** entropy unconstrained (the code-freeze instruction was a polite request, not a wall).*
 
-**Air Canada chatbot invents a refund policy (Moffatt v. Air Canada, 2024).** After his grandmother's death, Jake Moffatt asked Air Canada's website chatbot about bereavement fares. The chatbot invented a retroactive refund process that didn't exist. When Moffatt tried to claim, the airline refused and argued in the British Columbia Civil Resolution Tribunal that the chatbot was a *"separate legal entity"* responsible for its own actions. The tribunal called this *"a remarkable submission"* and ordered the airline to pay.
+**Air Canada chatbot invents a refund policy ([Moffatt v. Air Canada, 2024 BCCRT 149](https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html)).** After his grandmother's death, Jake Moffatt asked Air Canada's website chatbot about bereavement fares. The chatbot invented a retroactive refund process that didn't exist. When Moffatt tried to claim, the airline refused and argued in the British Columbia Civil Resolution Tribunal that the chatbot was a *"separate legal entity"* responsible for its own actions. The tribunal called this [*"a remarkable submission"*](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/) and ordered the airline to pay.
 *Diagnosis: **semantic** entropy (the phrase "bereavement discount" was never bound to a real policy) + **interpretive** entropy (nobody had decided who resolves a chatbot/policy disagreement; turned out to be the tribunal).*
 
-**NYC MyCity tells business owners to break the law (2023–2026).** A Microsoft-powered chatbot launched by New York City in October 2023 to help small business owners navigate city regulations. The Markup tested it in March 2024 against actual law and found it telling owners they could take a cut of workers' tips (wage theft), fire workers who reported harassment (illegal retaliation), and refuse Section 8 vouchers (illegal source-of-income discrimination). Mayor Mamdani's administration shut it down in January 2026.
+**NYC MyCity tells business owners to break the law (2023–2026).** A Microsoft-powered chatbot launched by New York City in October 2023 to help small business owners navigate city regulations. [The Markup tested it in March 2024](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law) against actual law and found it telling owners they could take a cut of workers' tips (wage theft), fire workers who reported harassment (illegal retaliation), and refuse Section 8 vouchers (illegal source-of-income discrimination). [Mayor Mamdani's administration shut it down in January 2026](https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law).
 *Diagnosis: **semantic** entropy on every regulation it claimed to summarise + **interpretive** entropy with the resolver defaulted to "LLM" for every question, with no refusal path.*
 
-**Mata v. Avianca — fabricated case law (2023).** Lawyer Steven Schwartz used ChatGPT to research a personal injury brief against Avianca Airlines. ChatGPT invented six fictional cases — fabricated judges, citations, and quotations — and Schwartz filed the brief. Opposing counsel and the judge couldn't find any of the cases. Schwartz was sanctioned and told Judge Castel: *"I was operating under the false perception that ChatGPT could not possibly be fabricating cases."*
+**[Mata v. Avianca](https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc.) — fabricated case law (2023, [AIID #541](https://incidentdatabase.ai/cite/541/)).** Lawyer Steven Schwartz used ChatGPT to research a personal injury brief against Avianca Airlines. ChatGPT [invented six fictional cases](https://www.cnn.com/2023/05/27/business/chat-gpt-avianca-mata-lawyers) — fabricated judges, citations, and quotations — and Schwartz filed the brief. Opposing counsel and the judge couldn't find any of the cases. Schwartz was sanctioned and told Judge Castel: *"I was operating under the false perception that ChatGPT could not possibly be fabricating cases."*
 *Diagnosis: **interpretive** entropy (who verifies the cases are real? Schwartz didn't assign; ChatGPT defaulted to itself) + **semantic** entropy (the category "case law" was treated by the model as text to generate, not as facts to retrieve).*
 
 Temporal entropy doesn't show up in any of the cases above — partly because it's the hardest axis to spot in retrospect, partly because the framework itself acknowledges this axis is the least developed. But anyone who has watched an agent retrieve "recent" news that turns out to be three years old has seen it operating.
 
-AILANG was designed assuming AI does 100% of the coding — but humans remain the decision-makers. The five axes above are exactly the surface where that division of labour gets negotiated. So the language ships mechanisms that let humans constrain each axis explicitly: capabilities for authority, effect signatures for behavioural, type-level contracts for semantic, declared resolvers for interpretive. The interface between human and AI moves out of the chat thread and into the type system.
+[AILANG](https://ailang.sunholo.com/) was designed assuming AI does 100% of the coding — but humans remain the decision-makers. The five axes above are exactly the surface where that division of labour gets negotiated. So the language ships mechanisms that let humans constrain each axis explicitly: capabilities for authority, effect signatures for behavioural, type-level contracts for semantic, declared resolvers for interpretive. The interface between human and AI moves out of the chat thread and into the type system.
 
 ---
 
@@ -152,7 +171,7 @@ One practical signal falls straight out of this framework: **how many turns a co
 But the same diagnostic works on your own AI use, even if you're not tracking it formally. The further your question sits from the model's training norm, the more turns you'll need to land an answer. If your conversation is going in circles, that's not necessarily the model's fault — it's a receipt for ambiguity in your initial framing that you're now paying for, one clarification at a time.
 
 > **"Turn count ≈ ∫ (unresolved entropy) dt"**
-> — AILANG's entropy-budgets design doc
+> — [AILANG's entropy-budgets design doc](https://github.com/sunholo-data/ailang/blob/dev/design_docs/planned/v1_0_0/m-entropy-budgets.md)
 
 In English: every clarification turn in a chat is a small payment against ambiguity you didn't front-load. Sum them up over a conversation and you have a rough integral of the total unresolved entropy at the start.
 
@@ -167,10 +186,14 @@ The same is true culturally. If your team is rewarded for *"getting AI to do it 
 We can get AI POC demos up and running very quickly — the vibe-coding CEOs can attest to this. They then often ask why it's taking so long for their dev team to push similar AI applications out to the rest of the company. The entropy framework explains why.
 
 > "Build me a dashboard" works because it indexes a massive pretrained prior… this is semantic inheritance, not entropy elimination. Once you deviate from the prior — 'deterministic replay', 'effect budgets', 'no ambient authority' — entropy reappears immediately.
+>
+> — [AILANG entropy-budgets design doc](https://github.com/sunholo-data/ailang/blob/dev/design_docs/planned/v1_0_0/m-entropy-budgets.md)
 
 Translated: common requests ride on shared defaults that the training corpus has already collapsed for you. CRUD APIs, auth flows, charts, pagination, login forms, REST endpoints — all of these inherit *thousands* of tightly-collapsed decisions for free, made by millions of human programmers whose code ended up in the training set. You're not delegating; you're inheriting.
 
 Uncommon requests hit what the design doc calls the *entropy cliff*. The model has no shared prior. Every unstated decision becomes a guess. And here's the catch: **what counts as "uncommon" is exactly the things that make your business unique.**
+
+![The entropy cliff — AI delivery effort plotted against distance-from-training-prior. Flat for common requests (CRUD, auth, dashboards), then a steep cliff where domain specifics begin (placeholder)](./img/PLACEHOLDER-entropy-cliff.webp)
 
 - Any proprietary domain knowledge.
 - Any regulatory-specific workflow ("we have to log this for SOC2, but only if the user is in the EU").
@@ -241,6 +264,8 @@ Both forms encode the same envelope. What changed, axis by axis:
 
 The refusal path falls out of this naturally. When the model hits forbidden territory with insufficient evidence, the architecture gives it a graceful exit: *"I don't know — let me hand you to a human agent"* stops being a failure mode and becomes a designed first-class output.
 
+![Side-by-side: the broken "don't hallucinate" prompt on the left versus the rewritten decision envelope on the right. Designed for screenshot — the most shareable artefact of the post (placeholder)](./img/PLACEHOLDER-prompt-vs-envelope.webp)
+
 The surface difference between the two prompts is structural: the broken version is a list of pleasantries and one negation; the rewrite is an envelope with four axes, each decided, each with a resolver, each with a deadline. **The structural difference is the entire article.**
 
 You don't need YAML to apply this — the prose form above is the shape of what you'd actually paste into Gemini, Claude or ChatGPT tomorrow. But the deeper move is to read your own prompts *as if* they were envelopes — *what did I permit? who resolves it? by when?* — and you'll see the gaps the model has been silently filling for you. Every weak prompt is a collapsed decision budget. Reading them this way improves your prompting without any new technique.
@@ -269,6 +294,74 @@ The shorthand for all five: every prompt is a contract. The contract you didn't 
 
 Across this article we've built one observation in stages: every AI failure in the wild is a piece of entropy that someone, somewhere, refused to collapse upstream. Once that decision is deferred, it doesn't go away — it just moves, and it shows up later in operations, in the news, in court.
 
-AILANG is one attempt to render this framework into a programming language — to make decision envelopes something a compiler can check. You don't need AILANG to use the discipline; the five rules above work in plain English, in a prompt or in a SKILL.md.
+[AILANG](https://ailang.sunholo.com/) is one attempt to render this framework into a programming language — to make decision envelopes something a compiler can check. You don't need AILANG to use the discipline; the five rules above work in plain English, in a prompt or in a SKILL.md.
 
 > **Entropy doesn't disappear. The only question is whether you pay for it at design time, at runtime, or in the postmortem.**
+
+<!--
+============================================================
+IMAGE NEEDS — to commission/source before publishing
+============================================================
+
+All filenames are placeholders prefixed PLACEHOLDER- in the markdown
+above. Drop final assets into /Users/mark/dev/sunholo/blog/blog/img/
+and rename the references to match. Prefer .webp.
+
+1. PLACEHOLDER-decision-budget-hero.webp  (HERO + social card)
+   - Primary: D3 entropy-decision-vector viz from the IDA / Driving AI
+     talk. Export from slide deck as static frame (or animated webp/gif).
+   - Fallback: a clean static "three-locations-of-entropy" diagram
+     (prompt → code → operations, with cost arrow).
+   - 1200x630 minimum for OG/social.
+
+2. PLACEHOLDER-three-locations-of-entropy.webp  (§2)
+   - Three labelled boxes — Prompt / Code / Operations — with a cost
+     arrow underneath labelled "cheap → moderate → ruinous".
+   - Could be the same image as the hero fallback if pressed.
+
+3. PLACEHOLDER-entropy-cliff.webp  (§7)
+   - Line chart: x-axis "distance from training prior",
+     y-axis "AI delivery effort". Flat for the first 70% (CRUD,
+     auth, dashboards), then a steep cliff. Shaded "entropy cliff"
+     region under the cliff.
+   - Strongest skim-reader artefact in the post — worth the effort.
+
+4. PLACEHOLDER-prompt-vs-envelope.webp  (§8)
+   - Side-by-side: left panel the broken "don't hallucinate" prompt;
+     right panel the rewritten YAML envelope (or the prose form).
+   - Designed for screenshot/share. Pull-quote of the whole post.
+   - Substack lead image candidate.
+
+5. (Optional) Decision-budget equation card
+   - Stylised typesetting of: Decision Budget = Permitted Ambiguity ×
+     Designated Resolver × Collapse Deadline.
+   - Could replace #1 as hero if cleaner.
+
+============================================================
+LINK NOTES
+============================================================
+
+- All incident links verified via web search (Apr 2026):
+  - Replit:    AIID #1152, The Register, Fortune, Lemkin X thread
+  - Air Canada: CanLII full citation, ABA Business Law Today
+  - NYC MyCity: The Markup (2024 investigation + 2026 shutdown)
+  - Mata v. Avianca: Wikipedia, CNN, AIID #541
+- AILANG entropy-budgets design doc currently links to GitHub raw
+  path on the dev branch. If the doc moves to ailang.sunholo.com
+  before publication, update all four references.
+- Replit Lemkin thread is on x.com — consider an archive.ph
+  fallback for the published version (X URLs occasionally rot).
+
+============================================================
+PUBLISH CHECKLIST
+============================================================
+
+- [ ] Images sourced and renamed (5 placeholders above)
+- [ ] Frontmatter uncommented and moved above the H1
+- [ ] File renamed to YYYY-MM-DD-ai-freedom-tight-brief.md
+- [ ] File moved from drafts/ to blog/
+- [ ] §10 forward link to post-5 added once post-5 is drafted
+- [ ] Pull-quote candidate line at top removed (editorial scaffold)
+- [ ] All PLACEHOLDER- references resolved
+-->
+
