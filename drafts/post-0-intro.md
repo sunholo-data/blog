@@ -21,6 +21,20 @@ Points to hit:
 
 ---
 
+"Can I trust AI?" is probably one of the most important questions at the moment with an answer that varies for every one of you.  Your answer is probably neither fully 100% or 0%, but somewhere in between which will be directly influencing how and what you use AI for.
+
+But trust is a feeling.  Can we qualify 'trust in AI' to have a framework to help us judge our human interactions with artificial intelligence?  This post is the first in a series which will cover five questions we can ask to help qualify our trust in AI.  Those questions are:
+
+- What is AI allowed to change?
+- Will AI do the same thing twice given the same input?
+- Can we observe what the AI did?
+- How many decisions can the AI make on our behalf?
+- Can the AI say when it can't do something?
+
+If instead of AI we were talking about a new human junior hire, these may be similar to questions a good manager may ask.  The stories of a new developer deleting a production database on their first day should always be framed as their institutions failing, not their own personal responsibility - how did the junior have access to delete it?  
+
+Similairly how we delegate to an AI should also have these questions answered and defined first, before blaming the AI for mistakes.  If we can get them right, then we can have more confidence and trust in what an AI can or can not do.
+
 ## 2. The shift that makes this urgent (~200 words)
 
 **One central point:** the code-writer changed; the language didn't. Our *institutions* were built for humans. Stuffing AI into them unchanged is the bug.
@@ -36,6 +50,22 @@ And:
 Bridge line: *what's true of languages is true of contracts, approvals, policies. We are putting AI into processes designed for embarrassable humans, and wondering why it goes wrong.*
 
 ---
+
+Considering the sector where AI is having most impact first, software engineering and programming, we are rapidly moving to a world where AI writes most of our code - code that touches critical systems in our human socities. 
+
+Our institutions are made for human decisions and responsbilities, but we are outsourcing more of those to AI. Yet the institutions and programming languages in use are still the same made-for-humans shapes (C, Python, JavaScript etc) despite the main actors changing.  Stuffing AI into human made shapes is a bug.  And what's true of languages is true of contracts, approvals, policies. We are putting AI into processes designed for embarrassable accountable humans, replacing them with machines that can forget everything by the next conversation.
+
+This was why we started developing AILANG, an AI-first programming language.  Its made consulting AIs for its design, for AIs to use.  From AILANG's vision document:
+
+> "Human programming languages optimize for: Comfort — familiar syntax, IDE support, autocompletion; Ambiguity — multiple ways to express the same thing; Speed — fast typing, shortcuts, implicit behaviors."
+
+We aim to make an AI language that is optimised for what AI needs, and change where humans interact with its surface.  
+
+We need to move from a world where a human examines and is accountable for every line of code they write to new surfaces and boundaries.  And as we have learnt from large language models in recent years, a language is more than just communication.  We have been surprised by how much capability has emerged from next word prediction to create this current AI-boom, which has led us to re-examine how much language and intelligence plays into one another.
+
+> "A language isn't just syntax and semantics. It's also learnability — and in 2025, that means learnability by machines."
+
+This means the language impacts fundamentally how AI and humans think.  Some bilingual people talk of having a different "soul" or personality depending on the language they are speaking and thinking within - the same must be true with AIs and how it interacts with us.
 
 ## 3. The five principles (~600 words — ~120 per principle)
 
