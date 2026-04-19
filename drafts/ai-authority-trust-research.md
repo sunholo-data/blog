@@ -455,19 +455,33 @@ The bug in most current AI deployments isn't that the AI is wrong; it's that **"
 
 ## Counterintuitive hook for the piece — the model-quality gradient
 
-From AILANG's benchmarks, a striking finding worth opening or closing the post with:
+From AILANG v0.12.0 benchmarks (51 problems, 0-shot + self-repair, 612 total runs):
 
-> "The better the model, the bigger AILANG's advantage over Python. A language designed for precise reasoning rewards models that reason well."
+> "AILANG outperforms Python for 4 of 6 models. The biggest advantage belongs to the cheapest model."
 
-| Model            | AILANG | Python | Delta    |
-|------------------|--------|--------|----------|
-| Claude Sonnet 4.6| 82.0%  | 72.0%  | +10.0%   |
-| Claude Opus 4.6  | 84.3%  | 74.5%  | +9.8%    |
-| GPT-5            | 82.4%  | 80.4%  | +2.0%    |
+**Standard Eval:**
 
-**The general principle:** structure, constraint, and declared authority don't *hold back* capable systems — they *compound with* them. Weak models muddle through ambiguity; strong models exploit structure.
+| Model | AILANG | Python | Delta |
+|---|---|---|---|
+| Opus 4.7 | 86.3% | 82.4% | +~4 pp |
+| GPT-5.4 | 86.3% | 82.4% | +~4 pp |
+| Sonnet 4.6 | 86.3% | 80.4% | +~6 pp |
+| Gemini 3.1 Pro | 82.4% | 78.4% | +~4 pp |
+| GPT-5.2 Codex | 76.5% | 80.4% | -~4 pp |
+| Gemini 3 Flash | 82.4% | 70.6% | +~12 pp |
 
-The analogy for a general audience: give a junior employee a loose mandate and they flail. Give a senior employee a loose mandate and they do something impressive — but unaccountable. Give a senior employee a tight mandate with clear scope and they produce their best work, auditably. **Constraint is how you get the upside of capability without the downside of agency drift.**
+**Agent Eval (multi-turn):**
+
+| Executor | AILANG | Python |
+|---|---|---|
+| Claude Code (Sonnet 4.5) | 97.7% | 97.7% |
+| Gemini CLI (Gemini 3 Flash) | 39.1% | 43.5% |
+
+**Overall v0.12.0:** 81.2% success rate, up +22.9pp from v0.11.2. Total cost: $21.87 across all models.
+
+**The general principle:** structure and constraint improve AI performance across the board. The biggest delta (+~12 pp) belongs to the cheapest model — structure helps the most constrained the most. And in agent mode, iterative feedback nearly closes the gap entirely (97.7% for both languages), showing the structure is learnable, not a barrier. **Constraint is how you get the upside of capability without the downside of agency drift.**
+
+The analogy for a general audience: give a senior employee a loose mandate and they do something impressive — but unaccountable. Give them a tight mandate with clear scope and they produce their best work, auditably.
 
 This is a good counterweight to the common "AI needs freedom to be creative" framing. For any task where trust matters, the opposite is true.
 
