@@ -155,9 +155,7 @@ An AI system that passes all five is one you can delegate to meaningfully. A sys
 
 ## 6. Series tease (~50 words)
 
-Sign off: *"Over the next five weeks I'll take each of these apart with the specific cases that prove it. Next week: the Replit incident, iOS permissions, and what your AI agent is quietly allowed to touch."*
-
----
+We have done an overview of the five principles in this summary post, but there are a lot more we can dive in to for each one.  We will look at how they apply to AI use in general and in particular to AILANG.  Half the reason for developing AILANG has been to explore with AI where our human-AI relationship boundaries should lie, and it is hoped that these principles can help inspire or start a wider discussion so as we can help shape that in a way that is positive for all.  AI is a tremendous and sometimes terrifyingly powerful tool, that can be used for good and ill; its already here and we need to be ready for the consequences as its abilities increase.  Over the next five posts we will also examine various rougue-AI incidents as see how they could have been better handled following our principles, and what we can learn.  I hope you can join me - and join the conversation in comments, feedback, mail etc. if you agree or disagree. 
 
 ## Cutting-room floor — do NOT include in this post
 
