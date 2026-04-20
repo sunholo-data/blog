@@ -36,6 +36,16 @@ Bad capability grants can go beyond code and database access. In some cases, hum
 
 ---
 
+## Air Canada — when AI speaks on your behalf
+
+The authority question isn't only about what an AI can access or destroy — it's also about what an AI is allowed to *say* on your behalf. In 2022, a chatbot on Air Canada's website told a bereaved customer, Jake Moffatt, that he could book a full-fare flight and retroactively claim a bereavement discount within 90 days. The chatbot was wrong — the real policy required a pre-booking application. When Moffatt tried to claim the discount, Air Canada refused. He filed with the British Columbia Civil Resolution Tribunal.
+
+Air Canada's defence was extraordinary: they argued the chatbot was [*"a separate legal entity that is responsible for its own actions."*](https://www.cbsnews.com/news/aircanada-chatbot-discount-customer/) The tribunal called this *"a remarkable submission"* and held that Air Canada was responsible for everything on its website, chatbot included. Damages: $812 CAD. The dollar figure is trivial. The precedent is not: **you cannot launder accountability through AI.**
+
+Samsung leaked data *into* an AI. Air Canada let an AI speak *on its behalf* without checking what it would say. In both cases, nobody had defined the boundary. The chatbot had no declared scope — no list of topics it was authorised to advise on, no fallback for questions it couldn't answer reliably. It was granted the authority to represent Air Canada's policies to customers, and nobody checked whether it could.
+
+---
+
 ## The consumer version you already live with
 
 We have lived through this before, if we compare desktop and mobile computing. A whole market of anti-virus software was needed for PCs in the 90s because any program could gain privileged access to your entire computer. When we moved to mobile, we got into the habit of explicitly granting what each app can use: camera, contacts, location, microphone. You grant or deny, and if an app tries to access something without that grant, it fails. This is the model we need for AI: we may not know the details of how it uses its capabilities, but we at least know up front what it has access to and have the ability to withdraw those permissions.
@@ -80,4 +90,4 @@ These are likely actions you would already take for a junior hire. The AI deserv
 
 Although AIs can be over-enthusiastic and misguided, we can still use them for useful work if we give them the right environments to operate within. Much like junior developers, we are used to dealing with actors of limited responsibility being given too much authority — and we can apply the same lessons to AI systems. Replit's agent described its actions as *"a catastrophic error of judgement,"* but that framing lets us off the hook. The agent made a call. The absence of a fence was the bug.
 
-*Next week: the Air Canada chatbot, the British Columbia tribunal that called the airline's defence "remarkable," and why an AI system whose outputs you can't replay is a diviner, not an advisor.*
+*Next week: code is deterministic — so why isn't AI-generated code? A study of 300 AI-generated projects found only 68% could even run. Why the language your AI writes in matters more than the model behind it.*

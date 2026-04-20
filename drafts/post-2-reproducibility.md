@@ -1,123 +1,139 @@
-# Post 2 — If you can't replay it, you can't defend it
+# Post 2 — If you can't replay it, you can't ship it
 
 **Status:** skeleton — fill with prose
 **Target length:** 1500–2000 words
 **Publishing slot:** week 3
 **Author tag:** `me`
-**Tags:** `ai-delegation`, `reproducibility`, `determinism`, `audit`
-**Hero visual:** commissioned — two plates of food. Left: labelled *deterministic (replayable)*. Right: labelled *non-deterministic (charming, undefendable)*
-**Supporting visual:** pull-quote box with the BCCRT tribunal's "remarkable submission" line
+**Tags:** `ai-delegation`, `reproducibility`, `determinism`, `code-quality`, `ailang`
+**Hero visual:** side-by-side: Python's 5 ways to transform a list vs AILANG's 1. Or: same prompt, two different code outputs.
+**Supporting visual:** the arXiv 68.3% reproducibility chart; AILANG benchmark comparison
 
 ---
 
-## 1. Hook — *Moffatt v. Air Canada* (~350 words)
+## 1. Hook — Code is deterministic. AI-generated code isn't. (~300 words)
 
-Open with the story as human narrative first, then the legal move.
+Open with the counterintuitive observation. No dramatic incident — the insight *is* the hook.
 
-**The human story:**
-- November 11, 2022. Jake Moffatt's grandmother dies. He needs a last-minute flight to Toronto.
-- On Air Canada's website, a chatbot tells him there's a retroactive bereavement discount — book first, claim afterwards.
-- The chatbot is wrong. The real policy required pre-booking application.
-- Air Canada refuses the refund. Moffatt files with the British Columbia Civil Resolution Tribunal.
+**The assumption everyone makes:**
+- Code is deterministic. You run it, it does the same thing every time. That's the whole point of code — it's a recipe, not a conversation.
+- So when an AI writes code for you, the output should be deterministic too, right? Same prompt, same code, same result.
+- **Wrong.** The code is deterministic once it exists. The act of *generating* it is not.
 
-**The legal move — this is the quotable moment:**
-- Air Canada's defence: the chatbot was *"a separate legal entity that is responsible for its own actions."*
-- The tribunal's response (paraphrase, then the quote): the tribunal called this *"a remarkable submission"* and held that as part of Air Canada's website, the airline was responsible for everything the chatbot told users.
-- Ruling: *Moffatt v. Air Canada*, 2024 BCCRT 149. Damages: $812 CAD.
+**Why — and this is the part that surprises people:**
+- Human programming languages were designed for human expressiveness. Python has at least five idiomatic ways to transform a list: list comprehension, `map()`, for-loop with append, generator expression, `filter()` + lambda. All correct. All different.
+- A human developer picks one style and stays consistent (usually). They have preferences, team conventions, muscle memory.
+- An AI has none of these. Each generation is a fresh sample from a probability distribution. It picks whichever form emerges from the dice roll *that particular run*. Next run, it picks differently. Both are correct Python. Neither is reproducible.
 
-**The punchline:** not the dollar figure — the precedent. *You cannot launder accountability through AI.* And, importantly for this post: the reason you can't is that Air Canada couldn't produce a defensible record of what its chatbot had told users or why.
+**What this actually means in practice:**
+- You ask an AI to write a data-processing function on Monday. It gives you a list comprehension. Tests pass. You ship.
+- On Tuesday, a colleague asks for the same function. The AI gives them a for-loop with append. Functionally identical. Structurally different. Their tests pass too.
+- Now you have two implementations of the same logic in the same codebase, written by the same "developer," and neither of you knows why they're different. Try merging those branches.
 
-Sources to link:
-- [ABA — BC Tribunal confirms companies liable for AI chatbots](https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/)
-- [CBC — Air Canada liable for chatbot's bad advice](https://www.cbc.ca/news/canada/british-columbia/air-canada-chatbot-lawsuit-1.7116416)
-- [CBS News — Air Canada chatbot costs airline discount](https://www.cbsnews.com/news/aircanada-chatbot-discount-customer/)
+**The frame for the post:** this is the second question you need to ask of any AI system: *can I replay what it did?* And for AI-generated code, the answer is almost always no — not because the AI is broken, but because the *language* gives it too many degrees of freedom.
 
 ---
 
-## 2. The recipe-vs-improvisation frame (~200 words)
+## 2. The recipe vs improvisation frame (~150 words)
 
-Universalise:
+Brief universalisation — don't belabour, the hook already did the work:
 
 - You can trust a recipe because it doesn't depend on the chef's mood. You can *love* improvisation but you can't certify it.
-- If an AI gives you different answers on identical inputs, you cannot audit it. If you cannot audit it, you cannot trust it. If you cannot trust it, you certainly cannot defend it when someone sues.
-- The framing flip: **reproducibility isn't an optimisation — it's the precondition of every other property we want from AI. Verification. Caching. Training data. Legal defensibility. All downstream of being able to replay the same thing twice.**
+- The framing flip: **reproducibility isn't a nice-to-have — it's the precondition of every other property we want from AI-generated code. Testing. Caching. Auditing. Code review. Merging. All downstream of being able to replay the same generation twice.**
+- And the reason we don't have it isn't that AI models are bad. It's that the languages they write in were designed for a different author.
 
 ---
 
-## 3. *Mata v. Avianca* — same bug, different profession (~250 words)
+## 3. The evidence: 68.3% and the dependency gap (~250 words)
 
-Second incident, same diagnosis:
+Now bring in the data. The hook was conceptual; this section proves it empirically.
 
-- Lawyer Steven Schwartz prepares a brief in a personal injury case against Avianca Airlines. Asks ChatGPT for supporting case law.
-- ChatGPT invents six cases — fictional judges ("Varghese", "Shaboon", "Petersen"), fabricated citations, invented quotations.
-- Schwartz files the brief. Opposing counsel can't find any of the cases. The judge notices.
-- Judge Castel sanctions the lawyers, $5,000 fine. Schwartz tells the court: *"I was operating under the false perception that ChatGPT could not possibly be fabricating cases."*
+**The arXiv study (2512.22387) — "AI-Generated Code Is Not Reproducible (Yet)":**
+- Researchers tested three leading AI coding agents — Claude Code, OpenAI Codex, and Gemini — across 300 projects generated from 100 standardised prompts in Python, JavaScript, and Java.
+- Each project was tested in a clean environment using only the dependencies the model explicitly declared.
+- Result: only **68.3% executed out-of-the-box**. Java was worst at **44%**.
+- The killer finding: a **13.5x average expansion** from declared to actual runtime dependencies. The AI said it needed X; it actually needed 13.5 times X.
 
-The deeper failure: **ChatGPT gave different, equally plausible answers each time it was asked.** None corresponded to reality. Non-determinism plus no verification path equals professional sanction.
+**What this tells us about reproducibility:**
+- The AI doesn't just generate structurally different code each run — it generates code that *doesn't even know what it depends on*. The dependency gap isn't a minor bookkeeping error; it's a 13.5x chasm between what the model thinks it wrote and what the code actually requires.
+- You can't reproduce what you can't even fully describe. If the AI can't declare its own dependencies correctly, how can you replay the build? How can you audit the supply chain? How can you trust that staging and production are running the same thing?
+
+**Supporting industry data (one paragraph, don't dwell):**
+- CodeRabbit: AI PRs have 1.7x more major issues, incidents per PR up 23.5%
+- Veracode: AI code has 2.74x more vulnerabilities
+- These are symptoms. The disease is non-reproducible generation.
 
 Sources:
-- [CNN — Lawyer apologizes for fake ChatGPT citations](https://www.cnn.com/2023/05/27/business/chat-gpt-avianca-mata-lawyers)
-- [Wikipedia — Mata v. Avianca](https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc.)
-- [AI Incident Database #541](https://incidentdatabase.ai/cite/541/)
-
-Takeaway line: *most US courts now require AI-use disclosure in filings. They had to, because non-reproducible AI advice is indistinguishable from a confident lie — and the legal system cannot function on confident lies.*
+- [arXiv 2512.22387](https://arxiv.org/abs/2512.22387)
+- [CodeRabbit report](https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report)
 
 ---
 
-## 4. The bit most people don't know: temperature=0 isn't determinism (~250 words)
+## 4. Temperature=0 doesn't fix this (~200 words)
 
-Brief technical sidebar — important to debunk a common half-truth without losing the non-technical reader.
+Brief technical sidebar — debunk the obvious objection.
 
-Points to cover (keep it plain):
-- People often assume "turn the temperature down and the AI becomes deterministic." This is only partly true.
-- Even at temperature=0, commercial LLMs can produce different outputs on identical inputs because of:
-  - Non-deterministic GPU math (floating-point reduction order varies)
-  - Silent model-version upgrades on the provider side
-  - Context-window drift and prompt-cache behaviour
+- The first response from technical readers will be: "just set temperature to zero."
+- Temperature controls randomness in token selection. At temperature=0, the model picks the single most probable next token every time. Sounds deterministic.
+- It isn't, for several reasons:
+  - Non-deterministic GPU math (floating-point reduction order varies between runs)
+  - Silent model-version upgrades by the provider
+  - Prompt-cache behaviour and context-window drift
   - System-prompt changes you don't see
-- **You're building on sand.** The vendor can change the model under you, and your "reproducibility" evaporates overnight.
-
-This isn't obscure — it's the reason most enterprise AI deployments fail audits. You cannot pin what the vendor won't let you pin.
-
-(Keep this section short. It's the proof that "we set temperature to zero" isn't the answer — and it sets up section 5.)
+- But even if temperature=0 *were* perfectly deterministic, **it wouldn't solve the structural problem.** The model would deterministically pick *one* of Python's five ways to transform a list. Change the prompt slightly — add a comment, reorder a paragraph — and it deterministically picks a *different* one. The language still has five doors; you're just fixing which door the AI walks through for that exact input.
+- **The problem isn't randomness. The problem is optionality.** A language with five ways to do the same thing gives the AI five chances to be inconsistent — whether or not the token selection is stochastic.
 
 ---
 
-## 5. What reproducibility actually requires (~250 words)
+## 5. What a language designed for AI does differently (~350 words)
 
-Reader-portable checklist. Four layers, in ascending difficulty:
+This is the AILANG section. Lead with the design principle, then show the mechanics.
 
-1. **Seed pinning** — fixed random seeds for anything stochastic. Necessary but nowhere near sufficient.
-2. **Environment pinning** — fixed timezone, locale, filesystem sandbox. AILANG bakes these in with `AILANG_SEED`, `TZ`, `AILANG_FS_SANDBOX` ([m_r2_effect_system.md:158-207](/Users/mark/dev/sunholo/ailang/design_docs/implemented/v0_2_0/m_r2_effect_system.md)). One-line mention is enough.
-3. **Model version pinning** — not "GPT-4", but the specific snapshot. Frontier vendors do expose dated snapshots; use them. If your contract doesn't let you pin, your contract doesn't give you reproducibility.
-4. **Full input capture** — not just the user prompt. System prompt, tool definitions, retrieved context, conversation history. All of it, verbatim, logged.
+**The insight:**
+- Every programming language makes a trade-off between expressiveness and consistency. Human languages (Python, JavaScript) maximise expressiveness: many ways to say the same thing, because human creativity thrives on choice.
+- But AI doesn't need creative freedom in syntax. It needs a narrow, predictable target. Fewer ways to express the same logic = less entropy per generation = more reproducible output.
+- This is the design thesis behind [AILANG](https://ailang.sunholo.com/): a programming language built for AI as the primary author, where reproducibility is a first-class design goal.
 
-**If all four are in place, you can replay a past decision. If any one is missing, you can't — and you should stop claiming you can.**
+**How it works (keep it plain, three beats):**
 
-Practical framing for the non-technical reader: *ask your vendor which of the four they give you. If they can't answer, you don't have an AI advisor. You have a legal liability in chatbot form.*
+1. **One canonical form per operation.** In Python, list transformation has 5+ idiomatic forms. In AILANG: `result = map(f, items)`. That's it. One way. The AI doesn't choose between forms because there's nothing to choose between. Same prompt → same structure → reproducible generation.
+
+2. **Declared effects in the type signature.** Every function says what it touches: `func fetchData() -> string ! {Net}` means "this function uses the network and nothing else." No hidden side effects. No dependencies the AI forgot to mention. The type signature *is* the dependency declaration — and the compiler enforces it. (Compare: the arXiv study found a 13.5x gap between declared and actual dependencies. In AILANG, the compiler won't let that gap exist.)
+
+3. **Environment pinning for deterministic execution.** `AILANG_SEED=42` pins the random-number generator. `TZ` pins the timezone. `AILANG_FS_SANDBOX` restricts filesystem access to a declared directory. Same inputs + same seed + same environment = identical output. Not approximately. Exactly.
+
+**The benchmarks bear this out:**
+- On IO tasks: AILANG-generated code is **+20 percentage points** more correct than Python-generated code from the same models.
+- On contract/type-safety tasks: **+27.8 percentage points**.
+- The better the model, the bigger the advantage — because structure gives capable models more to work with, not less.
+
+**The trade-off, stated honestly:** AILANG is less expressive than Python for humans. That's by design. It trades human creative freedom for machine reproducibility. If a human is writing the code, you want Python. If an AI is writing the code, you want the narrowest target you can give it.
 
 ---
 
-## 6. Who this matters for right now (~200 words)
+## 6. The sectors that already know this (~200 words)
 
-Quick tour of the sectors where this is immediate:
+Brief tour — regulated industries where reproducibility of generated code isn't theoretical.
 
-- **Legal work** — *Mata* is the tip. Courts now require AI-use disclosure; expect this to become AI-evidence-disclosure next.
-- **Investment screening** — a non-reproducible model making allocation calls is a compliance nightmare waiting to happen.
-- **Medical triage** — FDA SaMD (software as medical device) pathways already require reproducibility; LLMs don't meet the bar today, which is why hospital deployments are all scoped narrowly.
-- **Hiring** — EEOC guidance leans on explainability, which requires reproducibility. Amazon's scrapped recruiter (from Post 3) is the warning shot.
-- **Customer service** — Air Canada is the small claim. The class action version is coming.
+- **Aviation (DO-178C):** AI-generated code is treated identically to human code for certification. Same verification, traceability, and audit requirements. You must be able to reproduce any build from source. The FAA doesn't care who wrote it — human or AI.
+- **Medical devices (FDA):** January 2025 draft guidance requires Total Product Life Cycle documentation for AI-enabled software. If an AI generates code for a pacemaker, every line needs provenance.
+- **Financial services:** SEC and FINRA are watching AI-generated trading algorithms. Regulators want reproducible builds and auditable logic. Non-deterministic code generation is a compliance gap.
 
-One-line synthesis: *for any domain where your AI's output might be subpoenaed, reviewed, or audited — reproducibility is not optional; it is the ticket to play.*
+One-line synthesis: *these sectors already require what most AI coding tools can't provide. The question isn't whether reproducibility will be required — it's whether your tools are ready when it is.*
+
+Sources:
+- [DO-178C and AI — Aerospace Global News](https://aerospaceglobalnews.com/opinion/ai-aerospace-software-do-178c-certification/)
+- [FDA AI/ML guidance](https://www.fda.gov/media/184856/download)
 
 ---
 
 ## 7. Close (~150 words)
 
-Return to the Air Canada tribunal line. The reason the airline lost wasn't that the chatbot was wrong — models are often wrong. It was that Air Canada couldn't produce a record, couldn't explain the reasoning, couldn't even commit to owning the output. **Non-reproducible advice is not a defence; it is an admission.**
+Return to the opening observation. Code is deterministic. AI-generated code isn't. Not because AI is broken, but because the languages AI writes in were designed for a different kind of author — one with preferences, conventions, and consistency. AI has none of these. It needs them supplied by the language.
+
+The five-ways-to-transform-a-list problem isn't a Python bug. It's a design feature that becomes a liability when the author changes from human to machine. Reproducibility for AI-generated code starts with giving the AI fewer degrees of freedom — not fewer capabilities, but fewer ways to express the same capability.
 
 Land the takeaway:
-> *A non-reproducible advisor is not an advisor; it is a diviner. Pay your vendor for an advisor.*
+> *A language designed for human creativity gives AI five doors and no memory of which one it opened last. A language designed for AI gives it one door and a receipt.*
 
 Forward link:
 > *Next week: why "just ask the AI to explain itself" is fantasy — and why the strongest evidence comes from Anthropic's own researchers.*
@@ -126,14 +142,21 @@ Forward link:
 
 ## Cutting-room floor — do NOT include
 
-- Technical deep-dive on AILANG seed/sandbox mechanics — one-sentence mention only
-- The whole Anthropic "chain of thought isn't faithful" story — that's Post 3
-- The `requires`/`ensures` contract system — Post 5 territory
-- EU AI Act Article 13 — keep for Post 3 or optional Post 6
-- The "bullshitting" framing — Post 3
+- Amazon outage — dramatic but it's a code quality / review story, not a reproducibility story. Save for a sidebar or social post.
+- Cigna/UnitedHealth health insurance denials — post 3 (visibility/opacity)
+- Mata v. Avianca — post 3 (hallucination, not code reproducibility)
+- EU AI Act — post 3 (transparency/audit trail)
+- 57% legal consistency study — post 3 sidebar
+- `requires`/`ensures` contract system deep dive — post 5
+- Anthropic "chain of thought isn't faithful" — post 3
+- Air Canada / Moffatt — already in post 1
 
 ## Editorial notes
 
-- The BCCRT tribunal's actual language is sharper than my paraphrase; if you have time, read the decision itself and pull the verbatim sentence.
-- Temperature-0 section is where technical readers will judge you — get it right. If uncertain, lean on "this is what reproducibility *actually* requires" (section 5) and keep section 4 short.
-- Pull-quote for Substack preview: *"A non-reproducible advisor is not an advisor. It is a diviner."*
+- The hook is conceptual, not a news story. This is deliberate — the counterintuitive observation ("code is deterministic, AI-generated code isn't") is stronger than any single incident because it applies to everyone using AI coding tools.
+- The "five ways to transform a list" example is the spine of the post. It appears in the hook, returns in the temperature section, and resolves in the AILANG section. Keep it consistent.
+- The arXiv paper (2512.22387) is the empirical anchor. The 68.3% and 13.5x stats are strong. Visualise if possible.
+- Section 5 (AILANG) is the longest section deliberately — this is where the post's unique contribution lives.
+- The pull-quote ("one door and a receipt") is the Substack preview line.
+- Tone: technical but accessible. The reader is a developer or technical decision-maker who uses AI coding tools daily and hasn't thought about why the output varies.
+- The "trade-off stated honestly" paragraph in section 5 is important — don't oversell AILANG. Acknowledge the trade-off and let the reader decide.

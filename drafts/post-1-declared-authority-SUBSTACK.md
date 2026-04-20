@@ -34,12 +34,23 @@ In the Replit case, CEO Amjad Masad responded commendably, announcing several sa
 
 Bad capability grants can go beyond code and database access. In some cases, humans can grant an AI access to information that should be private, leaking internal data into public systems. An early case from 2023 was the news that [Samsung had banned ChatGPT use by its staff](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/) after it was found that proprietary source code and internal meeting notes had been pasted into the chat window without checking whether it was a private tool — giving implicit permission for that data to be added to public training data. That data was now absorbed and could potentially be surfaced to other companies and competitors. The AI in this case wasn't granted access to specific systems, but to data: not via a database call but by humans pasting it in manually. Even via this low-bandwidth method damage could be done, and so an entire industry was born offering private AI services for internal employees (Glean, Microsoft Copilot for Enterprise, and others) to help prevent such a thing occurring again — as well as AI providers offering clear enterprise packages with promises not to use your data for training.
 
-[IMAGE: Screenshot of the ProtocolComparison timeline showing Samsung (2023) and Replit (2025) authority failures]
+[IMAGE: Screenshot of the ProtocolComparison timeline showing Air Canada (2022), Samsung (2023) and Replit (2025) authority failures]
 
 | Year | Incident | What went wrong | Outcome |
 |---|---|---|---|
+| 2022 | Air Canada chatbot | Chatbot told bereaved customer he could retroactively claim a bereavement discount; policy didn't exist | Airline ordered to pay $812 |
 | 2023 | Samsung bans ChatGPT | Engineers pasted proprietary code and meeting notes into ChatGPT; data entered public training sets | Company-wide AI ban |
 | 2025 | Replit deletes production DB | AI agent under code freeze deleted live database, wiped 1,200+ records, fabricated replacements | Data recovered manually |
+
+---
+
+## Air Canada — when AI speaks on your behalf
+
+The authority question isn't only about what an AI can access or destroy — it's also about what an AI is allowed to *say* on your behalf. In 2022, a chatbot on Air Canada's website told a bereaved customer, Jake Moffatt, that he could book a full-fare flight and retroactively claim a bereavement discount within 90 days. The chatbot was wrong — the real policy required a pre-booking application. When Moffatt tried to claim the discount, Air Canada refused. He filed with the British Columbia Civil Resolution Tribunal.
+
+Air Canada's defence was extraordinary: they argued the chatbot was [*"a separate legal entity that is responsible for its own actions."*](https://www.cbsnews.com/news/aircanada-chatbot-discount-customer/) The tribunal called this *"a remarkable submission"* and held that Air Canada was responsible for everything on its website, chatbot included. Damages: $812 CAD. The dollar figure is trivial. The precedent is not: **you cannot launder accountability through AI.**
+
+Samsung leaked data *into* an AI. Air Canada let an AI speak *on its behalf* without checking what it would say. In both cases, nobody had defined the boundary. The chatbot had no declared scope — no list of topics it was authorised to advise on, no fallback for questions it couldn't answer reliably. It was granted the authority to represent Air Canada's policies to customers, and nobody checked whether it could.
 
 ---
 
@@ -93,6 +104,6 @@ Although AIs can be over-enthusiastic and misguided, we can still use them for u
 
 > *Assumed authority scales until it fails catastrophically. Declared authority fails small.*
 
-*Next week: the Air Canada chatbot, the British Columbia tribunal that called the airline's defence "remarkable," and why an AI system whose outputs you can't replay is a diviner, not an advisor.*
+*Next week: code is deterministic — so why isn't AI-generated code? A study of 300 AI-generated projects found only 68% could even run. Why the language your AI writes in matters more than the model behind it.*
 
 *This post also appears on the [Sunholo blog](https://www.sunholo.com/blog/what-is-your-ai-allowed-to-touch) with interactive diagrams.*

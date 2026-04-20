@@ -79,10 +79,19 @@ Bad capability grants can go beyond code and database access. In some cases, hum
 />
 
 <ProtocolComparison
-  title="Authority Failures — Two Incidents, One Missing Principle"
+  title="Authority Failures — Three Incidents, One Missing Principle"
   mode="timeline"
   showLegend={true}
   items={[
+    {
+      name: "Air Canada chatbot",
+      year: "2022",
+      color: "#4CAF50",
+      description: "Chatbot told bereaved customer he could retroactively claim a bereavement discount. The policy didn't exist. Airline argued chatbot was a 'separate legal entity.'",
+      features: ["Authority undefined", "No scope boundary on chatbot topics", "Output authority uncontrolled"],
+      stats: { outcome: "Airline ordered to pay $812", principle: "1 — Declared Authority" },
+      links: [{ title: "CBS News", url: "https://www.cbsnews.com/news/aircanada-chatbot-discount-customer/" }]
+    },
     {
       name: "Samsung bans ChatGPT",
       year: "2023",
@@ -106,6 +115,28 @@ Bad capability grants can go beyond code and database access. In some cases, hum
       ]
     },
   ]}
+/>
+
+---
+
+## Air Canada — when AI speaks on your behalf
+
+The authority question isn't only about what an AI can access or destroy — it's also about what an AI is allowed to *say* on your behalf. In 2022, a chatbot on Air Canada's website told a bereaved customer, Jake Moffatt, that he could book a full-fare flight and retroactively claim a bereavement discount within 90 days. The chatbot was wrong — the real policy required a pre-booking application. When Moffatt tried to claim the discount, Air Canada refused. He filed with the British Columbia Civil Resolution Tribunal.
+
+Air Canada's defence was extraordinary: they argued the chatbot was [*"a separate legal entity that is responsible for its own actions."*](https://www.cbsnews.com/news/aircanada-chatbot-discount-customer/) The tribunal called this *"a remarkable submission"* and held that Air Canada was responsible for everything on its website, chatbot included. Damages: $812 CAD. The dollar figure is trivial. The precedent is not: **you cannot launder accountability through AI.**
+
+Samsung leaked data *into* an AI. Air Canada let an AI speak *on its behalf* without checking what it would say. In both cases, nobody had defined the boundary. The chatbot had no declared scope — no list of topics it was authorised to advise on, no fallback for questions it couldn't answer reliably. It was granted the authority to represent Air Canada's policies to customers, and nobody checked whether it could.
+
+<IncidentCard
+  name="Air Canada chatbot invents policy"
+  year="2022"
+  description="Chatbot told bereaved customer he could retroactively claim a bereavement discount. Air Canada argued the chatbot was 'a separate legal entity.' Tribunal called this 'a remarkable submission.'"
+  principle="Declared Authority"
+  principleNumber={1}
+  outcome="Airline ordered to pay $812"
+  color="#4CAF50"
+  link="https://www.cbsnews.com/news/aircanada-chatbot-discount-customer/"
+  linkText="CBS News"
 />
 
 ---
@@ -224,4 +255,4 @@ Although AIs can be over-enthusiastic and misguided, we can still use them for u
   Assumed authority scales until it fails catastrophically. Declared authority fails small.
 </PullQuote>
 
-*Next week: the Air Canada chatbot, the British Columbia tribunal that called the airline's defence "remarkable," and why an AI system whose outputs you can't replay is a diviner, not an advisor.*
+*Next week: code is deterministic — so why isn't AI-generated code? A study of 300 AI-generated projects found only 68% could even run. Why the language your AI writes in matters more than the model behind it.*
