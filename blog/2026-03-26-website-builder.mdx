@@ -6,11 +6,13 @@ slug: /website-builder
 image: ./img/website-builder.webp
 ---
 
+import TierComparison from '@site/src/components/tierComparison';
+
 ![](./img/website-builder.webp)
 
 Today we're launching the **AILANG Website Builder** — describe your business, upload some photos and documents, pick a style, and get a multi-page website published to GitHub Pages. No code, no templates, no web skills required.
 
-<!-- truncate -->
+{/* truncate */}
 
 :::info[AI-Generated Content]
 This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
@@ -64,6 +66,68 @@ Each persona brings a different AI model and build approach:
 - **Opal Cadillac** — Brings OpenAI's GPT models to your builds with your own API key.
 
 Pick the persona that matches your needs. You can switch between builds without losing your content.
+
+<TierComparison
+  title="Builder Personas"
+  tiers={[
+    {
+      name: "Gemma Builder",
+      color: "#4285F4",
+      icon: "🌐",
+      strength: 85,
+      strengthLabel: "Speed",
+      description: "Runs in-browser via WASM with Google Gemini. Fast, lightweight, no server needed.",
+      points: [
+        "Client-side via WebAssembly",
+        "Powered by Google Gemini",
+        "Bring your own Gemini API key",
+        "Great for quick experiments",
+      ],
+    },
+    {
+      name: "Claudette Mouser",
+      color: "#7C3AED",
+      icon: "☁️",
+      strength: 95,
+      strengthLabel: "Quality",
+      description: "AILANG Cloud builds powered by Claude. Higher quality layouts, smarter content decisions.",
+      points: [
+        "Server-side via AILANG Cloud",
+        "Powered by Claude",
+        "No API key required (admin access)",
+        "Best for polished, production-ready sites",
+      ],
+    },
+    {
+      name: "Sir Claude Fixalot",
+      color: "#D97706",
+      icon: "🔧",
+      strength: 90,
+      strengthLabel: "Quality",
+      description: "Uses your own Anthropic API key for premium Claude-powered builds. You control the cost.",
+      points: [
+        "Premium Claude-powered builds",
+        "Bring your own Anthropic API key",
+        "Full cost control",
+        "High quality with direct API access",
+      ],
+    },
+    {
+      name: "Opal Cadillac",
+      color: "#059669",
+      icon: "💎",
+      strength: 88,
+      strengthLabel: "Quality",
+      description: "Brings OpenAI's GPT models to your builds with your own API key.",
+      points: [
+        "Powered by OpenAI GPT models",
+        "Bring your own OpenAI API key",
+        "Alternative model choice",
+        "Familiar for OpenAI users",
+      ],
+    },
+  ]}
+/>
 
 ![Builder persona selection](./img/screenshot-website-builder-personas.webp)
 

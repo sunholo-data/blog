@@ -1,0 +1,120 @@
+.card {
+  display: flex;
+  margin: 1.2rem 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-left: 4px solid var(--card-color);
+  border-radius: 0 8px 8px 0;
+  background: var(--ifm-background-surface-color);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateX(3px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.8rem 0.6rem;
+  background: var(--card-color);
+  color: white;
+  min-width: 48px;
+}
+
+.year {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.principleNum {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.1rem 0.35rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+
+.body {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  min-width: 0;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+
+.name {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ifm-heading-color);
+}
+
+.principle {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  background: var(--ifm-color-emphasis-100);
+  color: var(--card-color);
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.description {
+  margin: 0.3rem 0 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.outcome {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.link {
+  font-size: 0.8rem;
+  color: var(--ifm-link-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--ifm-link-hover-color);
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .sidebar {
+    min-width: 40px;
+    padding: 0.6rem 0.4rem;
+  }
+
+  .body {
+    padding: 0.6rem 0.8rem;
+  }
+}

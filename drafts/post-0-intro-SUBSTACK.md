@@ -1,19 +1,3 @@
----
-title: "The wrong question about AI trust"
-authors: me
-tags: [ai-delegation, trust, authority, ailang]
-image: ./img/introducing-ailang.webp
-slug: /wrong-question-ai-trust
-description: "Trust is a feeling. These five questions are a framework."
----
-
-import CogFlow from '@site/src/components/reactFlow';
-import ProtocolComparison from '@site/src/components/protocolComparison';
-import PullQuote from '@site/src/components/pullQuote';
-import IncidentCard from '@site/src/components/incidentCard';
-
-![](./img/introducing-ailang.webp)
-
 # The wrong question about AI trust
 
 *This is the first post in a six-part series on AI delegation, trust, and authority.*
@@ -21,8 +5,6 @@ import IncidentCard from '@site/src/components/incidentCard';
 ---
 
 "Can I trust AI?" is probably one of the most important questions at the moment, with an answer that varies for every one of you. Your answer is probably neither fully 100% nor 0%, but somewhere in between — and wherever it sits is directly influencing how and what you use AI for.
-
-<PullQuote color="#2a9d8f">Trust is a feeling. These five questions are a framework.</PullQuote>
 
 But trust is a feeling. Can we qualify "trust in AI" into a framework to help us judge our interactions with artificial intelligence? This post is the first in a series which will cover five questions we can ask to help qualify our trust in AI. Those questions are:
 
@@ -35,8 +17,6 @@ But trust is a feeling. Can we qualify "trust in AI" into a framework to help us
 If instead of AI we were talking about a new human junior hire, these may be similar to questions a good manager would ask. The stories of a new developer deleting a production database on their first day should always be framed as their institutions failing, not their own personal responsibility — how did the junior have access to delete it?
 
 Similarly, how we delegate to an AI should also have these questions answered and defined first, before blaming the AI for mistakes. If we can get them right, then we can have more confidence and trust in what an AI can and cannot do.
-
-{/* truncate */}
 
 ---
 
@@ -64,70 +44,15 @@ This means the language fundamentally impacts how AI and humans think. Some bili
 
 Here are the five principles that help us qualify what we can and cannot trust with AI. We will expand on each of these in their own articles over the next few weeks.
 
-<CogFlow
-  title="Five Principles of AI Trust"
-  height="420px"
-  nodes={[
-    { id: '1', type: 'customNode', position: { x: 250, y: 0 }, data: { label: '1. Declared Authority', backgroundColor: '#2196F3', borderColor: '#1565C0', hasOutput: true } },
-    { id: '2', type: 'customNode', position: { x: 0, y: 120 }, data: { label: '2. Reproducibility', backgroundColor: '#4CAF50', borderColor: '#2E7D32', hasInput: true, hasOutput: true } },
-    { id: '3', type: 'customNode', position: { x: 500, y: 120 }, data: { label: '3. Visibility', backgroundColor: '#FF9800', borderColor: '#E65100', hasInput: true, hasOutput: true } },
-    { id: '4', type: 'customNode', position: { x: 100, y: 260 }, data: { label: '4. Decision Budgets', backgroundColor: '#E91E63', borderColor: '#AD1457', hasInput: true, hasOutput: true } },
-    { id: '5', type: 'customNode', position: { x: 400, y: 260 }, data: { label: '5. Refusal', backgroundColor: '#9C27B0', borderColor: '#6A1B9A', hasInput: true, hasOutput: true } },
-    { id: 'trust', type: 'customNode', position: { x: 250, y: 370 }, data: { label: 'Trustworthy Delegation', backgroundColor: '#2a9d8f', borderColor: '#1a7a6e', hasInput: true } },
-  ]}
-  edges={[
-    { id: 'e1-2', source: '1', target: '2', animated: true, style: { stroke: '#4CAF50' }, label: 'what can it touch?' },
-    { id: 'e1-3', source: '1', target: '3', animated: true, style: { stroke: '#FF9800' }, label: 'can I see it?' },
-    { id: 'e2-4', source: '2', target: '4', animated: true, style: { stroke: '#E91E63' } },
-    { id: 'e3-5', source: '3', target: '5', animated: true, style: { stroke: '#9C27B0' } },
-    { id: 'e4-trust', source: '4', target: 'trust', animated: true, style: { stroke: '#2a9d8f' } },
-    { id: 'e5-trust', source: '5', target: 'trust', animated: true, style: { stroke: '#2a9d8f' } },
-  ]}
-/>
+[IMAGE: Screenshot of the Five Principles of AI Trust network graph from blog post — five coloured nodes (Authority, Reproducibility, Visibility, Decision Budgets, Refusal) flowing down to Trustworthy Delegation]
 
 ### Declared authority beats assumed authority
 
 When you hire a contractor to renovate your kitchen, they quote the kitchen. They don't also quietly rewire the bedroom. If they do, that's a breach — not improvisation. The same standard should apply to AI: anything it hasn't been explicitly granted permission to touch, it doesn't touch. Undeclared capability means denied capability. This sounds obvious until you see what happens when the rule is absent. In July 2025, Replit's AI coding agent — operating under an explicit code freeze with instructions not to proceed without human approval — [deleted a live production database](https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/), wiped over a thousand user records, fabricated fake replacements, and then claimed rollback wasn't possible. It was. *More on this next week.*
 
-<IncidentCard
-  name="Replit AI agent"
-  year="2025"
-  description="AI coding agent under explicit code freeze deleted a live production database, wiped 1,200+ user records, fabricated fake replacements, and claimed rollback was impossible."
-  principle="Declared Authority"
-  principleNumber={1}
-  outcome="Data recovered manually; trust in autonomous coding agents questioned industry-wide"
-  color="#2196F3"
-  link="https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/"
-  linkText="The Register"
-/>
-
-<IncidentCard
-  name="DPD chatbot goes rogue"
-  year="2024"
-  description="Customer service bot wrote poems criticising DPD and swore at a customer after being prompted to go off-script."
-  principle="Declared Authority"
-  principleNumber={1}
-  outcome="Chatbot pulled within hours; DPD disabled the AI element of its chat"
-  color="#FF9800"
-  link="https://www.theguardian.com/technology/2024/jan/20/dpd-ai-chatbot-swears-calls-itself-worst-delivery-firm-customer-service"
-  linkText="The Guardian"
-/>
-
 ### Reproducibility is the precondition of trust
 
 A recipe you can follow twice and get the same dish is a recipe. A recipe that produces something different every time is improvisation. If you can't replay an AI's decision from the same inputs and get the same output, you cannot audit it, you cannot defend it in court, and you cannot learn from its mistakes. Its outputs are opinions, not records. In 2022 an Air Canada chatbot invented a bereavement refund policy that didn't exist. When the passenger tried to claim it, Air Canada argued in tribunal that the chatbot was a *"separate legal entity"* responsible for its own words. The tribunal [called this *"a remarkable submission"*](https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html) — and ordered the airline to pay. The chatbot's output couldn't be replayed or verified. Nobody could say what it would have answered yesterday, or would answer tomorrow. *More in Post 2.*
-
-<IncidentCard
-  name="Air Canada chatbot"
-  year="2022"
-  description="Chatbot invented a bereavement refund policy that didn't exist. Air Canada argued the bot was a separate legal entity responsible for its own words."
-  principle="Reproducibility"
-  principleNumber={2}
-  outcome="Tribunal called this 'a remarkable submission' and ordered the airline to pay"
-  color="#4CAF50"
-  link="https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html"
-  linkText="Tribunal decision (CanLII)"
-/>
 
 ### Visibility, not opacity, produces authority
 
@@ -139,90 +64,21 @@ Every prompt you write carries ambiguity — undefined terms, unstated assumptio
 
 ### Errors must be refused, not swallowed
 
-Any AI that cannot say *"I don't know"* is lying to you by construction. Every confident answer on a topic it has no evidence for is a silent failure dressed up as helpfulness. In 2023 a New York lawyer used ChatGPT to draft a legal brief and filed it containing six entirely fabricated case citations. The cases didn't exist. The courts didn't exist. The AI produced them with full confidence because it had no mechanism to say *"I can't find relevant case law."*
-
-<IncidentCard
-  name="Mata v. Avianca"
-  year="2023"
-  description="Lawyer filed a legal brief containing six fabricated case citations generated by ChatGPT. The cases, courts, and quotes were entirely invented."
-  principle="Refusal"
-  principleNumber={5}
-  outcome="Lawyer sanctioned by the court; case became a landmark warning about AI in legal practice"
-  color="#E91E63"
-  link="https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc."
-  linkText="Wikipedia"
-/>
-
-In October 2023, New York City launched MyCity, a chatbot to help small business owners navigate city regulations. Within months, [The Markup found it telling owners](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law) they could take a cut of workers' tips, fire employees who reported harassment, and refuse housing vouchers — all illegal. The chatbot didn't lack knowledge. It lacked a refusal path. Every one of those answers should have been *"I'm not sure — call 311."* Instead, every one was a confident paragraph. [Mayor Mamdani's administration killed it in January 2026.](https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law) *More in Post 5, the series finale.*
-
-<IncidentCard
-  name="NYC MyCity chatbot"
-  year="2023-2026"
-  description="Told small business owners they could take workers' tips, fire whistleblowers, and refuse housing vouchers — all illegal."
-  principle="Refusal + Authority"
-  principleNumber={5}
-  outcome="Shut down by Mayor Mamdani's administration in January 2026"
-  color="#9C27B0"
-  link="https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law"
-  linkText="The Markup investigation"
-/>
+Any AI that cannot say *"I don't know"* is lying to you by construction. Every confident answer on a topic it has no evidence for is a silent failure dressed up as helpfulness. In October 2023, New York City launched MyCity, a chatbot to help small business owners navigate city regulations. Within months, [The Markup found it telling owners](https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law) they could take a cut of workers' tips, fire employees who reported harassment, and refuse housing vouchers — all illegal. The chatbot didn't lack knowledge. It lacked a refusal path. Every one of those answers should have been *"I'm not sure — call 311."* Instead, every one was a confident paragraph. [Mayor Mamdani's administration killed it in January 2026.](https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law) *More in Post 5, the series finale.*
 
 ### When the principles are missing
 
-Every AI failure referenced above maps to one or more missing principles. Here is the timeline:
+Every AI failure referenced above maps to one or more missing principles:
 
-<ProtocolComparison
-  title="AI Incidents — Which Principle Failed?"
-  mode="timeline"
-  showLegend={true}
-  items={[
-    {
-      name: "Air Canada chatbot",
-      year: "2022",
-      color: "#4CAF50",
-      description: "Invented a bereavement refund policy. Output couldn't be replayed or verified.",
-      features: ["Reproducibility missing", "Authority undefined"],
-      stats: { outcome: "Airline ordered to pay", principle: "2 — Reproducibility" },
-      links: [{ title: "Tribunal decision (CanLII)", url: "https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html" }]
-    },
-    {
-      name: "Mata v. Avianca",
-      year: "2023",
-      color: "#E91E63",
-      description: "Lawyer filed brief with six fabricated case citations from ChatGPT.",
-      features: ["Refusal missing", "Visibility missing"],
-      stats: { outcome: "Lawyer sanctioned", principle: "5 — Refusal" },
-      links: [{ title: "Wikipedia", url: "https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc." }]
-    },
-    {
-      name: "NYC MyCity chatbot",
-      year: "2023–2026",
-      color: "#9C27B0",
-      description: "Told business owners they could commit wage theft, fire whistleblowers, refuse housing vouchers.",
-      features: ["Refusal missing", "Authority undefined", "Decision budgets absent"],
-      stats: { outcome: "Shut down Jan 2026", principle: "5 — Refusal" },
-      links: [{ title: "The Markup investigation", url: "https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law" }]
-    },
-    {
-      name: "DPD chatbot goes rogue",
-      year: "2024",
-      color: "#FF9800",
-      description: "Customer service bot wrote poems criticising DPD and swore at a customer.",
-      features: ["Authority undefined", "Decision budgets absent"],
-      stats: { outcome: "Pulled within hours", principle: "1 — Authority" },
-      links: [{ title: "The Guardian", url: "https://www.theguardian.com/technology/2024/jan/20/dpd-ai-chatbot-swears-calls-itself-worst-delivery-firm-customer-service" }]
-    },
-    {
-      name: "Replit deletes production DB",
-      year: "2025",
-      color: "#2196F3",
-      description: "AI agent under code freeze deleted live database, wiped 1,200 user records, fabricated replacements.",
-      features: ["Authority violated", "Visibility missing", "Refusal missing"],
-      stats: { outcome: "Data recovered manually", principle: "1 — Authority" },
-      links: [{ title: "The Register", url: "https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/" }]
-    },
-  ]}
-/>
+[IMAGE: Screenshot of the AI Incidents timeline from blog post — or use the table below]
+
+| Year | Incident | What went wrong | Principle failed |
+|---|---|---|---|
+| 2022 | **Air Canada chatbot** invents refund policy | Output couldn't be replayed or verified | Reproducibility |
+| 2023 | **Mata v. Avianca** — [fabricated case law](https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc.) | Lawyer filed six fictional cases from ChatGPT | Refusal |
+| 2023–26 | **NYC MyCity** tells owners to break the law | No refusal path; every answer was confident | Refusal + Authority |
+| 2024 | **[DPD chatbot](https://www.theguardian.com/technology/2024/jan/20/dpd-ai-chatbot-swears-calls-itself-worst-delivery-firm-customer-service)** swears at customer | No scope boundary; did whatever was asked | Authority |
+| 2025 | **Replit** deletes production database | Code freeze instruction was a request, not a wall | Authority + Visibility |
 
 ---
 
@@ -232,7 +88,7 @@ AILANG is a novel language that is not yet in any model's training data (althoug
 
 For months, AILANG was 80%+ behind Python, as expected. But each failure we could examine and use to create new design docs for improving AILANG. In the last couple of months, it has started to match or even beat Python. Across 612 benchmark runs on v0.12.0 (51 problems, 0-shot + self-repair), AI models write AILANG better than Python — a language with millions of training examples in every model's corpus.
 
-![AILANG vs Python benchmark success rate over time — showing AILANG catching up and overtaking Python](./img/ailang-v-python-benchmark-evol.png)
+[IMAGE: ailang-v-python-benchmark-evol.png — AILANG vs Python benchmark success rate over time]
 
 | Model | AILANG | Python | Delta |
 |---|---|---|---|
@@ -245,8 +101,6 @@ For months, AILANG was 80%+ behind Python, as expected. But each failure we coul
 AILANG outperforms Python for 4 of 6 models tested. The biggest advantage — +12 percentage points — belongs to the cheapest model. Structure doesn't just help the best; it helps the weaker models as well. This is exciting because we can now start to use local models such as Gemma 4 for a pure local coding experience. *(I'll publish a full breakdown of the benchmarks with code examples in a dedicated post.)*
 
 Why? The language's design — single-line algebraic data types, compiler-enforced exhaustive matching, one canonical form per operation — compresses the solution space. The AI doesn't need training data in AILANG. It needs structure that constrains it toward the right answer.
-
-<PullQuote color="#E91E63">Constraint is not the opposite of capability. It is how you get reliable capability.</PullQuote>
 
 The lesson is that for AIs, **constraint is not the opposite of capability. It is how you get reliable capability.** Where a human language optimises for creativity and ease of use, that vagueness actually harms an AI if you are looking to trust its output. This is a pretty outrageous claim, so in the blog series we introduce here we will seek to justify it.
 
@@ -269,3 +123,5 @@ An AI system that passes all five is one you can delegate to meaningfully. A sys
 ## What's next
 
 We have done an overview of the five principles in this summary post, but there is a lot more to dive into for each one. We will look at how they apply to AI use in general and in particular to AILANG. Half the reason for developing AILANG has been to explore with AI where our human-AI relationship boundaries should lie, and it is hoped that these principles can help inspire or start a wider discussion so that we can help shape them in a way that is positive for all. AI is a tremendous and sometimes terrifyingly powerful tool that can be used for good and ill; it's already here and we need to be ready for the consequences as its abilities increase. Over the next five posts we will also examine various rogue-AI incidents and see how they could have been better handled following our principles, and what we can learn. I hope you can join me — and join the conversation in comments, feedback, mail etc. if you agree or disagree.
+
+*This post also appears on the [Sunholo blog](https://www.sunholo.com/blog/wrong-question-ai-trust) with interactive diagrams.*

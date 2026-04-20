@@ -7,11 +7,13 @@ image: ./img/ailang-cloud.webp
 draft: true
 ---
 
+import TierComparison from '@site/src/components/tierComparison';
+
 ![](./img/ailang-cloud.webp)
 
 Today we're launching **AILANG Cloud** — a serverless execution platform that runs autonomous AILANG agent workflows on Google Cloud. Three components, five Pub/Sub topics, Terraform-managed infrastructure, and a full observability dashboard. Production cost: roughly $60/month.
 
-<!-- truncate -->
+{/* truncate */}
 
 :::info[AI-Generated Content]
 This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
@@ -48,6 +50,57 @@ AILANG Cloud uses a single Terraform codebase with per-environment variable file
 | **dev** | `ailang-multivac-dev` | Scale-to-zero | Development, testing |
 | **test** | `ailang-multivac-test` | Coordinator always-on | Integration testing |
 | **prod** | `ailang-multivac` | All services always-on | Production workloads |
+
+<TierComparison
+  title="Environment Scaling Overview"
+  tiers={[
+    {
+      name: "Dev",
+      color: "#22c55e",
+      strength: 30,
+      strengthLabel: "Scale-to-zero",
+      icon: "🧪",
+      description: "Development and testing environment. All services scale to zero when idle — pay nothing when you're not working.",
+      points: [
+        "Project: ailang-multivac-dev",
+        "Coordinator and dashboard scale to zero",
+        "Agent jobs run on demand",
+        "Lowest cost — ideal for iteration",
+      ],
+      example: "terraform apply -var-file=\"environments/dev/terraform.tfvars\"",
+    },
+    {
+      name: "Test",
+      color: "#f59e0b",
+      strength: 60,
+      strengthLabel: "Coordinator always-on",
+      icon: "🔬",
+      description: "Integration testing environment. Coordinator stays warm for reliable webhook handling and faster response times.",
+      points: [
+        "Project: ailang-multivac-test",
+        "Coordinator: 1 vCPU always-on",
+        "Dashboard scales to zero",
+        "Moderate cost — validates production readiness",
+      ],
+      example: "terraform apply -var-file=\"environments/test/terraform.tfvars\"",
+    },
+    {
+      name: "Prod",
+      color: "#3b82f6",
+      strength: 100,
+      strengthLabel: "All services always-on",
+      icon: "🚀",
+      description: "Production workloads. All services stay warm for zero cold-start latency and maximum reliability.",
+      points: [
+        "Project: ailang-multivac",
+        "Coordinator: 1 vCPU always-on",
+        "Dashboard: 1 vCPU always-on",
+        "Full cost (~$60/month) — production-grade uptime",
+      ],
+      example: "terraform apply -var-file=\"environments/prod/terraform.tfvars\"",
+    },
+  ]}
+/>
 
 Deploy any environment with two commands:
 

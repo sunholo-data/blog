@@ -6,11 +6,14 @@ slug: /ailang-v09
 image: ./img/ailang-v09.webp
 ---
 
+import TierComparison from '@site/src/components/tierComparison';
+import PullQuote from '@site/src/components/pullQuote';
+
 ![](./img/ailang-v09.webp)
 
 Today we're releasing AILANG v0.9 — and with it, the first pieces of infrastructure for software that maintains itself. A package registry where AI agents can publish, verify, and update code. An async runtime for real-time agent coordination. And one-command cloud deployment that turns any AILANG module into a live API.
 
-<!-- truncate -->
+{/* truncate */}
 
 :::info[AI-Generated Content]
 This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
@@ -70,6 +73,44 @@ AILANG's approach is defense-in-depth:
 2. **Effects are enforced, not declared.** A package claiming `! {Net}` can't secretly access `! {FS}`. The compiler enforces effect boundaries at every call site.
 
 3. **Authority must be explicit.** [Axiom 4](https://ailang.sunholo.com/docs/references/axioms) — no program has implicit access to the world. Capability budgets (`AI @limit=20`) make resource consumption part of a program's semantics.
+
+<TierComparison
+  title="Package Security: Traditional vs AILANG"
+  tiers={[
+    {
+      name: "Traditional (Insecure by Default)",
+      color: "#e74c3c",
+      strength: 25,
+      strengthLabel: "Trust-based",
+      icon: "⚠",
+      description: "Packages run arbitrary code at install time and have implicit access to all system resources. Security depends on trusting every maintainer in the dependency tree.",
+      points: [
+        "Post-install scripts execute with full system access",
+        "No visibility into what capabilities a package actually uses",
+        "Supply-chain attacks via compromised credentials or typosquatting",
+        "Semver ranges pull untested versions automatically"
+      ],
+      example: "pip install package  # runs setup.py with full OS access"
+    },
+    {
+      name: "AILANG (Secure by Default)",
+      color: "#27ae60",
+      strength: 95,
+      strengthLabel: "Enforced by compiler",
+      icon: "✓",
+      description: "No code runs at install time. Every package declares its maximum capabilities, and the compiler enforces those boundaries at every call site.",
+      points: [
+        "Installation is pure data extraction — zero code execution",
+        "Effect ceilings make capability scope machine-verifiable",
+        "Content-addressed hashing detects any tampering",
+        "Exact version pinning — no surprise upgrades"
+      ],
+      example: "ailang install pkg  # data-only, compiler-verified effects"
+    }
+  ]}
+/>
+
+<PullQuote color="#27ae60">Undeclared capability means denied capability. This isn't convention — it's enforced by the compiler.</PullQuote>
 
 Coming in v0.11: Ed25519 signed publishing, consumer-side admission policies (`ailang-policy.toml`), and formal change classification. The goal is a package ecosystem where supply-chain attacks are structurally impossible — not just unlikely.
 

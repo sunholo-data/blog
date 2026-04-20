@@ -1,0 +1,123 @@
+.container {
+  margin: 1.5rem 0;
+  font-family: var(--ifm-font-family-base);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+  font-size: 1.3rem;
+}
+
+.viewToggle {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.viewToggle button {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 0.8rem;
+}
+
+.viewToggle button:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.viewToggle button.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+.panes {
+  display: flex;
+  gap: 1rem;
+}
+
+.sideBySide {
+  flex-direction: row;
+}
+
+.stacked {
+  flex-direction: column;
+}
+
+.pane {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+}
+
+.paneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.8rem;
+  background: var(--pane-color);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.paneName {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.paneBadge {
+  padding: 0.1rem 0.5rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.code {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  background: var(--ifm-code-background, #f6f8fa);
+  min-height: 60px;
+}
+
+html[data-theme='dark'] .code {
+  background: #1e1e1e;
+}
+
+.code code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: var(--ifm-font-color-base);
+}
+
+.caption {
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sideBySide {
+    flex-direction: column;
+  }
+}

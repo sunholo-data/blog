@@ -6,11 +6,15 @@ slug: /ailang-parse-launch
 image: ./img/ailang-parse-homepage.webp
 ---
 
+import TierComparison from '@site/src/components/tierComparison';
+import CodeCompare from '@site/src/components/codeCompare';
+import PullQuote from '@site/src/components/pullQuote';
+
 ![](./img/ailang-parse-homepage.webp)
 
 Today we're launching **AILANG Parse** — a universal document parser that extracts structured content from 13 formats, built entirely in AILANG. It parses Office documents deterministically from XML, delegates to AI only when structure genuinely isn't in the file, and scores **93.9% on OfficeDocBench v2** against eight competing parsers — with 100% format coverage versus the nearest competitor's 68%.
 
-<!-- truncate -->
+{/* truncate */}
 
 :::info[AI-Generated Content]
 This product announcement was written by Solaris, Sunholo's AI communications assistant, and reviewed by the Sunholo team.
@@ -43,6 +47,70 @@ For PDFs and images, where the structure genuinely isn't in the file, AILANG Par
 | Email threading (EML/MBOX) | — | — | — | None |
 | ODF formats (ODT/ODP/ODS) | Yes | Yes | Yes | Pandoc (ODT only) |
 
+<TierComparison
+  title="AILANG Parse vs the Competition"
+  tiers={[
+    {
+      name: "AILANG Parse",
+      color: "#4CAF50",
+      strength: 100,
+      strengthLabel: "10/10 features",
+      icon: "🏆",
+      description: "Direct XML extraction with full metadata support",
+      points: [
+        "Tables with merged cells across DOCX, PPTX, XLSX",
+        "Track changes, comments, headers/footers",
+        "Equations, field codes, text boxes, VML shapes",
+        "Speaker notes, email threading, full ODF support"
+      ],
+      example: "docparse report.docx → structured output in milliseconds"
+    },
+    {
+      name: "Pandoc",
+      color: "#FF9800",
+      strength: 30,
+      strengthLabel: "3/10 features",
+      icon: "📄",
+      description: "Good format conversion but limited metadata extraction",
+      points: [
+        "Partial track changes support",
+        "ODT only for ODF formats",
+        "No equation, comment, or speaker note extraction"
+      ],
+      example: "pandoc report.docx -t markdown → loses tracked changes"
+    },
+    {
+      name: "Kreuzberg",
+      color: "#FF9800",
+      strength: 20,
+      strengthLabel: "2/10 features",
+      icon: "🔍",
+      description: "Partial header/footer and field code support",
+      points: [
+        "Partial headers/footers",
+        "Partial field codes",
+        "No track changes, comments, or ODF support"
+      ],
+      example: "Limited to basic DOCX text extraction"
+    },
+    {
+      name: "Raw OOXML Parsers",
+      color: "#F44336",
+      strength: 30,
+      strengthLabel: "3/10 features",
+      icon: "⚙️",
+      description: "Low-level XML access but no structured output",
+      points: [
+        "Raw merged cell data (unstructured)",
+        "Partial comments (unstructured)",
+        "Partial text boxes (unstructured)",
+        "No ODF, email, or equation support"
+      ],
+      example: "Requires significant post-processing to be usable"
+    }
+  ]}
+/>
+
 :::tip[Why deterministic parsing matters]
 Most tools convert DOCX to PDF before extracting. That conversion loses tracked changes, comments, and precise table structure. We skip the middleman and read the XML directly — which is why we catch things competitors miss entirely.
 :::
@@ -50,6 +118,8 @@ Most tools convert DOCX to PDF before extracting. That conversion loses tracked 
 ## Key features
 
 **13 input formats, 9 output formats.** Parse DOCX, PPTX, XLSX, ODT, ODP, ODS, PDF, HTML, Markdown, CSV, EPUB, EML, and MBOX. Generate DOCX, PPTX, XLSX, ODT, ODP, ODS, HTML, Markdown, and QMD (Quarto). Cross-format conversion lets you go from CSV to DOCX or Markdown to PPTX.
+
+<PullQuote color="#4CAF50">93.9% on OfficeDocBench v2 — tested against eight parsers on 69 files across 11 format variants and 7 metrics, with 100% format coverage versus the nearest competitor's 68%.</PullQuote>
 
 **93.9% on OfficeDocBench v2.** Tested against eight parsers on 69 files across 11 format variants and 7 metrics — including aspirational ECMA-376 spec dimensions. Nearest competitor reaches 68% when adjusted for coverage.
 
@@ -72,6 +142,24 @@ Most tools convert DOCX to PDF before extracting. That conversion loses tracked 
 **28+ Z3-verified contracts, 50+ inline tests.** When AILANG Parse says it parsed your document, the guarantees are mathematical, not aspirational.
 
 ## Get started
+
+<CodeCompare
+  title="Document Parsing: Traditional vs AILANG Parse"
+  left={{
+    name: "Traditional Tools",
+    color: "#F44336",
+    badge: "Multi-step",
+    code: `# Convert DOCX to PDF first\nlibreoffice --headless --convert-to pdf report.docx\n\n# Then run AI extraction on the PDF\npython -m unstructured.partition.pdf report.pdf\n\n# Track changes? Comments? Lost.\n# Headers/footers? Gone.\n# Merged table cells? Flattened.`,
+    caption: "Lossy conversion pipeline — metadata destroyed before extraction begins"
+  }}
+  right={{
+    name: "AILANG Parse",
+    color: "#4CAF50",
+    badge: "One command",
+    code: `# Direct XML extraction — no conversion\ndocparse report.docx\n\n# Everything preserved:\n#   Track changes, comments,\n#   headers/footers, merged cells,\n#   equations, field codes\n\n# AI only when needed (PDFs, images)\ndocparse scan.pdf --ai gemini-3-flash-preview`,
+    caption: "Deterministic extraction — all metadata preserved, AI only where needed"
+  }}
+/>
 
 **CLI** — clone, symlink, parse:
 
