@@ -167,7 +167,32 @@ function ComparisonTable({ models }) {
   );
 }
 
-const BenchmarkComparisonTable = ({ dataUrl = DEFAULT_DATA_URL }) => {
+// Reshape the tier model_stats payload into the {totalRuns, languages: {...}}
+// shape the table expects. Mirrors buildTierScopedModels in the AILANG
+// dashboard so the table matches what the official benchmark page shows.
+function buildTierModels(tierModelStats) {
+  if (!tierModelStats) return null;
+  const out = {};
+  for (const [name, langs] of Object.entries(tierModelStats)) {
+    if (!langs) continue;
+    const ail = langs.ailang;
+    const py = langs.python;
+    const totalRuns = (ail?.totalRuns || 0) + (py?.totalRuns || 0);
+    out[name] = {
+      totalRuns,
+      languages: {
+        ...(ail ? { ailang: ail } : {}),
+        ...(py ? { python: py } : {}),
+      },
+    };
+  }
+  return out;
+}
+
+const BenchmarkComparisonTable = ({
+  dataUrl = DEFAULT_DATA_URL,
+  tier = 'core',
+}) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -196,13 +221,21 @@ const BenchmarkComparisonTable = ({ dataUrl = DEFAULT_DATA_URL }) => {
     return <div className={styles.loading}>Loading live benchmark data…</div>;
   }
 
+  // Prefer the tier scope (matches the official dashboard's default view),
+  // fall back to the raw models block if the tier isn't present.
+  const tierStats = data.tiers?.[tier]?.model_stats;
+  const tierModels = buildTierModels(tierStats);
+  const tableModels = tierModels || data.models || {};
+  const tierLabel = tier ? tier.charAt(0).toUpperCase() + tier.slice(1) : null;
   const version = data.version;
-  const timestamp = data.timestamp ? new Date(data.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : null;
+  const timestamp = data.timestamp
+    ? new Date(data.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+    : null;
 
   return (
     <div>
       <div className={styles.tableContainer}>
-        <ComparisonTable models={data.models || {}} />
+        <ComparisonTable models={tableModels} />
         <div className={styles.tableFootnote}>
           💡 <strong>Gap</strong> = AILANG − Python success % (positive = AILANG better) ·{' '}
           <strong>Ratio</strong> = AILANG/Python tokens (lower = more efficient) ·{' '}
@@ -210,7 +243,8 @@ const BenchmarkComparisonTable = ({ dataUrl = DEFAULT_DATA_URL }) => {
         </div>
       </div>
       <div className={styles.tableMeta}>
-        Live data{version ? ` from AILANG ${version}` : ''}{timestamp ? `, ${timestamp}` : ''} ·{' '}
+        Live data{version ? ` from AILANG ${version}` : ''}{timestamp ? `, ${timestamp}` : ''}
+        {tierModels && tierLabel ? ` · ${tierLabel} benchmark tier` : ''} ·{' '}
         <a href="https://ailang.sunholo.com/docs/benchmarks/performance" target="_blank" rel="noreferrer">
           full interactive dashboard →
         </a>
