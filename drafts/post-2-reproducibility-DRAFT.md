@@ -28,17 +28,27 @@ And the reason we don't have reproducibility isn't that AI models are bad at cod
 
 ---
 
-## The numbers: 68.3%
+## The numbers: model, language, harness
 
-This isn't theoretical. In late 2025, researchers at the University of Missouri and SRI International published a study with the self-explanatory title [*"AI-Generated Code Is Not Reproducible (Yet)"*](https://arxiv.org/abs/2512.22387). They tested three leading AI coding agents — Claude Code, OpenAI Codex, and Gemini — across 300 projects generated from 100 standardised prompts in Python, JavaScript, and Java. Each prompt explicitly asked for reproducible code with complete dependency specifications. Each project was tested in a clean environment using only the dependencies the model declared.
+This isn't theoretical. We've been running our own benchmark suite against AILANG and Python side-by-side, across six leading models — Claude Opus 4.7, Claude Sonnet 4.6, GPT-5.5, GPT-5.4-mini, Gemini 3.1 Pro, Gemini 3 Flash — through three different evaluation harnesses: single-shot API, single-shot-with-repair, and full agentic CLI (Claude Code, Gemini CLI, opencode, Codex). 33 standardised benchmarks per combination. The latest run — v0.15.0, generated this morning — covered 396 standard runs and 180 agent runs.
 
-The result: only **68.3% of projects executed out-of-the-box**. Nearly a third failed immediately. Java was worst at 44%. Python was best at 89.2%, but even there, one in ten projects didn't work as generated.
+[COMPONENT: `<LanguageChart />` from BenchmarkDashboard — shows AILANG vs Python success rates per model. Source: `https://ailang.sunholo.com/benchmarks/latest.json`]
 
-The finding that should alarm anyone building on AI-generated code is the dependency gap. Projects that claimed to need an average of 3 dependencies actually required **37 packages at runtime** — a 13.5x expansion between what the AI said the code needed and what it actually needed. The AI wrote code that imported libraries, used their functions, depended on their transitive dependencies — and then forgot to mention most of them. It's as if a contractor built a house, handed you a materials list with "timber, nails, paint," and neglected to mention the foundation, the plumbing, and the electrical wiring.
+The headline result is more interesting than "AILANG wins" or "Python wins." On single-shot generation, Python edges AILANG by a few points: Python 79.3% vs AILANG 75.8%. On agent mode with a repair loop, Python pulls further ahead: 97.1% vs 86.2%. If you read the marketing of any AI coding tool, this is roughly the story you expect — Python is what the models were trained on, and the models do better on what they were trained on.
 
-The study also revealed unexpected specialisations. Gemini achieved 100% reproducibility on Python but only 28% on Java. Claude Code hit 80% on both Python and Java — the only agent that handled enterprise Java effectively. These specialisations aren't advertised by vendors but emerge clearly through systematic testing. If your organisation picks an AI coding tool based on marketing rather than testing it against your actual stack, you're rolling the dice on reproducibility.
+But the headline averages hide the real finding, which is the variance.
 
-And here's the detail that reframes the whole problem: only 10.5% of failures were caused by missing dependencies. The majority — 52.6% — were fundamental code generation errors: malformed syntax, incorrect file paths, uninitialised variables, structural issues. The AI wasn't just failing to list its ingredients; it was producing broken recipes.
+[COMPONENT: `<ModelChart />` showing per-model breakdown — same data, sliced by model rather than language]
+
+GPT-5.5 writing AILANG hits **90.9%** on single-shot. The same model on Python hits 81.8%. Gemini 3 Flash on AILANG: 66.7%. On Python: 66.7%. Claude Opus 4.7 on Python: 87.9%. On AILANG: 84.8%. Different models, different languages, different success rates — and there's no single "best" combination that holds across the board.
+
+The picture changes again when you switch evaluation harness. The same model writing the same language gets dramatically different results depending on whether it runs as a single API call, a single call with repair, or a full agentic CLI session. Some opencode + AILANG combinations hit **100%**. Some single-shot AILANG runs barely scrape 60%. The harness matters as much as the language. Sometimes more.
+
+[COMPONENT: `<HarnessComparisonTable />` from `LanguageLeaderboard` — cross-harness comparison showing same model under different CLIs]
+
+The point isn't that any one combination is best. It's that **success rate is a function of language × model × harness, and most teams measuring "is this AI any good?" are only varying one of those three**. They pick a model and stick with it. They pick Python and stick with it. They pick a single-shot API call and stick with it. Then they wonder why the results aren't reproducible — because the search space is far larger than they realised, and they haven't measured it.
+
+The full live data, including the 33 benchmarks, six models, multiple harnesses, and historical trends across versions, is on the [AILANG benchmarks dashboard](https://ailang.sunholo.com/docs/benchmarks/performance). Outside corroboration: an [arXiv study from late 2025](https://arxiv.org/abs/2512.22387) tested three coding agents across 300 projects in Python, JavaScript, and Java and found similar variance — only 68.3% of projects ran out of the box, with a 13.5× gap between declared and actual dependencies. Same pattern, broader scope.
 
 ---
 
@@ -64,13 +74,55 @@ Three things make the difference:
 
 **One canonical form per operation.** In Python, list transformation has five or more idiomatic forms. In AILANG: `result = map(f, items)`. That's it. One way. The AI doesn't choose between forms because there's nothing to choose between. Same prompt, same structure, reproducible generation. This isn't a constraint — it's the elimination of unnecessary entropy. One right way is a feature, not a limitation.
 
-**Declared effects in the type signature.** Every function says what it touches: `func fetchData() -> string ! {Net}` means "this function uses the network and nothing else." No hidden side effects. No dependencies the AI forgot to mention. The type signature *is* the dependency declaration — and the compiler enforces it. Remember the arXiv study's 13.5x dependency gap? In AILANG, the compiler won't let that gap exist. If your code uses the filesystem without declaring `! {FS}`, it doesn't compile. The gap between what the AI claims and what the code requires is closed at the language level, not discovered at runtime by a frustrated developer.
+**Declared effects in the type signature.** Every function says what it touches: `func fetchData() -> string ! {Net}` means "this function uses the network and nothing else." No hidden side effects. No dependencies the AI forgot to mention. The type signature *is* the dependency declaration — and the compiler enforces it. The 13.5× dependency gap the arXiv study found in Python and Java code can't exist in AILANG: if your code uses the filesystem without declaring `! {FS}`, it doesn't compile. The gap between what the AI claims and what the code requires is closed at the language level, not discovered at runtime by a frustrated developer.
 
 **Environment pinning for deterministic execution.** `AILANG_SEED=42` pins the random-number generator. `TZ` pins the timezone. `AILANG_FS_SANDBOX` restricts filesystem access to a declared directory. Same inputs, same seed, same environment — identical output. Not approximately. Exactly. You can replay a past generation, diff it against a new one, and know that any difference is meaningful rather than noise.
 
-The benchmarks back this up. On IO tasks, AI-generated AILANG code is +20 percentage points more correct than AI-generated Python from the same models. On contract and type-safety tasks, the advantage is +27.8 percentage points. And counterintuitively, the better the model, the bigger the advantage — because structure gives capable models more to work with, not less. A capable model writing in a constrained language is more reliable than the same model writing in an expressive one.
+The benchmark data shows this isn't a clean win — yet. On single-shot generation, Python's familiarity to the models still edges out AILANG's structural advantage by a few points overall. But the per-model picture is more revealing: where the language design actually pays off is with capable models in agentic harnesses. GPT-5.5 hits 90.9% on AILANG single-shot. Sonnet 4.6 in opencode hits 91.7% on AILANG. Several harness × AILANG combinations cross **100%**. The pattern: the better the model and the better the harness, the more AILANG's reproducibility guarantees translate into measurable success.
 
-The trade-off, stated honestly: AILANG is less expressive than Python for humans. A human developer might find it rigid. That's by design. It trades human creative freedom for machine reproducibility. If a human is writing the code, you want Python. If an AI is writing the code, you want the narrowest target you can give it.
+[COMPONENT: `<RepairEffectiveness />` or `<ModelDeltaTrend />` showing how repair-loop and agent-mode change the AILANG vs Python gap per model]
+
+The trade-off, stated honestly: AILANG is less expressive than Python for humans, and the models have far more Python in their training data. That's why we run the benchmarks in both languages — so we can measure the gap, watch it close as models get better at AILANG, and prove the design thesis holds. If a human is writing the code, use Python. If an AI is writing the code in a context where reproducibility matters, the question stops being "which language do humans prefer?" and starts being "which language gives the AI the narrowest target?"
+
+---
+
+## The audit trail you never had with humans
+
+Here's the part of this that's genuinely counterintuitive: **delegating coding to AI gives you more provenance, not less, than having a human do it.**
+
+The usual framing is the opposite. AI is the black box; the human is accountable. Ask a developer why they made a decision and they'll tell you. Ask an AI and you get a hallucinated rationalisation. So the conventional wisdom is that handing work to an AI loses you the audit trail.
+
+That's only true if you're not capturing what the AI does. And the thing about AI is — it has to think in text. Every reasoning step, every tool call, every "let me try this approach instead," every retry after a failed test, every decision about which library to use — all of it happens in language, and all of it can be logged. The model literally cannot reason without producing text. If it makes a decision, that decision exists as words somewhere in the trace.
+
+Compare that to a human developer. Most of their reasoning happens silently, inside their head. They open a file, stare at it for two minutes, type three lines, run the tests, commit. The commit message says "fix bug." The decision-making process — why those three lines, why that approach, why not the alternative — is gone. You can ask them a week later, but what you'll get is a reconstruction, not a record. Most of what humans actually decide leaves no paper trail at all.
+
+This flips the audit story on its head. With AI-generated code, properly captured, you have:
+- The exact prompt that initiated the work
+- The full system prompt and context window the model saw
+- Every tool call the model made, with arguments and results
+- Every intermediate reasoning step
+- The code that came out, diffable against the prompt
+- The cost and token count of the whole exchange
+
+AILANG's Observatory makes this concrete. Run `ailang chains list` to see every AI-driven task. Run `ailang chains chat <chain-id>` to read the turn-by-turn conversation that produced a specific code change — exactly which prompt, which response, which retry, which fix. Run `ailang chains diff <chain-id>` to see the resulting code change tied back to the conversation. Run `ailang chains stats --by-agent` for cost and token rollups. The dashboard surfaces all of it visually. None of this is hypothetical; it's how we work on AILANG itself.
+
+[COMPONENT: screenshot of `ailang chains chat` output showing turn-by-turn conversation, or dashboard view of chain history]
+
+The implication is uncomfortable for some readers and freeing for others: in domains where audit trails matter — regulated industries, legal evidence, compliance reviews — AI-generated code can be *more* defensible than human-generated code, provided you capture the chain. You can't subpoena a developer's thought process. You can subpoena a chat log.
+
+This is what reproducibility looks like at scale. Not just "same prompt produces same code" but "and here's the entire reasoning trail that got us there, recorded automatically, queryable forever, diffable against any other run." The five-doors problem we opened with isn't just solved — it's inverted. With humans, you don't even know which five doors there were. With AI plus the right harness, every door the model considered is logged.
+
+---
+
+## Reproducibility is just analytics for AI code
+
+If you've spent any time in digital analytics, this should feel familiar in shape if not in detail. We spent fifteen years figuring out how to capture web events — pageviews, sessions, conversions — and the discipline of making sure that data was reliable, complete, and reproducible. The same discipline now applies to AI outputs, and the mapping is direct. Conversion rate becomes task success rate. Bounce rate becomes hallucination and retry rate. Cost per acquisition becomes cost per generation. Funnels become trace trees. The metrics rename; the thinking doesn't.
+
+The benchmark dashboard above is essentially a GA4 for AI code generation. Task success rate per model. Cost per task. Dependency completeness. Repair effectiveness. Cross-harness comparison. It's the same shape of report you'd build for any digital product, applied to code artefacts instead of pageviews — and most teams shipping AI-generated code aren't building it at all. They have no equivalent of bounce rate. No cost-per-acquisition. They ship and hope.
+
+This matters because of where the competitive surface for AI products has moved. Three things make a viable AI product: the unique data only you have, the model behind it, and the harness around it — the eval pipeline, the trace capture, the tool catalogue, the language the AI writes in. The model is increasingly a commodity. Everyone has access to GPT, Claude, and Gemini. Your data is yours. **Your harness is your moat.** And reproducibility is what makes the harness work — without it, your evals don't replay, your traces don't compare, your costs don't reconcile.
+
+A language designed for AI is part of that harness. AILANG isn't competing with Python for human developers; it's the layer of the harness that makes generated code measurable. Same logic as Langfuse-as-harness for chat conversations: AILANG-as-harness for code artefacts. If you can't replay the generation, you can't analyse it. If you can't analyse it, you can't improve it. And the team that can — the team whose harness produces measurable, reproducible AI output — wins on something the model commoditisation can't take away.
 
 ---
 
@@ -84,7 +136,7 @@ In medical devices, the FDA's January 2025 draft guidance requires Total Product
 
 In financial services, SEC and FINRA are watching AI-generated trading algorithms. A non-reproducible model making allocation calls is a compliance gap waiting to be discovered.
 
-These sectors aren't waiting for consensus on AI code quality. They already require what the arXiv study shows most AI coding tools can't deliver: proof that you can replay the generation and get the same result. The question isn't whether reproducibility will be required more broadly — it's whether your tools will be ready when it is.
+These sectors aren't waiting for consensus on AI code quality. They already require what the benchmark data shows most AI coding stacks can't reliably deliver: proof that you can replay the generation and get the same result. The question isn't whether reproducibility will be required more broadly — it's whether your tools will be ready when it is.
 
 ---
 
