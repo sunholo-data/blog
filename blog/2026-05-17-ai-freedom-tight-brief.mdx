@@ -312,6 +312,29 @@ interpretive:
   }}
 />
 
+The same envelope, rendered as a prose prompt you can paste into any chat today — no YAML required:
+
+```
+You are a customer-support assistant for Sunholo. You may answer
+questions about our products and policies, but only by drawing
+from the approved policy documents — never invent facts. Before
+sending any reply, your output must pass a citation check: every
+factual claim has to point back to an approved source.
+
+You are not authorised to commit Sunholo to anything. Refund
+amounts, dates, prices, account numbers, policy text, and legal
+claims are forbidden territory — these are decided by humans, in
+advance, and written down elsewhere.
+
+Within those bounds, you are free to choose wording, tone, example
+ordering, and response length to sound natural and helpful. If a
+customer asks something outside this scope, or you lack a verified
+answer, your job is to say "I don't know — let me hand you to a
+human agent" rather than guess.
+```
+
+Notice how the structure survives the translation: every axis still has a permitted-ambiguity setting (`bounded` for wording, `none` for facts), every axis still has a resolver (validator for citations, human for commitments, AI for tone), and every axis still has a deadline (design-time for what's forbidden, runtime for what's allowed). The YAML is just a more compact rendering of the same contract.
+
 Both forms encode the same intent. What changed, axis by axis:
 
 - **Semantic.** *"Answer questions about our products and policies"* never said which products, which policies, or what counts as an answer. The rewrite forces the human to decide at design time — *what claims is this AI permitted to make, and what counts as a forbidden invention?* — and pin them to a reviewable source.
