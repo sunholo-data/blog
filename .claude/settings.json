@@ -9,7 +9,8 @@
       "Bash(yarn build)",
       "Bash(yarn start)",
       "Bash(ailang docs:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(ailang chains *)"
     ],
     "additionalDirectories": [
       "/Users/mark/dev/sunholo/ailang",

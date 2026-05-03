@@ -2,7 +2,7 @@
 title: "AI: Give me the freedom of a tight brief"
 authors: me
 tags: [ai-delegation, entropy, decision-budgets, prompting, ailang]
-image: ./img/PLACEHOLDER-decision-budget-hero.webp
+image: ./img/ailang-v-python-benchmark-evol.png
 slug: /ai-freedom-tight-brief
 description: "What AI agents actually demand from you — a framework for delegating decisions, not just tasks."
 draft: true
@@ -18,7 +18,7 @@ import CodeCompare from '@site/src/components/codeCompare';
 
 ---
 
-![Decision budget — vector visualisation showing entropy collapsing across five axes](./img/PLACEHOLDER-decision-budget-hero.webp)
+![Decision budget — vector visualisation showing entropy collapsing across five axes](./img/ailang-v-python-benchmark-evol.png)
 
 ## The prompt that was never going to work
 
@@ -56,7 +56,7 @@ So if we narrow further to just code that an AI produces, we now have three loca
 | **Code** | Runtime and maintenance complexity, *during* execution |
 | **Operations** | Incidents, outages, hallucinations, undefined behaviour, *after* execution |
 
-![Three locations entropy can live when working with AI: prompt, code, operations — with cost increasing left-to-right](./img/PLACEHOLDER-three-locations-of-entropy.webp)
+{/* IMAGE NEEDED: Three locations entropy can live when working with AI — prompt, code, operations — with cost arrow underneath labelled "cheap → moderate → ruinous". Placeholder removed for dev preview; restore as ./img/three-locations-of-entropy.webp before publish. */}
 
 You pay in one of these currencies. Always. The only choice you have is *when*.
 
@@ -242,7 +242,7 @@ Translated: common requests ride on shared defaults that the training corpus has
 
 Uncommon requests hit what the design doc calls the *entropy cliff*. The model has no shared prior. Every unstated decision becomes a guess. And here's the catch: **what counts as "uncommon" is exactly the things that make your business unique.**
 
-![The entropy cliff — AI delivery effort plotted against distance-from-training-prior. Flat for common requests (CRUD, auth, dashboards), then a steep cliff where domain specifics begin](./img/PLACEHOLDER-entropy-cliff.webp)
+{/* IMAGE NEEDED: Entropy cliff — line chart, x-axis "distance from training prior", y-axis "AI delivery effort". Flat for the first 70% (CRUD, auth, dashboards), then a steep cliff. Strongest skim-reader artefact in the post. Restore as ./img/entropy-cliff.webp before publish. */}
 
 - Any proprietary domain knowledge.
 - Any regulatory-specific workflow ("we have to log this for SOC2, but only if the user is in the EU").
