@@ -10,6 +10,50 @@
 
 ---
 
+## Cross-references from the published series (use freely)
+
+The series is now five posts deep. This is what's been published and the slugs to link to:
+
+| # | Date | Title | Slug | Anchor concept for callbacks |
+|---|---|---|---|---|
+| 0 | 2026-04-19 | The wrong question about AI trust | `/wrong-question-ai-trust` | The five questions; explainability of action |
+| 1 | 2026-04-26 | What is your AI allowed to touch? | `/what-is-your-ai-allowed-to-touch` | Declared authority / capability envelopes |
+| 2 | 2026-05-03 | If you can't replay it, you can't ship it | `/if-you-cant-replay-it` | Reproducibility / determinism |
+| 3 | 2026-05-10 | Don't ask the AI what it was thinking | `/dont-ask-the-ai` | Three-layer visibility model; action-level audit |
+| 4 | 2026-05-17 | AI: Give me the freedom of a tight brief | `/ai-freedom-tight-brief` | Decision budgets; entropy as 5-axis vector |
+
+### Quotable lines from the series (already published — safe to reprise)
+
+From **post 3**:
+- *"You cannot subpoena a developer's thought process. You can subpoena a chat log."*
+- *"Treat any shown reasoning as marketing copy, not audit evidence."*
+- *"The harness around the AI is your competitive surface."*
+
+From **post 4**:
+- *"Give me the freedom of a tight brief."*
+- *"Every AI failure is a human refusing to collapse entropy upstream — and watching it collapse somewhere nastier downstream."*
+- *"This is not a capability gap. It is an entropy-inheritance gap."*
+- *"Entropy doesn't disappear. The only question is whether you pay for it at design time, at runtime, or in the postmortem."*
+- *"Declared delegation is a specification. Undeclared delegation is an accident."*
+
+### The forward-link from post 4 (this post must deliver on it)
+
+Post 4 closes with this teaser — the post 5 premise is now public-facing and cannot drift:
+
+> *"Next week — the series finale: any AI that can't say 'I don't know' is lying to you. Why refusal is the most under-engineered surface in AI products, and why every confident answer to a question the model has no evidence for is a silent failure dressed up as helpfulness."*
+
+### Refusal as the structural payoff of post 4's framework
+
+The decision-envelope worked example in post 4 already shipped a refusal-by-design clause:
+
+> *"If a customer asks something outside this scope, or you lack a verified answer, your job is to say 'I don't know — let me hand you to a human agent' rather than guess."*
+
+So post 5 is not introducing refusal from scratch — it's **promoting refusal from a footnote in post 4 to a first-class principle.** The argument: when a decision budget hits `permitted: none` and the human resolver isn't in the loop, refusal is the only legal output. Refusal is what makes the other four principles enforceable. A capability envelope without a refusal path is a wishlist; a reproducibility guarantee without refusal is a polished hallucination; a visibility log without refusal is just a richer record of being wrong.
+
+This frames post 5 as the keystone of the arch, not a sixth principle bolted on.
+
+---
+
 ## 1. Hook — the NYC MyCity chatbot (~350 words)
 
 Open with the single most damning modern example of AI-without-refusal.
@@ -116,13 +160,13 @@ A system without a measurable refusal rate is a system that doesn't refuse.
 
 Return to the five principles. Show that each one, ultimately, is a different face of the same requirement: **honest delegation.**
 
-| Principle | What it forces | What happens when missing |
+| Principle (post link) | What it forces | What happens when missing |
 |---|---|---|
-| Declared authority | The AI says what it will touch | Replit deletes prod DB |
-| Reproducibility | The AI can be replayed | Air Canada can't defend chatbot output |
-| Visibility | The AI's actions are logged | o1 hides reasoning, bills you for it |
-| Decision budgets | The AI's ambiguity is assigned | "Don't hallucinate" fails; 30-turn sessions |
-| Refusal | The AI can say "I don't know" | NYC MyCity tells you to commit wage theft |
+| [Declared authority](/blog/what-is-your-ai-allowed-to-touch) | The AI says what it will touch | Replit deletes prod DB |
+| [Reproducibility](/blog/if-you-cant-replay-it) | The AI can be replayed | Air Canada can't defend chatbot output |
+| [Visibility](/blog/dont-ask-the-ai) | The AI's actions are logged | o1 hides reasoning, bills you for it |
+| [Decision budgets](/blog/ai-freedom-tight-brief) | The AI's ambiguity is assigned | "Don't hallucinate" fails; 30-turn sessions |
+| **Refusal** *(this post)* | The AI can say "I don't know" | NYC MyCity tells you to commit wage theft |
 
 Every AI failure in the press over the last three years is one of these five, or a combination. None are failures of model capability. All are failures of delegation architecture.
 

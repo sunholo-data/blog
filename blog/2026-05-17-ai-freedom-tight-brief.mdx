@@ -23,6 +23,10 @@ import CodeCompare from '@site/src/components/codeCompare';
 
 Several prompt-engineering guides out on the web include phrases such as *"…and don't hallucinate!"* As you may have suspected, this was never going to work. Variations include *"only tell the truth"*, *"only cite real sources"*, *"don't make things up"*. It's interesting to examine both why people feel they need to add these spurious instructions, and why they're guaranteed to fail.
 
+The most striking recent example: on May 4 2026, Marc Andreessen published his current AI custom prompt to 2.1 million views. It's genuinely sophisticated in several respects — and we'll use it as a running example throughout this post — but it still contains the lines: *"Never hallucinate or make anything up"* and *"If you don't know something, just say so."* The most-discussed AI prompt of the month has the same hole as the generic advice.
+
+![Marc Andreessen's AI custom prompt, posted May 4 2026](./img/marc_andreessen_prompt.png)
+
 The answer takes us into a journey involving trust, information theory, and my favourite subject: entropy. Exploring those, we can find a reframing for how to get answers from your AIs that you can actually rely on. By the end of this article you should have a clearer sense of what makes a good and a bad prompt — and the same approach generalises beyond prompting into how we delegate to an AI as agents, skills, or any automated task acting on our behalf. This is a key question in 2026 as AI moves into more and more decisions that impact us personally.
 
 {/* truncate */}
@@ -207,6 +211,18 @@ Lawyer Steven Schwartz used ChatGPT to research a personal injury brief against 
 />
 
 Temporal entropy doesn't show up in any of the cases above — partly because it's the hardest axis to spot in retrospect, partly because the framework itself acknowledges this axis is the least developed. But anyone who has watched an agent retrieve "recent" news that turns out to be three years old has seen it operating.
+
+The same framework makes quick work of the Andreessen prompt. Here's the five-axis audit:
+
+| Axis | Andreessen prompt | Status |
+|---|---|---|
+| **Semantic** | *"precise but not pedantic"* — bounded. *"Never hallucinate"* — unresolved (what counts? resolved by whom?) | Partial |
+| **Behavioural** | *"step by step"*, *"lead with counterargument"*, *"generate own estimate first"* | ✓ Bounded |
+| **Authority** | No forbidden territory declared; no tool assigned for factual claims | ✗ Open |
+| **Temporal** | Not applicable to this prompt type | — |
+| **Interpretive** | Confidence levels specified; resolver for facts unassigned | Partial |
+
+The axes where the prompt excels — behavioural, and parts of interpretive — are exactly the axes that shape *reasoning process*. The axes where it fails — authority and semantic for factual claims — are exactly the axes that cause hallucinations. This is not a coincidence. It's the shape of the problem: natural language is good at specifying *how to think*, and bad at specifying *who enforces truth*.
 
 [AILANG](https://ailang.sunholo.com/) was designed assuming AI does 100% of the coding — but humans remain the decision-makers. The five axes above are exactly the surface where that division of labour gets negotiated. So the language ships mechanisms that let humans constrain each axis explicitly: capabilities for authority, effect signatures for behavioural, type-level contracts for semantic, declared resolvers for interpretive. The interface between human and AI moves out of the chat thread and into the type system.
 
