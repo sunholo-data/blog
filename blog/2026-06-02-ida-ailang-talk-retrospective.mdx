@@ -24,7 +24,7 @@ What I wanted people to leave the room with was considering whether the need for
 
 ![The AI Coding Revolution](./img/ida-2026-retro/00-ai-coding-revolution.png)
 
-To set this up, I opened with a quote from Dario Amodei, CEO of Anthropic. In March 2025 he stated that within 12 months, 90% of coding would be done by AI — something that was widely derided at the time.
+To set this up, I opened with a quote from [Dario Amodei](https://finance.yahoo.com/news/anthropic-ceo-says-ai-could-193020957.html), CEO of Anthropic. In early 2025 he stated that 90% of coding would be done by AI within the year — something that was widely derided at the time.
 
 But roughly 12 months later, I asked the room: how many of you would say AI is doing 90% of your coding? Almost every hand went up. I then asked how many would say 100% — the camp I'd put myself in. Around 10% of hands stayed up.
 
@@ -34,12 +34,12 @@ If AI is doing 100% of the coding, why do we choose programming languages based 
 
 We may still cling to knowing what good looks like in a language we're fluent in ourselves, but will that hold long term?
 
-I then showed some findings from LoCoBench, which analysed model performance across languages. The more flexible languages were easier for AI (Python, JavaScript), while the more strictly typed ones were harder (C++, Rust) — likely influenced by training data volume. But for trusted production code, typed languages are typically more reliable at scale. This meant AILANG aimed for a gap that seemed uncovered: simple syntax, but with types and fast compile-time verification loops.
+I then showed some findings from [LoCoBench](https://arxiv.org/abs/2509.09614), which analysed model performance across languages. The more flexible languages were easier for AI (Python, JavaScript), while the more strictly typed ones were harder (C++, Rust) — likely influenced by training data volume. But for trusted production code, typed languages are typically more reliable at scale. This meant AILANG aimed for a gap that seemed uncovered: simple syntax, but with types and fast compile-time verification loops.
 
 
 ---
 
-## Entropy: the hidden cost of every decision
+## Entropy collapse: the hidden cost of every decision
 
 From there we segued into entropy. Entropy can be thought of as a measure of uncertainty in a system — or, more usefully here, as the decisions that haven't been made yet, by either the human or the AI.
 
@@ -65,6 +65,8 @@ In a typical coding project, decisions pile up deferred — language choice, fra
 
 AILANG moves the entropy cost earlier: effects declarations, pattern matching, type verification, and neurosymbolic contracts all resolve uncertainty at compile time — the cheapest possible moment. 80% of entropy resolved at design time, no runtime risk.
 
+I've written more about this framing in [AI: Give me the freedom of a tight brief](/blog/ai-freedom-tight-brief).
+
 :::tip[Live demo]
 The interactive entropy explorer is still running — open `/presentations/ai-slaves-human-masters-ida/01-entropy-explorer.html` to explore the three tabs yourself.
 :::
@@ -77,11 +79,13 @@ The interactive entropy explorer is still running — open `/presentations/ai-sl
 
 The general aim is to tighten the verification loop so that an AI coding agent collapses decisions to compile time rather than runtime. Via the type system, neurosymbolic proofs, and bounded context space, AILANG creates a tight loop: AI writes code, runs `ailang verify`, and gets static analysis it can trust will hold at runtime — as opposed to Python or TypeScript, where code is freely written but you need to actually run it to find out if it works.
 
-The quadrant above places AILANG bottom-right: simple syntax, but compiler-checked. That's an unusual combination — most languages trade simplicity for power (Python) or correctness for complexity (Rust). AILANG tries to be the third option.
+The quadrant above places AILANG bottom-right: simple syntax, but compiler-checked. That's an unusual combination — most languages trade simplicity for power (Python) or correctness for complexity (Rust). AILANG tries to be the third option. (The underlying trust argument is in [The wrong question about AI trust](/blog/wrong-question-ai-trust).)
 
 We then walked through specific syntax examples, because the key point is that complexity is in the eye of the beholder — what simplifies things for humans can add cost for an AI, and vice versa.
 
 ### AI Cannot Hallucinate a Network Call
+
+I've explored this in more depth in [What is your AI allowed to touch?](/blog/what-is-your-ai-allowed-to-touch), but the short version in AILANG syntax:
 
 `export func process(path: string) -> string ! {IO @limit=3, FS}`
 
@@ -190,7 +194,7 @@ AILANG development was also a meta-experiment in how to build a large, complex p
 
 - **Design document** — the human acts as product manager, prioritising features. A Skill scores design docs against axioms and checks for duplicate or related work. The doc is a versioned artifact in the git repo, triaged by three different models (OpenAI, Anthropic, Gemini) to avoid overfitting to any one model's preferences.
 - **Sprint plan** — alongside the standard planner Skill, a JSON object keeps the AI on track and forces it to log progress against milestones, stopping it going down unrelated rabbit holes.
-- **Sprint executor** — takes the plan and practices TDD: creates failing tests, then makes them pass through code execution.
+- **Sprint executor** — takes the plan and practices TDD: creates failing tests, then makes them pass through code execution. The deterministic replay requirement here is non-negotiable — see [If you can't replay it, you can't ship it](/blog/if-you-cant-replay-it).
 - **Sprint evaluator** — the key human touchpoint: benchmarks run, gaps identified.
 - **Back to design** — gaps feed into new design documents, and the cycle begins again.
 
@@ -212,14 +216,37 @@ But the original aim had been met: we have a programming language that AI perfor
 
 After we achieved benchmark success, we looked to try it out on real projects - AI coded themselves 100%, in a language coded by AI 100% - our first 10,000% AI coded applications.
 
-TODO: add the images/gif from the presentaion here
-- Stapledons Voyage was the first since it was a game development project that would be good to test performance via the build to Go targets.  Remember our aim with AILANG is not to replace other languages with rich ecosystems, but to provide a cognitive layer for AI to write programs easier, so this project was testing that layer by compiling AILANG to Go for the game engine and then using Go graphic libraries to render.  We caught lots of gaps, include a lack of trignometry etc! and let us make scitetifically accurate general relativity and special relavity space simulations.
-- Voice DocPArse - we then moved to expanding the standard library (written in AILANG) to support streaming and AI API calls since this is the majority of my work outside of AILANG development.  We developed easier streaming HTTP ports and tested the compilation to WebAssembly, allow the demo website (www.sunholo.com/ailang-demos) to show live running AILANG programs.  This is still an active area of research, seeing how WebAssembly fits into the AI landscape.
-- AILANG Parse - this is currently the most used production level AILANG program.  It tackles document parsing for RAG pipelines, where instead of sending a PDF of a Word or Office document for lossy data extraction, we unzip and parse the XML directly for quicker, faster, cheaper and more accurate determistic parsing.  This is being rolled out to all my AI engineering clients as an alternative to the traditional PDF based RAG pipelines.
+**Stapledon's Voyage** was the first: a game development project, chosen because it compiles AILANG to Go targets, making build success easy to verify. AILANG's aim is not to replace languages with rich ecosystems — it's to provide a cognitive layer for AI to write programs more effectively. This project tested that layer via Go's graphics libraries for rendering.
+
+We caught plenty of gaps (no trigonometry in the standard library, for one), and used them to drive the next design-loop iteration. The result: scientifically accurate general relativity and special relativity space simulations, 100% AI-coded in AILANG.
+
+![Stapledon's Voyage — general relativity simulation](./img/ida-2026-retro/stapledon-gr.gif)
+
+![Stapledon's Voyage — flyby sequence](./img/ida-2026-retro/stapledon-flyby.gif)
+
+**Voice DocParse** came next — expanding the standard library (itself written in AILANG) to support streaming and AI API calls, which is the bulk of my client work outside AILANG development. We built streaming HTTP support and tested compilation to WebAssembly, which powers the live demos at [sunholo.com/ailang-demos](https://www.sunholo.com/ailang-demos). WebAssembly in the AI landscape is still an active area of research.
+
+**[AILANG Parse](/blog/ailang-parse-launch)** is currently the most-used production AILANG program. It tackles document parsing for RAG pipelines: instead of converting a Word or Office document to PDF for lossy extraction, we unzip and parse the XML directly — faster, cheaper, and more accurate deterministic parsing. It's rolling out to all my AI engineering clients as an alternative to traditional PDF-based RAG pipelines.
 
 
 ## The future of AILANG? Motoko self-modification AI Harness
 
-And finally I spoke briefly about the Motoko project, by Arni Westh, who was using AILANG to create a self modifying coding harness inspired by Pi.  Pi does its extensions via typescript, but AILANG looks espeically well suited since it can verify code before its run unlike TypeScript.
+And finally I spoke briefly about the [Motoko project](https://arniwesth.github.io/motoko_agent/), by Arni Westh, who is using AILANG to create a self-modifying coding harness inspired by [Pi](https://github.com/nicholasgasior/pi).
 
-TODO: more here.
+Pi ships a very minimal core compared to harnesses like Claude Code or OpenCode; the idea is that the AI self-discovers and extends the core as it needs more features. Pi does its extensions in TypeScript, but AILANG is especially well suited here — it can verify code before it runs, unlike TypeScript. The AILANG package registry supports this with AI-controlled security patches and auto-cascading updates.
+
+## And finally...
+
+With a couple of minutes to spare I mentioned that in the course of creating this talk, I'd discovered other AI languages being built independently — and surprisingly, some had arrived at the same features, such as function effects. Was the AI teaching us all the language it wanted to express itself in? If you think about it, the best candidate for designing a new programming language is someone who knows all existing languages — and that's AI. At the very least, it represents a new class of programming languages that may thrive alongside systems, frontend, or backend languages.
+
+As a final anecdote: although AI helped create and design AILANG, I still feel like it's *my* language. During a design sprint, I realised that the fundamental vision — deterministic state collapse, bounded entropy — had been shaped by what I'd thought were unrelated conversations with AI about cosmology and the block universe theories I'd been investigating. Those chats had fed into the axioms of AILANG through its chat-history reference features. If in the future we can all effortlessly create our own AI languages, perhaps we'll each create variations that reflect how we personally express ourselves to AI — and vice versa.
+
+The presentation finished, I then had a few good follow up questions which I paraphrase below:
+
+- What about dependencies? How do you handle AI suggesting them from a security perspective? My answer: yes, third-party dependency decisions should always kick back to a human. But in practice, the need for 3rd-party packages was far lower than expected — the AI would often just write its own version quickly.
+- Did I make my presentation with AI? Yes — the template is at [github.com/sunholo-data/presentations](https://github.com/sunholo-data/presentations), pure HTML and JS. The repository includes a Claude Skill to help you create something similar. Death to PowerPoint.
+- Why weren't functional languages like Haskell included in the language survey? They were just missing from the original [LoCoBench](https://arxiv.org/abs/2509.09614) dataset. But AILANG *is* a functional language, heavily influenced by Haskell — which I have a lot more respect for now. [Erik Meijer](https://en.wikipedia.org/wiki/Erik_Meijer_(computer_scientist)), Haskell's co-designer, has inspired several AILANG features through his talks on AI and programming.
+- Do you think humans will change how they speak to AI? Very deep question. I can imagine that just as we learned to "Google" effectively, learning to interact with AI may change humans in a similar way fire changed our ancestors — a fundamental shift in cognitive tooling.
+- Do you think AIs will create languages humans don't understand to communicate with each other? Maybe in the future — but currently they're grounded in large language corpora created by humans, so they understand language on that basis. As training expands to non-textual data (video, sound, sensor data), they may eventually converge on more fundamental representations for communication.
+
+Thanks to everyone who attended — a smart, engaged audience and excellent fellow speakers. Highly recommend it for next year.
