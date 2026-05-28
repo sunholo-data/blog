@@ -79,7 +79,7 @@ The interactive entropy explorer is still running — [open it here](https://www
 
 ## Authority and complexity: where does trust live?
 
-The general aim is to tighten the verification loop so that an AI coding agent collapses decisions to compile time rather than runtime. Via the type system, neurosymbolic proofs, and bounded context space, AILANG creates a tight loop: AI writes code, runs `ailang verify`, and gets static analysis it can trust will hold at runtime — as opposed to Python or TypeScript, where code is freely written but you need to actually run it to find out if it works. (The underlying trust argument is in [The wrong question about AI trust](/blog/wrong-question-ai-trust).)
+The general aim when working with AI coding is to tighten the verification loop - we want to be able to check AI output quickly so that an AI can iterate.  Its worse if you are the human in that loop - constantly checking program output and then re-prompting to modify.  Its best when the AI can verify itself, preferably before even running the code at compile time. Via the type system, neurosymbolic proofs, and bounded context space, AILANG creates that tight loop: AI writes code, runs `ailang verify`, and gets static analysis it can trust will hold at runtime — as opposed to Python or TypeScript, where code is freely written but you need to actually run it to find out if it works. (The underlying trust argument is in [The wrong question about AI trust](/blog/wrong-question-ai-trust).)
 
 We then walked through specific syntax examples, because the key point is that complexity is in the eye of the beholder — what simplifies things for humans can add cost for an AI, and vice versa.
 
@@ -89,11 +89,13 @@ I've explored this in more depth in [What is your AI allowed to touch?](/blog/wh
 
 `export func process(path: string) -> string ! {IO @limit=3, FS}`
 
-- IO — Can print to console
-- @limit=3 — Maximum 3 times
-- FS — Can read/write files
-- No Net — CANNOT touch the network
-- No DB — CANNOT access a database
+- `IO` — Can print to console
+- `@limit=3` — Maximum 3 times
+- `FS` — Can read/write files
+- No Net effect means — AI CANNOT touch the network
+- No DB means — AI CANNOT access a database
+
+This elimates exposure to those AI horror stories of deleting production databases.
 
 `$ ailang run --caps IO,FS process.ail` 
 
@@ -134,7 +136,9 @@ This is neurosymbolic programming — coupled on purpose. The neural side writes
 
 ### No loops — code the AI can hold in one context
 
-No loops. Only pattern matching. Every branch is visible on screen — no mutable loop state to track.
+No loops.  This was a great surprise to me when I reliased AILANG had no standard loop primitives, on the AI's request. 
+
+AIs preferred only pattern matching in a functional approach, since this means that every branch is visible in context — no mutable loop state to track or global assignment surprises.
 
 ```py
 total = 0
@@ -154,19 +158,19 @@ pure func total(xs: List[Item]) -> int {
 }
 ```
 
-Every branch is local. The model doesn't have to track an accumulator across loop iterations or wonder if it terminates. Compiler-checked exhaustiveness means fewer tokens spent on reasoning about state — and a one-turn fix when a branch is missing. 
+The reason is that every branch is now local. The model doesn't have to track an accumulator across loop iterations or wonder if it terminates. Compiler-checked exhaustiveness means fewer tokens spent on reasoning about state — and a one-turn fix when a branch is missing. 
 
 ### No transitive imports — what's in scope is what's on screen
 
-The same line of code puts very different cognitive loads on the AI.
+Import lines of code put very different cognitive loads on the AI.
 
-One line. What's in scope?
+For example, in python you may import like this:
 
 ```python
 import requests
 ```
 
-What the AI must reason about: `requests.get`, `requests.post`, `urllib3.*`, `charset_normalizer`, `idna`, `certifi.*`, `ssl`, `socket`, `http.client`, `json`, `os.environ`, `logging`, `warnings`, `io.BytesIO` … and more, transitively. 2 named, 12+ reachable through the package. The model spends tokens guessing what's in scope; sometimes it hallucinates symbols that don't exist, sometimes it uses ones that do but shouldn't.
+Now the AI must reason about: `requests.get`, `requests.post`, `urllib3.*`, `charset_normalizer`, `idna`, `certifi.*`, `ssl`, `socket`, `http.client`, `json`, `os.environ`, `logging`, `warnings`, `io.BytesIO` … and more, transitively. 2 named, but 12+ reachable through the package. The model spends tokens guessing what's in scope; sometimes it hallucinates symbols that don't exist, sometimes it uses ones that do but shouldn't.
 
 Compare with AILANG:
 
@@ -174,7 +178,7 @@ Compare with AILANG:
 import std/net (get, post)
 ```
 
-What the AI must reason about: `get`, `post`. 2 named, 2 reachable. The file is the complete inventory. Nothing arrives transitively. Whatever the AI cannot name, it cannot call.
+Now the AI must reason about: `get`, `post`. 2 named, 2 reachable. The file is the complete inventory. Nothing arrives transitively. Whatever the AI cannot name, it cannot call.
 
 ### Complexity is in the eye of the beholder
 
@@ -190,15 +194,14 @@ Every AILANG design choice has two readers — human and AI agent — and they o
 | One canonical syntax | *"Less expressive"* | Zero ambiguity |
 | Structured errors | *"More boilerplate"* | Parseable feedback for self-repair |
 
-Seven complaints. Seven wins. Same language. It landed well in the room — the point being that AILANG isn't trying to be a better language for humans, it's trying to be a better language for AI.
-
+Even if you are not creating your own AI langauge, these principles influence how I code with AI in general - context management applied to coding style.
 ---
 
 ## The Development Loop
 
-The previous talk had already highlighted how a design-document → verify → evaluate loop was becoming standard practice in AI coding. I completely agreed with that framing, and looked to connect it to the entropy argument we'd just covered: the methods that work are those that move decisions upstream for humans and downstream for AI, as needed.
+The talk before I went on ("From AI experiments to daily workflow" – Jacob Langvad Nilsson & Diana Meda) had already highlighted how a design-document → verify → evaluate loop was becoming standard practice in AI coding. I completely agreed with that framing, and looked to connect it to the entropy argument we'd just covered: the methods that work are those that move decisions upstream for humans and downstream for AI, as needed.
 
-AILANG development was also a meta-experiment in how to build a large, complex project with AI without succumbing to a mounting maintenance burden. I highlighted the 100% AI loop we'd settled on and found success with, driven mainly by Skills in the open-source repository.
+AILANG development was also a meta-experiment in how to build a large, complex project with AI without succumbing to a mounting maintenance burden. I highlighted the 100% AI loop we'd settled on and found success with, driven mainly by Claude Skills (which are all available to read in [AILANGs open-source repository](https://github.com/sunholo-data/ailang/tree/dev/.claude/skills))
 
 - **Design document** — the human acts as product manager, prioritising features. A Skill scores design docs against axioms and checks for duplicate or related work. The doc is a versioned artifact in the git repo, triaged by three different models (OpenAI, Anthropic, Gemini) to avoid overfitting to any one model's preferences.
 - **Sprint plan** — alongside the standard planner Skill, a JSON object keeps the AI on track and forces it to log progress against milestones, stopping it going down unrelated rabbit holes.
