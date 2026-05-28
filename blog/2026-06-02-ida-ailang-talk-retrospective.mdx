@@ -180,9 +180,17 @@ What the AI must reason about: `get`, `post`. 2 named, 2 reachable. The file is 
 
 Every AILANG design choice has two readers — human and AI agent — and they often disagree on what counts as friction.
 
-![Complexity Is in the Eye of the Beholder — human vs AI reactions to AILANG design choices](./img/ida-2026-retro/complexity-eye-of-beholder.png)
+| Design choice | Human reaction | AI agent reaction |
+|---|---|---|
+| Static, fully-inferred types | *"Why annotate?"* | Pre-runtime, parseable errors |
+| No loops, only recursion | *"Verbose"* | Total, analysable iteration |
+| Explicit effects in types | *"Noisy signatures"* | Can't hallucinate capabilities |
+| No transitive imports | *"Tedious"* | Bounded context window |
+| No mutable state | *"Inconvenient"* | No temporal reasoning needed |
+| One canonical syntax | *"Less expressive"* | Zero ambiguity |
+| Structured errors | *"More boilerplate"* | Parseable feedback for self-repair |
 
-The table landed well in the room. Humans see static types as verbose; the AI sees pre-runtime parseable errors. Humans see no mutable state as inconvenient; the AI sees zero need for temporal reasoning. Same language, opposite experience.
+Seven complaints. Seven wins. Same language. It landed well in the room — the point being that AILANG isn't trying to be a better language for humans, it's trying to be a better language for AI.
 
 ---
 
