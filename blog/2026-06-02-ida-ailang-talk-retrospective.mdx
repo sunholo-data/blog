@@ -204,7 +204,7 @@ The talk before I went on ("From AI experiments to daily workflow" – Jacob Lan
 AILANG development was also a meta-experiment in how to build a large, complex project with AI without succumbing to a mounting maintenance burden. I highlighted the 100% AI loop we'd settled on and found success with, driven mainly by Claude Skills (which are all available to read in [AILANGs open-source repository](https://github.com/sunholo-data/ailang/tree/dev/.claude/skills))
 
 - **Design document** — the human acts as product manager, prioritising features. A Skill scores design docs against axioms and checks for duplicate or related work. The doc is a versioned artifact in the git repo, triaged by three different models (OpenAI, Anthropic, Gemini) to avoid overfitting to any one model's preferences.
-- **Sprint plan** — alongside the standard planner Skill, a JSON object keeps the AI on track and forces it to log progress against milestones, stopping it going down unrelated rabbit holes.
+- **Sprint plan** — alongside standard task planners, a JSON object keeps the AI on track and forces it to log progress against milestones, stopping it going down unrelated rabbit holes.
 - **Sprint executor** — takes the plan and practices TDD: creates failing tests, then makes them pass through code execution. The deterministic replay requirement here is non-negotiable — see [If you can't replay it, you can't ship it](/blog/if-you-cant-replay-it).
 - **Sprint evaluator** — the key human touchpoint: benchmarks run, gaps identified.
 - **Back to design** — gaps feed into new design documents, and the cycle begins again.
@@ -219,7 +219,7 @@ After many iterations of the design loop above, we plotted Claude Sonnet 4.5's p
 
 Parity was reached at v0.11.2. The current latest sits at +4.5 — AILANG ahead. We dipped again as our benchmarks got saturated, so we added harder ones to expose new gaps; I'm constantly looking for better signal. The bar is now high enough that the challenges are beyond what I could solve myself in a day.
 
-One observation that surprised the audience: stronger models generalised better to AILANG. Weaker models could solve the same problems in Python but couldn't translate a novel AILANG prompt into working code. The language's constraints seem to reward more capable models disproportionately. A goal now is improving performance on smaller local models, for the cost and privacy benefits that brings.
+In the suite of models tested, we found that stronger models generalised better to AILANG. Weaker models could solve the same problems in Python but couldn't translate a novel AILANG prompt into working code. The language's constraints seem to reward more capable models disproportionately. A goal now is improving performance on smaller local models, for the cost and privacy benefits that brings.
 
 But the original aim had been met: we have a programming language that AI performs better in than in human-made languages — even starting from scratch in the prompt, with no prior training on AILANG. Once it's in the training data and the teaching preamble shrinks, performance should improve further still.
 
@@ -235,7 +235,7 @@ We caught plenty of gaps (no trigonometry in the standard library, for one), and
 
 ![Stapledon's Voyage — flyby sequence](./img/ida-2026-retro/stapledon-flyby.gif)
 
-**Voice DocParse** came next — expanding the standard library (itself written in AILANG) to support streaming and AI API calls, which is the bulk of my client work outside AILANG development. We built streaming HTTP support and tested compilation to WebAssembly, which powers the live demos at [sunholo.com/ailang-demos](https://www.sunholo.com/ailang-demos). WebAssembly in the AI landscape is still an active area of research.
+**[Voice DocParse](https://www.sunholo.com/ailang-demos/streaming/voice_docparse/index.html)** came next — expanding the standard library (itself written in AILANG) to support streaming and AI API calls, which is the bulk of my client work outside AILANG development. We built streaming HTTP support and tested compilation to WebAssembly, which powers the live demos at [sunholo.com/ailang-demos](https://www.sunholo.com/ailang-demos). WebAssembly in the AI landscape is still an active area of research.
 
 **[AILANG Parse](/blog/ailang-parse-launch)** is currently the most-used production AILANG program. It tackles document parsing for RAG pipelines: instead of converting a Word or Office document to PDF for lossy extraction, we unzip and parse the XML directly — faster, cheaper, and more accurate deterministic parsing. It's rolling out to all my AI engineering clients as an alternative to traditional PDF-based RAG pipelines.
 
