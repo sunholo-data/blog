@@ -1,0 +1,225 @@
+---
+title: "Programming Languages for AI, not Humans: My IDA Driving AI Talk"
+authors: me
+tags: [ailang, conferences, presentations, ai-coding, entropy]
+image: ./img/ida-2026-retro/index.png
+slug: /ida-driving-ai-talk-2026
+---
+
+*Yesterday I presented at [IDA Driving AI 2026](https://ida.dk) in Copenhagen. This is the talk retold while it's still fresh — the argument I made, the visualisations I built, and what I'd say differently next time.*
+
+<!-- truncate -->
+
+![IDA Driving AI 2026 — Programming Languages for AI, not Humans](./img/ida-2026-retro/index.png)
+
+---
+
+## The general point I was trying to argue
+
+What I wanted people to leave the room with was considering whether the need for AI languages actually existed. From what I've found in my work with AILANG, I think it's inevitable. If we agree that AI will do 100% of coding from now on, and that differences exist between programming languages in AI coding performance, then it follows that a language specifically made for AI preferences will be preferred over our existing human-made languages in the medium to long term.
+
+---
+
+## The AI Coding Revolution is already here
+
+![The AI Coding Revolution](./img/ida-2026-retro/00-ai-coding-revolution.png)
+
+To set this up, I opened with a quote from Dario Amodei, CEO of Anthropic. In March 2025 he stated that within 12 months, 90% of coding would be done by AI — something that was widely derided at the time.
+
+But roughly 12 months later, I asked the room: how many of you would say AI is doing 90% of your coding? Almost every hand went up. I then asked how many would say 100% — the camp I'd put myself in. Around 10% of hands stayed up.
+
+So: AI coding is here to stay. The question moves to what that actually looks like for us.
+
+If AI is doing 100% of the coding, why do we choose programming languages based on our own preferences? Are language wars over — an AI can code in any language, so we just pick the best tool each time?
+
+We may still cling to knowing what good looks like in a language we're fluent in ourselves, but will that hold long term?
+
+I then showed some findings from LoCoBench, which analysed model performance across languages. The more flexible languages were easier for AI (Python, JavaScript), while the more strictly typed ones were harder (C++, Rust) — likely influenced by training data volume. But for trusted production code, typed languages are typically more reliable at scale. This meant AILANG aimed for a gap that seemed uncovered: simple syntax, but with types and fast compile-time verification loops.
+
+
+---
+
+## Entropy: the hidden cost of every decision
+
+From there we segued into entropy. Entropy can be thought of as a measure of uncertainty in a system — or, more usefully here, as the decisions that haven't been made yet, by either the human or the AI.
+
+We can never remove entropy from a time-evolving system; we can only choose where we pay its costs. We could resolve every decision ourselves so the AI just acts, but that's micromanagement — we may as well code it ourselves. The real question is: which decisions should we delegate to the AI, and which should we keep?
+
+LLMs like Opus or GPT-4o are entropy-reducing machines. We spend an enormous amount of energy training them so they can collapse uncertainty elsewhere. The visualisation made this tangible through three examples.
+
+**Example 1 — Token prediction**
+
+![Entropy Explorer: Token Prediction — "the cat sat on the mat"](./img/ida-2026-retro/entropy-token-prediction.png)
+
+Each token prediction collapses the remaining paths. "The cat sat on the..." is almost always "mat". Starting entropy is high; by the end it's nearly zero. The model doesn't guess — it eliminates.
+
+**Example 2 — Traditional coding**
+
+![Entropy Explorer: Traditional Coding — entropy deferred to runtime](./img/ida-2026-retro/entropy-traditional-coding.png)
+
+In a typical coding project, decisions pile up deferred — language choice, framework, error handling. The difference is that not all entropy costs the same. Resolving ambiguity at runtime (a crash, a bug) costs far more than resolving it at design time. If you let the AI make all code decisions freely, complexity accumulates and the project becomes hard to debug or steer.
+
+**Example 3 — The AILANG approach**
+
+![Entropy Explorer: AILANG Approach — entropy resolved at design time](./img/ida-2026-retro/entropy-ailang-approach.png)
+
+AILANG moves the entropy cost earlier: effects declarations, pattern matching, type verification, and neurosymbolic contracts all resolve uncertainty at compile time — the cheapest possible moment. 80% of entropy resolved at design time, no runtime risk.
+
+:::tip[Live demo]
+The interactive entropy explorer is still running — open `/presentations/ai-slaves-human-masters-ida/01-entropy-explorer.html` to explore the three tabs yourself.
+:::
+
+---
+
+## Authority and complexity: where does trust live?
+
+![Explicitness Without Complexity — language design quadrant](./img/ida-2026-retro/explicitness-without-complexity.png)
+
+The general aim is to tighten the verification loop so that an AI coding agent collapses decisions to compile time rather than runtime. Via the type system, neurosymbolic proofs, and bounded context space, AILANG creates a tight loop: AI writes code, runs `ailang verify`, and gets static analysis it can trust will hold at runtime — as opposed to Python or TypeScript, where code is freely written but you need to actually run it to find out if it works.
+
+The quadrant above places AILANG bottom-right: simple syntax, but compiler-checked. That's an unusual combination — most languages trade simplicity for power (Python) or correctness for complexity (Rust). AILANG tries to be the third option.
+
+We then walked through specific syntax examples, because the key point is that complexity is in the eye of the beholder — what simplifies things for humans can add cost for an AI, and vice versa.
+
+### AI Cannot Hallucinate a Network Call
+
+`export func process(path: string) -> string ! {IO @limit=3, FS}`
+
+- IO — Can print to console
+- @limit=3 — Maximum 3 times
+- FS — Can read/write files
+- No Net — CANNOT touch the network
+- No DB — CANNOT access a database
+
+`$ ailang run --caps IO,FS process.ail` 
+
+Only IO and FS granted at runtime. Attempting Net or DB → immediate rejection.
+The compiler enforces this. Not documentation. Not discipline. The compiler. 
+
+### Neurosymbolic proofs
+
+The compiler doesn't just check types — it proves correctness via the Z3 SMT solver. AI writes `requires` / `ensures` contracts; Z3 reasons over every possible input and hands back a concrete counterexample when it finds a violation.
+
+```
+-- ✓ This one verifies
+export func calculateTax(income: int) -> int ! {}
+requires { income >= 0 }
+ensures  { result >= 0 }
+{ income / 5 }
+```
+
+```
+-- ✗ Subtle bug: what if price < discount?
+export func applyDiscount(price: int, discount: int) -> int ! {}
+requires { price >= 0, discount >= 0 }
+ensures  { result >= 0 }
+{ price - discount }
+```
+
+```
+$ ailang verify --verbose billing.ail
+VERIFIED calculateTax 6ms
+VIOLATION applyDiscount
+Counterexample:
+  price: Int = 0
+  discount: Int = 1
+-- 0 - 1 = -1, violates ensures { result >= 0 }
+```
+
+This is neurosymbolic programming — coupled on purpose. The neural side writes the code; the symbolic side proves it. No tests, no sampling — Z3 reasons over every possible execution and hands back a concrete counterexample when it can't verify. The AI then has exactly what it needs to repair the code in a single turn.
+
+### No loops — code the AI can hold in one context
+
+No loops. Only pattern matching. Every branch is visible on screen — no mutable loop state to track.
+
+```py
+total = 0
+for item in items:
+    if item.active:
+        total += item.value
+```
+
+```ailang
+pure func total(xs: List[Item]) -> int {
+  match xs {
+    [] => 0,
+    ::(x, rest) =>
+      if x.active then x.value + total(rest)
+      else total(rest)
+  }
+}
+```
+
+Every branch is local. The model doesn't have to track an accumulator across loop iterations or wonder if it terminates. Compiler-checked exhaustiveness means fewer tokens spent on reasoning about state — and a one-turn fix when a branch is missing. 
+
+### No transitive imports — what's in scope is what's on screen
+
+The same line of code puts very different cognitive loads on the AI.
+
+One line. What's in scope?
+
+```python
+import requests
+```
+
+What the AI must reason about: `requests.get`, `requests.post`, `urllib3.*`, `charset_normalizer`, `idna`, `certifi.*`, `ssl`, `socket`, `http.client`, `json`, `os.environ`, `logging`, `warnings`, `io.BytesIO` … and more, transitively. 2 named, 12+ reachable through the package. The model spends tokens guessing what's in scope; sometimes it hallucinates symbols that don't exist, sometimes it uses ones that do but shouldn't.
+
+Compare with AILANG:
+
+```ailang
+import std/net (get, post)
+```
+
+What the AI must reason about: `get`, `post`. 2 named, 2 reachable. The file is the complete inventory. Nothing arrives transitively. Whatever the AI cannot name, it cannot call.
+
+### Complexity is in the eye of the beholder
+
+Every AILANG design choice has two readers — human and AI agent — and they often disagree on what counts as friction.
+
+![Complexity Is in the Eye of the Beholder — human vs AI reactions to AILANG design choices](./img/ida-2026-retro/complexity-eye-of-beholder.png)
+
+The table landed well in the room. Humans see static types as verbose; the AI sees pre-runtime parseable errors. Humans see no mutable state as inconvenient; the AI sees zero need for temporal reasoning. Same language, opposite experience.
+
+---
+
+## The Development Loop
+
+The previous talk had already highlighted how a design-document → verify → evaluate loop was becoming standard practice in AI coding. I completely agreed with that framing, and looked to connect it to the entropy argument we'd just covered: the methods that work are those that move decisions upstream for humans and downstream for AI, as needed.
+
+AILANG development was also a meta-experiment in how to build a large, complex project with AI without succumbing to a mounting maintenance burden. I highlighted the 100% AI loop we'd settled on and found success with, driven mainly by Skills in the open-source repository.
+
+- **Design document** — the human acts as product manager, prioritising features. A Skill scores design docs against axioms and checks for duplicate or related work. The doc is a versioned artifact in the git repo, triaged by three different models (OpenAI, Anthropic, Gemini) to avoid overfitting to any one model's preferences.
+- **Sprint plan** — alongside the standard planner Skill, a JSON object keeps the AI on track and forces it to log progress against milestones, stopping it going down unrelated rabbit holes.
+- **Sprint executor** — takes the plan and practices TDD: creates failing tests, then makes them pass through code execution.
+- **Sprint evaluator** — the key human touchpoint: benchmarks run, gaps identified.
+- **Back to design** — gaps feed into new design documents, and the cycle begins again.
+
+## Does it work? From −66.7 to +4.5 against Python
+
+We then looked at the evidence that AILANG — and AI languages in general — are viable.
+
+After many iterations of the design loop above, we plotted Claude Sonnet 4.5's performance across AILANG versions against a benchmark suite of programming challenges run in both Python and AILANG. The starting point was −66.7 percentage points behind Python. The chart tells the rest of the story.
+
+![AILANG vs Python success-rate gap, v0.3.10 → v0.13.0, Claude Sonnet 4.5](./img/ida-2026-retro/benchmark-gap-chart.png)
+
+Parity was reached at v0.11.2. The current latest sits at +4.5 — AILANG ahead. We dipped again as our benchmarks got saturated, so we added harder ones to expose new gaps; I'm constantly looking for better signal. The bar is now high enough that the challenges are beyond what I could solve myself in a day.
+
+One observation that surprised the audience: stronger models generalised better to AILANG. Weaker models could solve the same problems in Python but couldn't translate a novel AILANG prompt into working code. The language's constraints seem to reward more capable models disproportionately. A goal now is improving performance on smaller local models, for the cost and privacy benefits that brings.
+
+But the original aim had been met: we have a programming language that AI performs better in than in human-made languages — even starting from scratch in the prompt, with no prior training on AILANG. Once it's in the training data and the teaching preamble shrinks, performance should improve further still.
+
+## More AILANG examples in the wild
+
+After we achieved benchmark success, we looked to try it out on real projects - AI coded themselves 100%, in a language coded by AI 100% - our first 10,000% AI coded applications.
+
+TODO: add the images/gif from the presentaion here
+- Stapledons Voyage was the first since it was a game development project that would be good to test performance via the build to Go targets.  Remember our aim with AILANG is not to replace other languages with rich ecosystems, but to provide a cognitive layer for AI to write programs easier, so this project was testing that layer by compiling AILANG to Go for the game engine and then using Go graphic libraries to render.  We caught lots of gaps, include a lack of trignometry etc! and let us make scitetifically accurate general relativity and special relavity space simulations.
+- Voice DocPArse - we then moved to expanding the standard library (written in AILANG) to support streaming and AI API calls since this is the majority of my work outside of AILANG development.  We developed easier streaming HTTP ports and tested the compilation to WebAssembly, allow the demo website (www.sunholo.com/ailang-demos) to show live running AILANG programs.  This is still an active area of research, seeing how WebAssembly fits into the AI landscape.
+- AILANG Parse - this is currently the most used production level AILANG program.  It tackles document parsing for RAG pipelines, where instead of sending a PDF of a Word or Office document for lossy data extraction, we unzip and parse the XML directly for quicker, faster, cheaper and more accurate determistic parsing.  This is being rolled out to all my AI engineering clients as an alternative to the traditional PDF based RAG pipelines.
+
+
+## The future of AILANG? Motoko self-modification AI Harness
+
+And finally I spoke briefly about the Motoko project, by Arni Westh, who was using AILANG to create a self modifying coding harness inspired by Pi.  Pi does its extensions via typescript, but AILANG looks espeically well suited since it can verify code before its run unlike TypeScript.
+
+TODO: more here.
