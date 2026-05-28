@@ -16,7 +16,7 @@ slug: /ida-driving-ai-talk-2026
 
 ## The general point I was trying to argue
 
-What I wanted people to leave the room with was considering whether the need for AI languages actually existed. From what I've found in my work with AILANG, I think it's inevitable. If we agree that AI will do 100% of coding from now on, and that differences exist between programming languages in AI coding performance, then it follows that a language specifically made for AI preferences will be preferred over our existing human-made languages in the medium to long term.
+What I wanted people to leave the room with was: do we need AI languages? From my work with AILANG, I think it's inevitable: if we agree that AI will do 100% of coding from now on; and that differences exist between programming languages in AI coding performance, then it follows that a language specifically made for AI will be preferred over our existing human-made languages in the medium to long term.
 
 ---
 
@@ -36,6 +36,10 @@ We may still cling to knowing what good looks like in a language we're fluent in
 
 I then showed some findings from [LoCoBench](https://arxiv.org/abs/2509.09614), which analysed model performance across languages. The more flexible languages were easier for AI (Python, JavaScript), while the more strictly typed ones were harder (C++, Rust) — likely influenced by training data volume. But for trusted production code, typed languages are typically more reliable at scale. This meant AILANG aimed for a gap that seemed uncovered: simple syntax, but with types and fast compile-time verification loops.
 
+![Explicitness Without Complexity — language design quadrant](./img/ida-2026-retro/explicitness-without-complexity.png)
+
+The chart places AILANG bottom-right: simple syntax, but compiler-checked. Most languages trade simplicity for power (Python) or correctness for complexity (Rust). AILANG tries to be the third option.
+
 
 ---
 
@@ -45,7 +49,7 @@ From there we segued into entropy. Entropy can be thought of as a measure of unc
 
 We can never remove entropy from a time-evolving system; we can only choose where we pay its costs. We could resolve every decision ourselves so the AI just acts, but that's micromanagement — we may as well code it ourselves. The real question is: which decisions should we delegate to the AI, and which should we keep?
 
-LLMs like Opus or GPT-4o are entropy-reducing machines. We spend an enormous amount of energy training them so they can collapse uncertainty elsewhere. The visualisation made this tangible through three examples.
+LLMs like Opus or GPT-4o are entropy-collapsing machines. We spend an enormous amount of energy training them so they can collapse uncertainty elsewhere. The visualisation made this tangible through three examples.
 
 **Example 1 — Token prediction**
 
@@ -75,11 +79,7 @@ The interactive entropy explorer is still running — open `/presentations/ai-sl
 
 ## Authority and complexity: where does trust live?
 
-![Explicitness Without Complexity — language design quadrant](./img/ida-2026-retro/explicitness-without-complexity.png)
-
-The general aim is to tighten the verification loop so that an AI coding agent collapses decisions to compile time rather than runtime. Via the type system, neurosymbolic proofs, and bounded context space, AILANG creates a tight loop: AI writes code, runs `ailang verify`, and gets static analysis it can trust will hold at runtime — as opposed to Python or TypeScript, where code is freely written but you need to actually run it to find out if it works.
-
-The quadrant above places AILANG bottom-right: simple syntax, but compiler-checked. That's an unusual combination — most languages trade simplicity for power (Python) or correctness for complexity (Rust). AILANG tries to be the third option. (The underlying trust argument is in [The wrong question about AI trust](/blog/wrong-question-ai-trust).)
+The general aim is to tighten the verification loop so that an AI coding agent collapses decisions to compile time rather than runtime. Via the type system, neurosymbolic proofs, and bounded context space, AILANG creates a tight loop: AI writes code, runs `ailang verify`, and gets static analysis it can trust will hold at runtime — as opposed to Python or TypeScript, where code is freely written but you need to actually run it to find out if it works. (The underlying trust argument is in [The wrong question about AI trust](/blog/wrong-question-ai-trust).)
 
 We then walked through specific syntax examples, because the key point is that complexity is in the eye of the beholder — what simplifies things for humans can add cost for an AI, and vice versa.
 
