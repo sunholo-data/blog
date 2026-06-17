@@ -5,4 +5,7 @@ build/
 .env
 .DS_Store
 substack/
-video/
+video/*.mp4
+video/*.mov
+video/*.avi
+video/*.mkv
