@@ -1,0 +1,86 @@
+---
+title: "Considerations when AI coding an AI coding harness"
+authors: me
+tags: [ai-coding, ailang, agents, context-engineering]
+image: ./img/ai-coding-an-ai-coding-harness/01-nested-ai-coding-loops.webp
+slug: /ai-coding-an-ai-coding-harness
+description: "What actually moves the needle when optimising a coding harness: customised core tools, compaction strategy and AST-aware reads. Notes from making Motoko the best harness for AILANG."
+---
+
+As I wrote last week, the local Mac Studio 128GB (which is now impossible to buy due to AI induced RAM price shocks) is churning away 24/7 running evaluation benchmarks for [Motoko](https://github.com/arniwesth/motoko_agent) + Qwen3.6 + [AILANG](https://ailang.sunholo.com/) with my checking in a couple of times a day to nudge it into interesting directions.
+
+<!-- truncate -->
+
+![Nested loops of AI coding agents, each layer wrapping tool icons for read, write, edit, search, list and execute, with a developer watching from a desk](./img/ai-coding-an-ai-coding-harness/01-nested-ai-coding-loops.webp)
+
+Performance keeps improving - we are now matching implementations done via Anthropic’s Opus 4.8 for complex document parsers. We needed to move away from simple problems to project based coding challenges to avoid saturated 100% pass rates with no usable improvement signal.
+
+Along the way, I’ve learnt more about coding harnesses and what moves the needle on improvements, which is half the point of the exercise. I’ll record a bit of progress here.
+
+## Customisation of basic tools
+
+As I mentioned last week, a coding harness such as Claude Code is a surprisingly small moat when we compare across open source coding harnesses. The coding harnesses Pi, OpenCode, Claude code, vanilla Motoko etc. all get similar scores when working on tasks using the same model and running the same benchmarks.
+
+But there is scope to focus. Following Pi’s innovation of a small core, extendable by the AI modifying its own harness, we can make more specialised harnesses by making extensions for our particular domain.
+
+For AILANG, that means teaching the AI to utilise the specialist tools AILANG provides - our aim is to make Motoko the best coding harness for AILANG. This is now proven by our internal evaluations: AILANG projects that fail using Pi succeed when using Motoko.
+
+Another big win is the now established practice of context engineering. Making sure the right context is available at the right time is still very relevant. You can brute force your way through it a bit with large 1 million token context windows and a clever model, but that can still be slow and expensive. With our self-imposed restrictions of a local models with smaller context, massaging that context to be exactly right is a high value proposition.
+
+The context for an AI coding harness is mainly about its tools of which there are by default not that many:
+
+- Read
+- Write
+- Edit
+- Grep/Search
+- List
+- Execute
+
+With those, an AI with given authority can run any program on your computer, usually via command line tools and bash. It is these tools that should be examined when optimising.
+
+## Compaction Rules
+
+Another very important aspect also appears on longer projects - compaction. This is the (sometimes dreaded) moment where the context of the chat history has reached a models token limit and it needs to summarise what its done so as it can continue, but whilst at the same time maintaining a good enough history it still knows what its done and what it still needs to do. Without compaction, even with 1 million token context you run out of steam (or turns) quickly.
+
+But compaction, compression and summarisation is a surprisingly deep topic. One could even argue that compaction IS intelligence as this video from 3Blue1Brown explains:
+
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/l6DKRf-fAAM" title="YouTube video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{borderRadius:'8px'}}></iframe>
+
+Knowing which information to compact and be available for the next turns is non-trivial and directly impacts performance. Naively, you can just keep the last few turns, but then you miss the original goal and what has been done - a symptom of inadequate compaction will be the AI coding agent repeating already done actions or losing task goals.
+
+Studying existing coding harnesses for how they do it, a strategy may be:
+
+- Keep all user messages
+- Keep the original system message (that explains AILANG syntax etc)
+- Keep last few AI messages
+- Pass AI messages and tool call results into another AI call and ask it to summarise what the session has done for handover to another AI
+
+But there are lots of strategies and variations to try.
+
+For our Motoko optimisations, we prefer to have these compaction approaches customisable for the task at hand. Perhaps the best compaction differs depending on language, task or complexity - being able to swap in different compaction strategies via the Motoko extension system seems a good approach, leaving Motoko core to only ensure hard limits are enforced. This is an active work in progress on what compaction strategy we actually land with.
+
+## Tools with AILANG in mind
+
+This takes us back to the tools:
+
+- Read
+- Write
+- Edit
+- Grep/Search
+- List
+- Execute
+
+Each of these have opportunities beyond the basics, and I think these are already being examined and optimised by AI coding harness engineers and is an exciting new field.
+
+- **Read -** naively this is a string dump of a file. That is handy for human readers - but what does an AI coding agent actually need? Programming files are parsed into an abstract syntax trees within the compiler. We could instead of a raw string output produce much more structured function signatures and the effect that function has been granted. Instead of dumping all characters, we can move to show just what is needed, with raw string details available on request. These reads can cut down token use by 70%+, so it also helps with reducing compaction cycles.
+- **Write & Edit** - Similarly, we can edit AST directly rather than messy replacement edits with sed etc. This can help reduce broken cycles of editing in the wrong place for weaker models.
+- **Grep & Search & List -** A big innovation of Claude Code over the previous coding harness leader, Cursor, was not using RAG or semantic search to find relevant code but to directly allow multiple turns of the AI using grep/search tools. However, perhaps in some situations a mixture of both can help optimise? We have been trying a **micro-RAG approach ([µRAG](https://ailang.sunholo.com/docs/guides/microrag))** - a just-in-time injection of a small amount of code context using a semantic index of examples and documentation which helps a model learn knowledge outside of its training data in a human-like recollection style. We don’t remember the whole book when we look at a particular piece of code.
+- **Execute -** The real workhorse of a coding agent, changes here need to be delicate, but using features such as the hook system you can modify the tool call outputs to be leaner without unnecessary cruft (such as via a tool like [rtk](https://github.com/rtk-ai/rtk)) or add verification checks to outputs before they are sent back to the AI - AILANG is well placed for this by having type checks and verification at its core, so rather than having an AI run type checks and then fix any errors we can run it directly whenever an .ail is created/run, and enforce project verification before any code is pronounced “done”
+
+## Coding harnesses is the new coding?
+
+In summary, we are seeking to use AI coding to run many iteration improvement loops over the code…that runs iterative improvement loops within an AI coding agent.
+
+Then we will loop over that. Then over that?
+
+Its isomorphism all the way down, and alongside the capabilities of models always increasing, we can find more strategic, generalisable decisions applied at the meta loop level. Humans providing the gumption, agency and direction, AI supplies the engine. Let us continue.
