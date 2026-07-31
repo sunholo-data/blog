@@ -1,0 +1,13 @@
+[{
+  "date": "2026-07-27",
+  "slug": "using-ai-to-buy-and-sell-a-house",
+  "title": "Using AI to buy and sell a house in Copenhagen",
+  "tags": ["ai-delegation", "ailang-parse", "agents"],
+  "hero": 1,
+  "description": "I treated selling and buying a house as a work project. What AI actually did: read every tilstandsrapport, query Denmark's public registers directly, and score every house the same way so one shiny feature could not win.",
+  "images": {
+    "1": ["triage-address-cli", "Terminal output of triage_address.py scoring a Copenhagen address: commute, motorway distance, air quality and soil contamination pulled from free public registers"],
+    "2": ["folder-is-the-status", "Diagram showing houses moving through folders — inbox, _new, _consideration, _viewed, then _offered or _rejected — as the whole database"],
+    "3": ["tilstandsrapport-summary", "Diagram of a Danish tilstandsrapport condition report turned by AILANG parse into a 30-second summary that flags a leased fjernvarme unit for the lawyer"]
+  }
+}]

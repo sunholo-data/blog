@@ -42,7 +42,7 @@ Four demos that parse, extract, and validate documents with formal safety guaran
 
 ![Streaming & Voice](./img/demo-streaming-voice.svg)
 
-Five demos exercising AILANG's `std/stream` effect system across SSE, WebSocket, and hybrid protocols.
+Five demos exercising AILANG's `std/stream` [effect system](https://ailang.sunholo.com/docs/reference/effects) across SSE, WebSocket, and hybrid protocols.
 
 **[Ambient Assistant](https://www.sunholo.com/ailang-demos/streaming/ambient_assistant/)** — An always-listening voice assistant with an animated Ambient Orb UI. Uses Gemini Live proactive audio, screen sharing, and 9 browser tools including screenshot capture and web fetching.
 

@@ -317,7 +317,7 @@ const fetchRealData = async () => {
   };
 ```
 
-I use a Vertex deployed API on [Multivac](https://dev.sunholo.com/docs/multivac/) and make a new VAC called `dynamic_blog_mdx` which has no tools, just a prompt that asks it to output the React components.  I call to my own Multivac cloud as this adds various features I want such as prompt management, analytics, configuration, user history etc. and runs custom code within a Cloud Run container.  
+I use a Vertex deployed API on [Multivac](https://dev.sunholo.com/docs/multivac/) and make a new VAC called `dynamic_blog_mdx` which has no tools, just a prompt that asks it to output the React components.  I call to my own [Multivac](https://www.sunholo.com/ai-platform) cloud as this adds various features I want such as prompt management, analytics, configuration, user history etc. and runs custom code within a Cloud Run container.  
 
 :::tip
 Multivac API requests are by no means required, you can modify the API call to be your own API or use a direct GenAI API call such as Gemini, Anthropic or OpenAI, or local hosted GenAI APIs via Ollama etc.

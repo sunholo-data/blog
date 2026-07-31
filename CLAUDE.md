@@ -69,6 +69,31 @@ This announcement was prepared in March 2026 to document the original release fr
 - Major releases may get both a press release AND a product launch post
 - **Use real product screenshots and examples** — prefer actual UI screenshots, demo outputs, and CLI results over AI-generated illustrations. Check product and demo repos for existing screenshots before generating new images. Copy into `blog/img/` and convert to `.webp` where possible.
 
+## Substack
+
+Two directions, do not confuse them:
+
+- **Blog → Substack** (normal): write here first, then adapt into `substack/` for
+  pasting into Substack's rich-text editor. See `substack/SUBSTACK-GUIDE.md` (local, gitignored).
+- **Substack → Blog** (catching up): a weekly post went out on Substack first and
+  needs mirroring here for SEO. See `scripts/MIRRORING-GUIDE.md`.
+
+The Substack RSS feed (`markedmondson.substack.com/feed`) carries **full post
+content** for the last ~19 posts, so mirroring needs no pasted URLs:
+
+```bash
+python3 scripts/mirror_substack.py --refresh list   # what is not mirrored yet
+python3 scripts/mirror_substack.py fetch <fragment> <slug>
+python3 scripts/mirror_substack.py assemble <config.json>
+```
+
+Mirrors are **verbatim** (fix conversion artifacts only, no re-editing) with **no**
+"originally published on Substack" note. Writing real alt text requires actually
+looking at each image — the fetch step leaves alt empty on purpose.
+
+After merging a mirror, set the canonical URL on the **Substack** post to the
+`sunholo.com/blog/...` equivalent. Without that, Substack keeps the ranking.
+
 ## Product Repos (for research)
 
 | Product | Repo Path |
