@@ -10,3 +10,5 @@ video/*.mov
 video/*.avi
 video/*.mkv
 .substack-staging/
+__pycache__/
+*.pyc
