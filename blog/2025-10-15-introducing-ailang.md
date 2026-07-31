@@ -24,7 +24,7 @@ This announcement was prepared in March 2026 to document the original release fr
 
 AI-generated code is difficult to audit, hard to reproduce, and nearly impossible to constrain. Existing languages were designed for human developers — mutable state, implicit side effects, and unrestricted system access make formal verification costly and runtime behavior unpredictable. In AILANG, every construct has deterministic semantics that can be reflected, verified, and serialized.
 
-The language is purely functional, built on lambda calculus with Hindley-Milner type inference, algebraic data types, and pattern matching. Where AILANG diverges from existing functional languages is its **effect system**. Every side effect — file access, network calls, clock reads, AI model invocations — must be declared in the function's type signature and granted explicitly at runtime through a capability-based security model.
+The language is purely functional, built on lambda calculus with Hindley-Milner type inference, algebraic data types, and pattern matching. Where AILANG diverges from existing functional languages is its **[effect system](https://ailang.sunholo.com/docs/reference/effects)**. Every side effect — file access, network calls, clock reads, AI model invocations — must be declared in the function's type signature and granted explicitly at runtime through a capability-based security model.
 
 > "The question is no longer whether AI can write code — it can. The question is whether you can trust that code to do what it claims and nothing more. AILANG gives you that guarantee at the language level."
 > — Mark Edmondson, Founder, Sunholo
@@ -51,7 +51,7 @@ Documentation, examples, and installation: [ailang.sunholo.com](https://ailang.s
 
 ## About Sunholo
 
-Sunholo (Holosun ApS) builds production AI systems for enterprises. Products include AILANG, a deterministic language for AI code synthesis; Multivac, an enterprise AI platform; and DocParse, universal document parsing. Based in Copenhagen, Denmark. Learn more at [sunholo.com](https://sunholo.com).
+Sunholo (Holosun ApS) builds production AI systems for enterprises. Products include AILANG, a deterministic language for AI code synthesis; [Multivac](https://www.sunholo.com/ai-platform), an enterprise AI platform; and DocParse, [universal document parsing](https://www.sunholo.com/ailang-parse). Based in Copenhagen, Denmark. Learn more at [sunholo.com](https://sunholo.com).
 
 ## Links
 

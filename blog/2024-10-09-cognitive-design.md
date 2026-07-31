@@ -372,7 +372,7 @@ The Cognitive Designer conceptualizes and designs how cognitive systems interact
 
 </div>
 
-For now, an established framework for Cognitive Design is still not quite here, but as mentioned before lots of startups are innovating in this area.  I’m making my own approach using microservices on GCP via Multivac.  Regardless of the framework used though, we have a good idea what 'good' will look like: a place where Cognitive Designers can thrive.
+For now, an established framework for Cognitive Design is still not quite here, but as mentioned before lots of startups are innovating in this area.  I’m making my own approach using microservices on GCP via [Multivac](https://www.sunholo.com/ai-platform).  Regardless of the framework used though, we have a good idea what 'good' will look like: a place where Cognitive Designers can thrive.
 
 ## Cognitive Design Examples
 

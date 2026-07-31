@@ -78,7 +78,7 @@ Coding harnesses are hot right now, as it may be where software engineering move
 
 [Claude Code](https://code.claude.com/docs/en/overview) is the most popular and created the category - its a large part of the success of Anthropic today. To my surprise though, its not a large a moat as I thought it would be. A lot of its success is getting out of the model’s way to let it figure out what to do, and there have been other open-source alternatives that have popped up which work with other models and have different approaches.
 
-As part of creating an AI-first programming language, I started tracking coding harnesses and running them with the same models and benchmarks. Alternatives such as [OpenCode](https://opencode.ai/) and [Pi](https://pi.dev/) showed similar if not better performance than Claude Code. I can see a future where coding harnesses get more differentiated and support their own models better, and one could argue that the user experience could also move away from coding into other business sectors.
+As part of creating an [AI-first programming language](https://ailang.sunholo.com/docs/why-ailang), I started tracking [coding harnesses](/blog/ai-coding-an-ai-coding-harness) and running them with the same models and benchmarks. Alternatives such as [OpenCode](https://opencode.ai/) and [Pi](https://pi.dev/) showed similar if not better performance than Claude Code. I can see a future where coding harnesses get more differentiated and support their own models better, and one could argue that the user experience could also move away from coding into other business sectors.
 
 Then Arni Westh showed me [Motoko, a coding harness for AILANG.](https://arniwesth.github.io/motoko_agent/)
 
@@ -92,11 +92,11 @@ And due to [AILANGs neurosymbolic verification systems that use SMT and Z3](http
 
 ## The iterative self-improvement loop
 
-And so last weekend, with the maturity of Motoko, Qwen3.6 released (the latest open source coding champion) and my new [Mac Studio M4 128GB](https://www.apple.com/dk/mac-studio/) I set up a loop within Claude Code to create its potential successor, Motoko.
+And so last weekend, with the maturity of Motoko, Qwen3.6 released (the latest [open source coding champion](https://ailang.sunholo.com/docs/benchmarks/os-model-leaderboard)) and my new [Mac Studio M4 128GB](https://www.apple.com/dk/mac-studio/) I set up a loop within Claude Code to create its potential successor, Motoko.
 
 The loop would:
 
-- Read the mission document with key goal: “Improve motoko running Qwen3.6 in AILANG benchmarks”. It started at ~23% pass rate (vs Fables 97% one-shot performance)
+- Read the mission document with key goal: “Improve motoko running Qwen3.6 in [AILANG benchmarks](https://ailang.sunholo.com/docs/benchmarks/overview)”. It started at ~23% pass rate (vs Fables 97% one-shot performance)
 - Run local benchmarks (that take around 3-4hours)
 - Examine chat logs and failures - identify gaps and add potential roadmap improvements to mission document
 - Create a new design doc to fix failures

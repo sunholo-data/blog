@@ -64,7 +64,7 @@ Execution currently spans providers, all behind one executor interface. It uses 
 - **Claude Fable** — the controller session plus pinned sub-agents (subscription-billed on Claude Max).
 - **OpenAI Sol (codex CLI)** — proven as a real executor: it shipped a merged, CI-green feature from a sprint plan on its first live fire. Lessons from that fire went straight back into the recipe: the sandbox needs explicit write access to build caches, long runs must be backgrounded, and codex can’t self-commit in a linked git worktree — the controller finalizes the commit, crediting the executor.
 - **Gemini (Vertex Managed Agents)** — runs in a Google-hosted sandbox with **no shared filesystem**, which makes it structurally read-only against our tree: perfect for review, usable for editing only via git clones. It clones the repo at a pinned SHA over network egress, runs our compiler’s check inside the sandbox, and returns a structured verdict.
-- **A local GPU model (Qwen3.6 on Motoko coding harness)** — planned as the “slow but free” lane for long-running, deterministically-verifiable work.
+- **A local GPU model (Qwen3.6 on [Motoko](/blog/who-needs-fable-local-models-ailang) coding harness)** — planned as the “slow but free” lane for long-running, deterministically-verifiable work.
 
 Design review is a **cross-provider quorum**: each design doc gets independent reject-by-default reviews from GPT and Gemini plus the Claude controller, each returning *&#123;verdict, strongest_objection, proposed_fix&#125;*.
 

@@ -137,7 +137,7 @@ Counterexample:
 -- 0 - 1 = -1, violates ensures { result >= 0 }
 ```
 
-This is neurosymbolic programming — coupled on purpose. The neural side writes the code; the symbolic side proves it. No tests, no sampling — Z3 reasons over every possible execution and hands back a concrete counterexample when it can't verify. The AI then has exactly what it needs to repair the code in a single turn.
+This is [neurosymbolic programming](https://ailang.sunholo.com/docs/guides/contracts) — coupled on purpose. The neural side writes the code; the symbolic side proves it. No tests, no sampling — Z3 reasons over every possible execution and hands back a concrete counterexample when it can't verify. The AI then has exactly what it needs to repair the code in a single turn.
 
 ### No loops — code the AI can hold in one context
 
@@ -242,20 +242,20 @@ We caught plenty of gaps (no trigonometry in the standard library, for one), and
 
 **[Voice DocParse](https://www.sunholo.com/ailang-demos/streaming/voice_docparse/index.html)** came next — expanding the standard library (itself written in AILANG) to support streaming and AI API calls, which is the bulk of my client work outside AILANG development. We built streaming HTTP support and tested compilation to WebAssembly, which powers the live demos at [sunholo.com/ailang-demos](https://www.sunholo.com/ailang-demos). WebAssembly in the AI landscape is still an active area of research.
 
-**[AILANG Parse](/blog/ailang-parse-launch)** is currently the most-used production AILANG program. It tackles document parsing for RAG pipelines: instead of converting a Word or Office document to PDF for lossy extraction, we unzip and parse the XML directly — faster, cheaper, and more accurate deterministic parsing. It's rolling out to all my AI engineering clients as an alternative to traditional PDF-based RAG pipelines.
+**[AILANG Parse](/blog/ailang-parse-launch)** is currently the most-used production AILANG program. It tackles document parsing for RAG pipelines: instead of converting a Word or Office document to PDF for lossy extraction, we unzip and parse the XML directly — faster, cheaper, and more accurate deterministic parsing. It's rolling out to all my [AI engineering](https://www.sunholo.com/ai-engineering) clients as an alternative to traditional PDF-based RAG pipelines.
 
 
 ## The future of AILANG? Motoko self-modification AI Harness
 
 And finally I spoke briefly about the [Motoko project](https://arniwesth.github.io/motoko_agent/), by Arni Westh, who is using AILANG to create a self-modifying coding harness inspired by [Pi](https://pi.dev/).
 
-Pi ships a very minimal core compared to harnesses like Claude Code or OpenCode; the idea is that the AI self-discovers and extends the core as it needs more features. Pi does its extensions in TypeScript, but AILANG is especially well suited here — it can verify code before it runs, unlike TypeScript. The AILANG package registry supports this with AI-controlled security patches and auto-cascading updates.
+Pi ships a very minimal core compared to harnesses like Claude Code or OpenCode; the idea is that the AI self-discovers and extends the core as it needs more features. Pi does its extensions in TypeScript, but AILANG is especially well suited here — it can verify code before it runs, unlike TypeScript. The [AILANG package registry](https://ailang.sunholo.com/docs/packages/explorer) supports this with AI-controlled security patches and auto-cascading updates.
 
 ![Motoko agent — self-verifying AILANG harness running live](./img/ida-2026-retro/motoko-agent-demo.png)
 
 ## And finally...
 
-With a couple of minutes to spare I mentioned that in the course of creating this talk, I'd discovered other AI languages being built independently — and surprisingly, some had arrived at the same features, such as function effects. Was the AI teaching us all the language it wanted to express itself in? If you think about it, the best candidate for designing a new programming language is someone who knows all existing languages — and that's AI. At the very least, it represents a new class of programming languages that may thrive alongside systems, frontend, or backend languages.
+With a couple of minutes to spare I mentioned that in the course of creating this talk, I'd discovered other AI languages being built independently — and surprisingly, some had arrived at the same features, such as [function effects](https://ailang.sunholo.com/docs/reference/effects). Was the AI teaching us all the language it wanted to express itself in? If you think about it, the best candidate for designing a new programming language is someone who knows all existing languages — and that's AI. At the very least, it represents a new class of programming languages that may thrive alongside systems, frontend, or backend languages.
 
 As a final anecdote: although AI helped create and design AILANG, I still felt like it's *my* language. During a design sprint, I realised that the fundamental vision — deterministic state collapse, bounded entropy — had been shaped by what I'd thought were unrelated conversations with AI about cosmology and the block universe theories I'd been investigating. Those chats had fed into the axioms of AILANG through its chat-history reference features. If in the future we can all effortlessly create our own AI languages, perhaps we'll each create variations that reflect how we personally express ourselves to AI — and vice versa.
 
