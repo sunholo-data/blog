@@ -91,11 +91,79 @@ def strip_widgets(h):
     """Remove Substack subscribe forms, share buttons and paywall furniture."""
     for cls in ('subscription-widget-wrap-editor', 'subscription-widget-wrap',
                 'subscribe-widget', 'button-wrapper', 'captioned-button-wrap',
-                'digest-post-embed', 'poll-embed', 'pencraft'):
+                'poll-embed', 'pencraft'):
         h = drop_div(h, cls)
     h = re.sub(r'<svg\b.*?</svg>', '', h, flags=re.S)
     h = re.sub(r'<form\b.*?</form>', '', h, flags=re.S)
     return h
+
+
+def convert_post_embeds(h):
+    """Turn Substack's "digest-post-embed" cards into italic markdown links.
+
+    These are NOT furniture -- each is a link to another of Mark's posts, and
+    dropping them leaves dangling "...for more details:" sentences and loses
+    internal links. Emitted as a substack URL; retarget_internal_links() then
+    maps it to the blog equivalent.
+    """
+    out, pos = [], 0
+    pat = re.compile(r'<div[^>]*class="[^"]*\bdigest-post-embed\b[^"]*"[^>]*>')
+    while True:
+        m = pat.search(h, pos)
+        if not m:
+            out.append(h[pos:])
+            break
+        out.append(h[pos:m.start()])
+        end = skip_to_close(h, m.end(), 'div')
+        block = h[m.start():end]
+        title = url = None
+        da = re.search(r'data-attrs="([^"]*)"', block)
+        if da:
+            try:
+                a = json.loads(html.unescape(da.group(1)))
+                title = (a.get('title') or '').strip()
+                url = a.get('canonical_url') or a.get('url')
+            except json.JSONDecodeError:
+                pass
+        if title and url:
+            out.append(f'<p><em><a href="{html.escape(url, quote=True)}">'
+                       f'{html.escape(title)}</a></em></p>')
+        pos = end
+    return ''.join(out)
+
+
+def retarget_internal_links(md, blog_dir):
+    """Rewrite substack.com/p/<slug> links to the local /blog/<slug> equivalent,
+    so mirrored posts link into the blog instead of back out to Substack."""
+    mapping = {}
+    ovr = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       'mirrored-overrides.json')
+    pairs = json.load(open(ovr)) if os.path.exists(ovr) else {}
+    for f in sorted(glob.glob(os.path.join(blog_dir, '*.md')) +
+                    glob.glob(os.path.join(blog_dir, '*.mdx'))):
+        txt = open(f).read()
+        s = re.search(r'(?m)^slug:\s*/?(\S+)\s*$', txt)
+        t = re.search(r'(?m)^title:\s*(.+?)\s*$', txt)
+        if not s:
+            continue
+        slug, title = s.group(1).lstrip('/'), (t.group(1).strip('\'"') if t else '')
+        mapping[norm(title)] = (slug, title)
+        for sslug, fn in pairs.items():
+            if fn == os.path.basename(f):
+                mapping['__slug__' + sslug] = (slug, title)
+
+    def repl(m):
+        text, sslug = m.group(1), m.group(2)
+        hit = mapping.get('__slug__' + sslug) or mapping.get(norm(text))
+        if not hit:
+            return m.group(0)
+        slug, title = hit
+        # anchor text should name the page it lands on: the blog title can differ
+        # from the Substack card's title for the same post
+        return f'[{title or text}](/blog/{slug})'
+
+    return re.sub(r'\[([^\]]+)\]\(https://[^/]*substack\.com/p/([^)?#]+)[^)]*\)',
+                  repl, md)
 
 
 def extract_media(h):
@@ -458,10 +526,10 @@ def cmd_fetch(args):
     slug = args.slug
     raw = item.find('content:encoded', NS).text
 
-    h, media = extract_media(strip_widgets(raw))
+    h, media = extract_media(convert_post_embeds(strip_widgets(raw)))
     p = MD()
     p.feed(h)
-    md = tidy(p.result())
+    md = retarget_internal_links(tidy(p.result()), os.path.join(REPO, 'blog'))
 
     os.makedirs(STAGING, exist_ok=True)
     print(f'{slug}: {len(media)} media item(s)')
