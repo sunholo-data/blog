@@ -117,6 +117,6 @@ Requires Node >= 20.
 
 ## Git Workflow
 
-- Use feature branches: `blog/product-launch-SLUG` or `blog/press-release-SLUG`
-- Create PRs and merge to main to trigger deploy
-- Deploy is automatic via GitHub Pages on push to `main` (`.github/workflows/deploy.yml`)
+- **Commit and push straight to `main`. Do not open PRs.**
+- Deploy is automatic via GitHub Pages on push to `main` (`.github/workflows/deploy.yml`),
+  so pushing publishes — run `yarn build` before pushing.
