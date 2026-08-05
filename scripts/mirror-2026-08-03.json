@@ -1,0 +1,13 @@
+[{
+  "date": "2026-08-03",
+  "slug": "verification-trust-abstraction",
+  "title": "Verification to get Trust, to create Abstraction - the journey from Self Driving Cars to AILANG World LBAC",
+  "tags": ["ailang", "ai-delegation", "trust", "determinism", "agents"],
+  "hero": 3,
+  "description": "Abstraction rises as we trust, and trust rises with verification. The same journey that took cars from hand cranks to autonomous passengers is now happening to programming — and AILANG World is a bet on Language-Based Agent Control as the verification layer.",
+  "images": {
+    "1": ["land-rover-series", "A weathered Land Rover Series parked in woodland, the kind of car whose mechanics a driver was expected to understand and repair"],
+    "2": ["ailang-lambda-mark", "The AILANG mark: a white lambda symbol on a dark hexagon with an orange border"],
+    "3": ["human-driver-to-ai-operator", "Two parallel journeys: Land Rover to assisted driving to autonomous passenger, and low-level languages to frameworks to an AI-operated environment. Each leap is gated by verification, resting on an AILANG World foundation of typed goals, scoped capabilities, budgets, declared effects, evidence and immutable history"]
+  }
+}]

@@ -152,15 +152,32 @@ def retarget_internal_links(md, blog_dir):
             if fn == os.path.basename(f):
                 mapping['__slug__' + sslug] = (slug, title)
 
+    def best_by_slug(sslug):
+        """Anchor text often is not the title ("dark factory loop"), so fall back
+        to fuzzy-matching the substack slug against blog titles and slugs."""
+        want = norm(sslug.replace('-', ' '))
+        best, score = None, 0.0
+        for key, hit in mapping.items():
+            if key.startswith('__slug__'):
+                continue
+            slug, title = hit
+            for cand in (key, norm(slug.replace('-', ' '))):
+                r = difflib.SequenceMatcher(None, want, cand).ratio()
+                if r > score:
+                    best, score = hit, r
+        return best if score > 0.6 else None
+
     def repl(m):
         text, sslug = m.group(1), m.group(2)
-        hit = mapping.get('__slug__' + sslug) or mapping.get(norm(text))
+        # a card's anchor IS the post title, so retitle it to the blog's version;
+        # an inline phrase ("the dark factory loop") must keep its own wording or
+        # the sentence breaks
+        titular = mapping.get('__slug__' + sslug) or mapping.get(norm(text))
+        hit = titular or best_by_slug(sslug)
         if not hit:
             return m.group(0)
         slug, title = hit
-        # anchor text should name the page it lands on: the blog title can differ
-        # from the Substack card's title for the same post
-        return f'[{title or text}](/blog/{slug})'
+        return f'[{title if titular and title else text}](/blog/{slug})'
 
     return re.sub(r'\[([^\]]+)\]\(https://[^/]*substack\.com/p/([^)?#]+)[^)]*\)',
                   repl, md)
@@ -379,6 +396,9 @@ CTA_RE = re.compile(
 def tidy(md):
     # Substack CTAs that sit outside a widget div survive as bare links
     md = CTA_RE.sub('', md)
+    # Substack sometimes wraps trailing punctuation in its own anchor, e.g.
+    # "**[LBAC](url)**[,](url)" -- a link around a comma is noise
+    md = re.sub(r'\[([,.;:!?\s]+)\]\([^)]*\)', r'\1', md)
     md = re.sub(r'[ \t]+\n', '\n', md)
     md = re.sub(r'\n{3,}', '\n\n', md)
     # tidy space before sentence punctuation, but never before a word (" .ail")
