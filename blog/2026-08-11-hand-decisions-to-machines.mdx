@@ -1,0 +1,83 @@
+---
+title: "We don’t want AI; we need to hand decisions to machines"
+authors: me
+tags: [ai-delegation, trust, agents, ailang]
+slug: /hand-decisions-to-machines
+description: "Stop asking what AI can do and ask which decisions you would be relieved to stop making yourself. Five questions that separate a real AI use case from an AI demo — and whether you would even notice if the machine started deciding badly."
+---
+
+Lots of people back from summer holidays now so less technical work this week, but that gives me a chance to step back and examine the AI projects I’ve been working on and start to analyse what really gave value.
+
+<!-- truncate -->
+
+Because when considering new [AI platform engineering](https://www.sunholo.com/ai-platform) projects, it seems helpful to not talk about AI with all its vague meanings and concentrate instead on what decisions we are happy to delegate to machines.
+
+Since AI can do ‘everything’, it’s hard to pinpoint what to build right now. If we were introduced to an omnipotent and omniscient being and asked what role they should take in our business, I don’t think it would be summarising company PDFs.
+
+But that is a start; and it helps introduce the tooling that can lead on to other AI use cases. To date I’ve been shy of proposing specific AI use cases myself to clients and instead focus on executing the ideas they come to me with, since it seems the knowledge about what will make a difference has to come from within the business itself, not an external consultant. But what I can offer is a framework on how to surface what those use cases could be.
+
+## We are all the product of good decisions
+
+In essence, it could be said that a company (and life?) are the product of good and bad decisions. The CEO decides strategy and direction; SVPs set budgets and goals; managers decide headcount and assessment; operators decide how to execute tasks. These roles all have boundaries on what decisions and responsibilities they have, and every day judgement calls are made that either improve or do nothing or even worsen business goals. Where AI use cases can emerge is when **artificial intelligence is given permission to make decisions on someone’s behalf.**
+
+What’s more, each role has various tasks that could or could not be handed over to automation. The job role stays, but AI makes it easier to say triage that inbox, extract insights from awkward formats or find and execute rare one off tasks. Each one of those involve decisions made on our behalf: what email is important or not, what pdf form holds the relevant answer to your question or which script to execute. There is however no reason to believe that AI usage will remain only at task level and it could extend in the future to replace entire roles: the “AI takes our jobs” doom scenario.
+
+That’s a bit scary, but we have already in place measures on how to verify decisions for humans via management - could the same be extended for AIs? As an AI platform engineer, I recognise that an important role I need to play is making sure the framework exists for AI tasks to be verified, evaluated and monitored in a way that the results can be trusted. The humans responsible for that task previously could then move up the chain to verifying the AI is performing the task that they once did.
+
+## With AGI we need trust
+
+And as AI improves, the potential significance of the decisions AI makes will get greater and greater. One definition of AGI I can agree with is that it’s here when an AI model can do the job that a human currently does purely with a keyboard and mouse. AGI can deal with and handle email, websites, documents, images etc and make decisions to achieve white collar roles similar to a human.
+
+By that definition (which is certainly well below other definitions of AGI such as having qualia and consciousness ) I think we are not far away.
+
+But even then, and today, to really be useful then I refer back to the [trust, verification and abstraction discussions on this blog](/blog/verification-trust-abstraction) from before. Only then, when we achieve abstraction, can build upon it to transform work and society.
+
+*[Verification to get Trust, to create Abstraction - the journey from Self Driving Cars to AILANG World LBAC](/blog/verification-trust-abstraction)*
+
+We will require trust, for which we will need verification, and it’s that loop of action, measurement and verification and then self correction that AI platforms should carry. That is why AILANG and AILANG World have monitoring and verification as first class primitives, since as AI abilities increase the need for auditability of decisions will get ever greater as AI is responsible for more and more.
+
+## Which decisions are you happy to give to machines?
+
+And so when thinking about AI within your company, rather than looking at what the latest models and tools are claimed to do, look instead at what decisions are currently being made in your company, that you wish a human didn’t have to do.
+
+Pick one decision currently made by a human in your business. Then ask:
+
+1. Is it repetitive and evidence-based, or does it need judgement no one has written down?
+2. Can you measure whether it was made *well* — not just made?
+3. If you ran it again on the same inputs, would you get the same answer?
+4. When the human moves from making the decision to checking it, is that a promotion or a babysitting job?
+5. Where exactly does responsibility sit when it’s wrong?
+
+If you can’t answer 2 and 3, you don’t have an AI use case yet — you have an AI demo.
+
+The question isn't *what can AI do* - as it can do nearly everything with various degrees of success and some things brilliantly. The question is which decisions in your business you'd be relieved to stop making yourself, and **whether you'd be able to tell** if the machine started making them badly as well.
+
+Here are a couple of examples to close off.
+
+The [Account Payable workflow demo](/blog/ap-accounts-payable-ai-workflow) answers the questions thusly:
+
+1. Yes triaging invoices in your email is repetitive and I can verify what numbers we extract to answer questions like should we pay it
+2. We can measure the judgement calls via how many are kicked up to a human to approve and monitoring payments
+3. We run it repeatedly and the same invoices get rejected or approved
+4. The human is promoted to checking only edge cases so can spend more time on non-standard work
+5. The responsibility still rests with the human managing the workflow.
+
+*[AP: Accounts Payable AI Workflow with AILANG Parse and a sprinkling of AI Protocols](/blog/ap-accounts-payable-ai-workflow)*
+
+The [buying a house using AI workflow demo](/blog/using-ai-to-buy-and-sell-a-house) answers the questions like this:
+
+1. Yes we need to judge houses via an evolving rubric such as price, distance from public transport and schools etc. by reading lots of email PDFs sent by estate agents
+2. Yes we can verify if its a good judgement by inspecting the original PDFs
+3. Yes we have made a rubric and get the same answers, but kick up the decisions to the human for their judgement calls like house feel, taste.
+4. It feels like a huge promotion from the drudgery of dealing with slightly differing reports and being able to just coordinate the results
+5. The responsibility still sits with the human to decide which house to visit.
+
+*[Using AI to buy and sell a house in Copenhagen](/blog/using-ai-to-buy-and-sell-a-house)*
+
+## What is your AI strategy?
+
+I hope this helps give some structure to the more vague “we must do something with AI” rhetoric I sometimes hear when talking to companies who have FOMO but are not sure where to get started. For me, its where AI and humans can work together to make every increasing efficiency where I have seen the most value be generated in a business. But this is all still new. As Ethan Mollick talked about in a Sana podcast last month, noone knows how to build an AI-native company yet.
+
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/avvtJrJv6ZU" title="YouTube video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{borderRadius:'8px'}}></iframe>
+
+Have you got another approach? Please let me know in comment below or get in contact, it would be great to hear.
