@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-08-18",
+    "slug": "aipla-update",
+    "title": "AI in Physics Learning and Assessment (AIPLA) now at aipla.ku.dk",
+    "tags": ["education", "agents", "ai-protocols"],
+    "hero": 1,
+    "description": "An update on AIPLA, the University of Copenhagen project bringing Socratic AI tutors to Danish upper-secondary physics: new student, teacher and researcher features - the tutor-persona picker, class co-pilot, curriculum curation, concept maps and AI-assessed scientific inquiry - now live at aipla.ku.dk.",
+    "images": {
+      "1": ["aipla-project-website", "The AIPLA project website at aipla.ku.dk (University of Copenhagen, Department of Science Education): a maroon hero reading 'AI in Physics Learning and Assessment', a left-hand navigation of the three-year research project, and the 'Exploring productive roles for AI in physics education' section"],
+      "2": ["aipla-student-tutor-chat", "The AIPLA student interface: the 'Sofie' AI tutor, an all-round physics-teacher persona, greets the student in Danish in a Socratic, exploration-first style, with a 'call the teacher' (hand-raise) button, a microphone/speech-to-text button, and a message field"],
+      "3": ["aipla-draw-upload-solution", "An AIPLA workbench activity where a student draws or uploads a picture of their handwritten solution using a pen, colour and eraser toolbar, then sends or uploads it so the AI tutor can read it and respond"],
+      "4": ["aipla-teacher-classes-dashboard", "The AIPLA teacher dashboard: a 'My classes' list showing groups, assigned physics activities (concept dialogue, Boldkast projectile motion, KineBot), the Sofie tutor persona and Manage/Delete actions, above an Insights & spend summary, per-class engagement, recent activity, and a 'Class co-pilot' assistant panel"],
+      "5": ["aipla-tutor-personas", "The AIPLA 'Tutor persona' picker: a grid of six preset teaching personas - Astrid (rigorous exam coach), Frida (warm mentor), Henrik (experienced senior teacher), Jonas (Socratic questioner), Mikkel (concise lab demonstrator) and Sofie (friendly default) - each with its own avatar, teaching style and voice"],
+      "6": ["aipla-materials-curator", "The AIPLA 'Materials' tab, where a teacher searches and uploads curriculum documents (AIPLA guides) to cite, filters by subject, folder and level, and a 'Medbygger' (class co-pilot) panel configures the class in natural language, with a 'Preview - what students see' panel on the right"],
+      "7": ["aipla-concept-map", "An AIPLA concept map for 'Energibevarelse' (conservation of energy): nodes for kinetic energy and potential energy point to conservation of energy, with a status legend of not-yet / on-the-way / understood to track a student's understanding"],
+      "8": ["aipla-researcher-judge", "The AIPLA researcher view: a SAAR scientific-abilities (Etkina 2006) rubric configuration for scoring a captured student session's inquiry process, with a selectable judge model, an editable judge prompt and an 'Experiment - score a captured session' box to run the judge"]
+    }
+  }
+]

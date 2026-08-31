@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-08-28",
+    "slug": "model-menagerie",
+    "title": "Managing a model menagerie: choosing from Sol, Fable, Terra, Opus, Qwen, DeepSeek, GLM, Gemini",
+    "tags": ["capabilities", "evals", "ailang"],
+    "hero": 1,
+    "description": "A practical framework for choosing among AI models - cloud, open-source and self-hosted - using bounded vs unbounded tasks, latency, cost, quotas and your own evaluations, plus how the AI model economy and data-centre build-out shape those choices.",
+    "images": {
+      "1": ["ai-capability-four-tiers", "Line chart of GPQA Diamond score from 2023 to 2027 for four model tiers - Tier 1 AI API (cloud), Tier 2 server (cluster), Tier 3 server-local (workstation) and Tier 4 on-device (phone/laptop) - each crossing an example 80% threshold at a different lag, from mid-2025 for the cloud tier to late-2027 for on-device"],
+      "2": ["ailang-model-eval-elo", "Two AILANG evaluation tables: a model-capability ranking by ELO (Claude Opus 5 highest at 2383, down through Gemini 3 Flash, GPT-5 Mini and the open-source contenders), and a benchmark-difficulty table listing very-hard tasks with their ELO and pass rates"]
+    }
+  }
+]
