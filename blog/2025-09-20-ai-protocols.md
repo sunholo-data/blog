@@ -3,14 +3,20 @@ title: "The AI Protocol Revolution: A Story of History Repeating Itself"
 authors: me
 tags: [mcp, a2a, agents]
 slug: /ai-protocol-revolution
-image: blog/img/ai-protocols.png
+image: /visuals/multivac-system/v1/social.webp
 ---
+
+import SharedTopic from '@site/src/components/sharedTopic';
 
 import AudioPlayer from '@site/src/components/audio';
 import CogFlow from '@site/src/components/reactFlow';
 import ProtocolComparison from '@site/src/components/protocolComparison';
 
-![AI Protocol Revolution Banner](img/ai-protocols.png)
+<figure className="topic-visual">
+  <img className="topic-light" src="/blog/visuals/multivac-system/v1/poster-light.webp" alt="A coral production core connects varied inputs to six modules; one module is withdrawn from its connection." width="1600" height="900" />
+  <img className="topic-dark" src="/blog/visuals/multivac-system/v1/poster-dark.webp" alt="A coral production core connects varied inputs to six modules; one module is withdrawn from its connection." width="1600" height="900" />
+  <figcaption>Shared protocols let components change while the surrounding system stays connected. <a href="https://www.sunholo.com/presentations/multivac/">Explore the Multivac talk</a>.</figcaption>
+</figure>
 
 Here at Sunholo, we've specialised in deploying GenAI applications for the past few years. Recently, when talking to new prospects we have noticed a trend: they show us their own internal chatbot, built at great expense just 18 months ago, and ask why it feels already outdated compared to ChatGPT or Gemini. Is there a better way to keep on the cutting edge but still keep your AI application bespoke? The answer takes us on a journey through web history, emerging protocols, and a future that's arriving faster than most realize.
 
@@ -316,3 +322,7 @@ Where does your organisation fit in this story?
 ---
 
 *Want to discuss how to navigate this transition? Reach out at multivac@sunholo.com or visit [www.sunholo.com](https://www.sunholo.com)*
+
+{/* TOPIC_RESOURCES_START */}
+<SharedTopic topic="multivac" current="/blog/ai-protocol-revolution" />
+{/* TOPIC_RESOURCES_END */}

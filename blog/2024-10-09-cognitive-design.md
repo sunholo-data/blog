@@ -6,6 +6,8 @@ image: ./img/cognitive-design.webp
 slug: /cognitive-design
 ---
 
+import SharedTopic from '@site/src/components/sharedTopic';
+
 import AudioPlayer from '@site/src/components/audio';
 
 ![](img/cognitive-design.webp)
@@ -688,3 +690,7 @@ The book was written before LLMs became a big deal so some of the forecasts are 
 I argue that cognitive designers can work with the above three aspects to produce incredibly useful applications today, particularly with audio, images and video that are new enough to not have had their potential realised yet.  If the models are frozen in their abilities right now, we have 5-10 years of applications that can be created and be potentially ground breaking.
 
 But given recent trends, its reasonable to say that the models we will have in two years time are going to be at least 10 times faster, be able to complete 2-3 more difficult tasks and be 50 times cheaper.  In that environment and with established frameworks for easy cognitive design, I hope to see great artists rise in their application. A soundbite I've used is that I think STEM students and software engineers will not be the best placed to tease out performance from the latent space of these models, as its emergent properties that we are witnessing the birth of applications for. It will be more poets and philosophers who will be better placed to interact with data that constitutes all of human expression, once petty things such as code syntax is abstracted away.  I look forward to seeing what they come up with.
+
+{/* TOPIC_RESOURCES_START */}
+<SharedTopic topic="engineering" current="/blog/cognitive-design" />
+{/* TOPIC_RESOURCES_END */}

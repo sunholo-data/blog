@@ -71,6 +71,11 @@ const config = {
             position: 'left',
           },
           {
+            href: 'https://www.sunholo.com/presentations/',
+            label: 'Talks',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/sunholo-data',
             label: 'GitHub',
             position: 'right',
