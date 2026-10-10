@@ -117,6 +117,7 @@ Requires Node >= 20.
 
 ## Git Workflow
 
-- **Commit and push straight to `main`. Do not open PRs.**
+- **Use a pull request against `main`. Do not push directly to `main`.**
+- Mark reviews and merges; agent tasks must not approve or merge their own PRs.
 - Deploy is automatic via GitHub Pages on push to `main` (`.github/workflows/deploy.yml`),
   so pushing publishes — run `yarn build` before pushing.
