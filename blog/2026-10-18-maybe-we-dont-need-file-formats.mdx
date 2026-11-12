@@ -1,0 +1,62 @@
+---
+title: "Maybe we don't need file formats anymore, post AI"
+authors: me
+tags: [ailang, ailang-parse, ai-delegation, trust]
+image: ./img/maybe-we-dont-need-file-formats/01-pptx-xml-vs-html-slide-title.webp
+slug: /maybe-we-dont-need-file-formats
+description: "After working with AI transformation perhaps it will become meaningless to work in specific file formats, be it Word .docx, Python .py, PowerPoint .pptx or JSON .json"
+---
+
+From moving house I’ve now transitioned into the renovating house phase, which is limiting my time to post these newsletters, but in-between walls being knocked down I have had time to prepare for an online IDA talk “[Death by PowerPoint: Building Presentations with AI Agents](https://ida.dk/en/arrangementer-og-kurser/arrangementer/death-by-powerpoint-building-presentations-with-ai-agents-368365)” this Thursday 22nd October - please sign up if you’d like to hear more - already over 100 participants.
+
+<!-- truncate -->
+
+You can hear more on Thursday, but the basic premise is that we don’t need PowerPoint anymore, since its easier to prompt an AI agent to make slides in HTML. Yes, there are a few “AI for PowerPoint” startups out there, but I think its a losing battle - why bother using PowerPoint when we already have a much richer visual language in HTML.
+
+![Side-by-side comparison titled 'Same slide title, two formats': on the left the PowerPoint .pptx XML needed for the title 'Generate the medium', with nested p:sp, p:spPr and a:xfrm elements positioned in English Metric Units; on the right the same title as a single HTML h1 element](./img/maybe-we-dont-need-file-formats/01-pptx-xml-vs-html-slide-title.webp)
+
+Richer, and simpler: see the illustration above about what XML PowerPoint uses vs HTML to generate a title phrase “Generate the medium”. Yes, AI agents can do both, but if we have the freedom of choice, it will bias to the more accurate and cost efficient token use of using HTML rather than a zipped up piece of XML tree, which is all a PowerPoint .pptx binary file really is.
+
+This has really hammered home with me ever since I’ve been using [AILANG Parse](https://www.sunholo.com/ailang-parse/) daily when dealing with various file formats including Word, PowerPoint, OpenOffice, Email etc. The source becomes abstracted away and my main interface with the content is the AI’s interpretation of it.
+
+## Abstractions for decisions we give to AI
+
+And it struck me that its a similar premise behind [AILANG](https://ailang.sunholo.com/) in general - once AI is doing 100% of your coding, will we bother to have a preference on which language they do programming in?
+
+We should let the AI select the best tool for the job: (perhaps that tool is AILANG if its a language created for AI coding specifically) users are today seeing more bash, python, ruby, typescript etc. being written on their behalf as they care more about the output than how they got there.
+
+This is again enforced by [AILANG World](https://www.sunholo.com/ailang-world/), a major Sunholo project for creating an AI operating system which the mission loops have neared completion of this last week after a few months of AI agent iteration.
+
+*[Shining a light into a dark software factory: AI loop engineering](/blog/ai-loop-engineering-dark-software-factory)*
+
+![AILANG World banner with a lambda hexagon logo and the tagline 'Unix made everything a file. World makes everything a typed state transition', describing a semantic operating environment where agents propose, a verifier checks, and only verified, authorized changes commit](./img/maybe-we-dont-need-file-formats/02-ailang-world-typed-state-transition.webp)
+
+AILANG World’s tag line is:
+
+Unix made everything a file. World makes everything a **typed state transition**.
+
+Its built in the belief that what we will need from AI-assisted workflows differs from what we needed as humans.
+
+AILANG World places emphasis on repeatable, traceable, deterministic agent trajectories as that is what we will need to trust AI, and as agents get more and more capable that trust becomes ever more important.
+
+Its starting to now dogfood tracing self-improvement to itself (in AILANG) but also upgrades to other code bases such as Python/React ADK upgrades for the [AI Protocol Platform](https://github.com/sunholo-data/ai-protocol-platform) that is the upstream code template used by all my client engagements at the moment.
+
+## What AI transformation will look like?
+
+So for fun, I will make a prediction that within the next few years, we will have less and less need for caring about not just what coding language our applications are written in, but also what file formats our data sits in.
+
+The reason file formats were useful before was to have data and metadata in a recognisable format for a shared application to display it for humans - e.g. you send a .docx file to someone else who owns Microsoft Office, you can open it and enjoy the same features and see the same content (albeit not 100% perfectly).
+
+**The need for file portability is being eroded away.** If a file is sent in an “alien” format, if its an AI agent dealing with it they will just convert it to one it needs. Perhaps we will see the raise of JIT (just in time) UI - a micro-second fast AI model that reads the data/metadata and displays it in a customised UI for the end user. Send it anything, it displays what your personal preferences prefer. Portability is a given, for any data sent.
+
+## Trust the abstraction, and forget
+
+Because, once trusted, we will have gained an abstraction - an abstraction of file formats.
+
+*[Verification to get Trust, to create Abstraction - the journey from Self Driving Cars to AILANG World LBAC](/blog/verification-trust-abstraction)*
+
+The details underneath that abstraction may be of niche interest for looking under the hood for enthusiasts and specialists, but for most people’s day to day - largely irrelevant.
+
+You can say that this already started before AI with the use of phone and pad operating systems where its already hidden away the folder/file system that those familiar with a more windows/linux background in the previous generation grew up with.
+
+AI may be its last nail.
