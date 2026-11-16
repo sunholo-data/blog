@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2026-11-14",
+    "slug": "tools-of-the-ai-engineering-trade",
+    "title": "Tools of the AI Engineering Trade - Nov 2026",
+    "tags": ["ailang", "agents", "ai-protocols", "ai-delegation"],
+    "hero": 4,
+    "description": "A snapshot of the working environment of a day-to-day AI Platform Engineer: the subscriptions and APIs, a Mac Studio rig on 24/7 with herdr and Tailscale, an internal AI protocol app, the AILANG message system, mission loops and Daneel.",
+    "images": {
+      "1": ["sunholo-mobile-start-page", "Sunholo mobile start page titled 'One place to start', with the Sunholo Platform card and an Open platform button"],
+      "2": ["web-researcher-chat", "Sunholo mobile app chat in the KnowledgeReady project, where the Web Researcher agent answers a question about traffic from ChatGPT, Claude and Gemini MCP directories"],
+      "3": ["gcp-pubsub-ailang-topics", "Google Cloud Pub/Sub Topics list showing the ailang topics: ailang-cascade, ailang-completions, ailang-dead-letter, ailang-events, ailang-messages and ailang-tasks"],
+      "4": ["tools-of-the-ai-engineering-trade", "Diagram of the always-on AI engineering environment: a MacBook Air and iPhone connect over Tailscale and herdr to a 128GB Mac Studio running interactive agents, an AI protocol app and local inference with Ollama, coordinated through the AILANG message system into mission loops and Daneel, with dockerized agents on GCP Cloud Run Jobs and model providers Anthropic, OpenAI, Gemini, OpenRouter and Ollama Cloud"]
+    }
+  }
+]
